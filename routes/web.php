@@ -5,6 +5,7 @@ use App\Http\Controllers\ProformaInvoice\ProformaInvoiceController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Supplier\SupplierController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\Plan\PlanController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\role\RoleController;
 use App\Http\Controllers\Category\CategoryController;
@@ -57,4 +58,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/category/store',[CategoryController::class,'store'])->name('category-store');
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category-edit');
     Route::get('/category/delete/{id}', [CategoryController::class, 'remove'])->name('category-delete');
+
+    //Product Module
+    Route::get('/product',[ProductController::class,'index'])->name('product-index');
+    Route::post('/product/store',[ProductController::class,'store'])->name('product-store');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product-edit');
+    Route::get('/product/delete/{id}', [ProductController::class, 'remove'])->name('product-delete');
+
+    //Plan Module
+    Route::get('/plan',[PlanController::class,'index'])->name('plan-index');
+    Route::post('/plan/store',[PlanController::class,'store'])->name('plan-store');
+    Route::get('/plan/edit/{id}', [PlanController::class, 'edit'])->name('plan-edit');
 });
