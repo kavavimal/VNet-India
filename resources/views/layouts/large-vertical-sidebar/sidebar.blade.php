@@ -16,7 +16,7 @@
                     </a>
                     <div class="triangle"></div>
                 </li>
-            @endcan 
+            @endcan
             @can('user-tab-show')
                 <li class="nav-item {{ request()->is('user*') ? 'active' : '' }}">
                     <a class="nav-item-hold" href="{{ route('user-index') }}">
