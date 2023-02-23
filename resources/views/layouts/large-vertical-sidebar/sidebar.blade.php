@@ -8,6 +8,15 @@
                 </a>
                 <div class="triangle"></div>
             </li>
+            @can('category-tab-show')
+                <li class="nav-item {{ request()->is('category*') ? 'active' : '' }}">
+                    <a class="nav-item-hold" href="{{ route('category-index') }}">
+                        <i class="nav-icon i-Navigation-Left-Window"></i>
+                        <span class="nav-text">Menu</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+            @endcan
             @can('user-tab-show')
                 <li class="nav-item {{ request()->is('user*') ? 'active' : '' }}">
                     <a class="nav-item-hold" href="{{ route('user-index') }}">
@@ -25,16 +34,7 @@
                     </a>
                     <div class="triangle"></div>
                 </li>
-            @endcan
-            @can('category-tab-show')
-                <li class="nav-item {{ request()->is('category*') ? 'active' : '' }}">
-                    <a class="nav-item-hold" href="{{ route('category-index') }}">
-                        <i class="nav-icon i-Navigation-Left-Window"></i>
-                        <span class="nav-text">Menu</span>
-                    </a>
-                    <div class="triangle"></div>
-                </li>
-            @endcan
+            @endcan           
         </ul>
     </div>
 
