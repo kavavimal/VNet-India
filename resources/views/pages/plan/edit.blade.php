@@ -34,47 +34,28 @@
         </div>
     </div>
 </div>
-<h4 class="heading-color">Product</h4>
+<h4 class="heading-color">Plan</h4>
 <div class="row">
-    <div class="col-md-12">
-    {{--  @if($plan)
-        <form class="erp-product-submit" data-url="{{route('product-store')}}" data-id="uid" data-name="name" data-email="email" data-pass="password">
-            <input type="hidden" id="prod_id" class="prod_id" value="{{$product->id}}" name="uid" />
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <label for="fname">Product Name</label>
-                    <input placeholder="Enter Product Name" class="form-control" id="productName" name="productName" type="productName" value="{{ $product->product_name ?? ''}}">
-                    <div class="error" style="color:red;" id="name_error"></div>
-                </div>
-                <div class="col-md-6 form-group">
-                    <label for="menu_category">Menu Category</label>                            
-                    <select class="form-control"  id="menu_category" name="menu_category">
-                        <option value="0">Select Category</option>
-                        @foreach($category_list as $value)
-                        <?php $catSelect = '';
-                        if ($value->id == $product->category_id) {
-                            $catSelect = 'selected';
-                        } else {
-                            $catSelect = '';
-                        }
-                        ?>
-                        <option value="{{$value->id}}" {{$catSelect}}>
-                            {{ $value->name }}
-                        </option>
-                        @endforeach
-                    </select>
-                    <div class="error" style="color:red;" id="cat_error"></div>
-                </div>
-                <div class="col-md-12 form-group">
-                    <label for="productDesc">Product Description</label>
-                    <textarea name="productDesc" id="productDesc" class="form-control">{{ $product->product_desc ?? ''}}</textarea>
-                    <div class="error" style="color:red;" id="fname_error"></div>
-                </div>
-            </div>
-        </form>
-    @else --}}
+    <div class="col-md-12">   
         <form class="erp-product-submit" data-url="{{route('product-store')}}" data-id="uid" data-name="name" data-email="email" data-pass="password">
         <input type="hidden" id="plan_id" class="plan_id" name="uid" value="0" />
+            <div class="card mt-4 mb-4">
+                <div class="card-body">
+                    <div class="col-md-12 form-group">
+                        <label for="fname">Select Product</label>
+                        <!-- <input class="form-control" id="productName" name="productName" type="text"> -->
+                        <select class="form-control"  id="product_id" name="product_id">
+                            <option value="0">Select Product</option>
+                            @foreach($product_list as $value)
+                            <option value="{{$value->id}}">
+                                {{ $value->product_name }}
+                            </option>
+                            @endforeach
+                        </select>
+                        <div class="error" style="color:red;" id="name_error"></div>
+                    </div>
+                </div>  
+            </div>
             <div class="card mb-4">
                 <div class="card-body">
                     <h4 class="mb-3">Single Domain</h4>
@@ -113,68 +94,25 @@
                 </div>
             </div>
             <div class="row">
+
                 <div class="col-md-6">
                     @include('pages.plan.specificationsList')
                 </div>
+
                 <div class="col-md-6">
-                <div class="card ">
-                    <div class="card-body">
-                        <h4 class="mb-3">Billing Cycle Price</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="host_website">
-                            <label class="form-check-label" for="host_website">Host Website</label>
+                    <div class="card ">
+                        <div class="card-body">
+                            <h4 class="mb-3">Billing Cycle Price</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="host_website">
+                                <label class="form-check-label" for="host_website">Host Website</label>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="database">
-                            <label class="form-check-label" for="database">Databases</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="bandwidth">
-                            <label class="form-check-label" for="bandwidth">Bandwidth</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="cpanel">
-                            <label class="form-check-label" for="cpanel">cPanel</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="one_click_install">
-                            <label class="form-check-label" for="one_click_install">One Click Install + 1 cPanel</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ssl">
-                            <label class="form-check-label" for="ssl">SSL</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="antivirus_proctection">
-                            <label class="form-check-label" for="antivirus_proctection">Antivirus Protection</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
-                            <label class="form-check-label" for="24_7_365_support">24*7*365 Support</label>
-                        </div>
-                    </div>
                     </div>
                 </div>  
+
                 <div class="card col-md-12 mt-4">
-                    <div class="card-body">
-                        <h4 class="mb-3">Features Category</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="key_feature">
-                            <label class="form-check-label" for="key_feature">Key Features</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="additional_feature">
-                            <label class="form-check-label" for="additional_feature">Additional Features</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="resource_limit">
-                            <label class="form-check-label" for="resource_limit">Resource Limit</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="security_features">
-                            <label class="form-check-label" for="security_features">Security Features</label>
-                        </div>
-                    </div>
+                    @include('pages.plan.featuredcategoryList')
                 </div> 
                 <div class="card col-md-5 mt-4 mr-5">
                     <div class="card-body">
@@ -275,4 +213,5 @@
 @section('bottom-js')
     @include('pages.product.form-script')
     @include('pages.plan.specification-form-script')
+    @include('pages.plan.featuredCategory-form-script')
 @endsection
