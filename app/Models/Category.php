@@ -22,18 +22,14 @@ class Category extends Authenticatable
         'description',
         'status',
     ];
-  
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [];
-  
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
+
+    //each category might have one parent
+    public function parent() {
+        return $this->hasOne($this::class, 'id', 'parent_id');
+    }
+
+    //each category might have multiple children
+    public function children() {
+        return $this->hasMany($this::class, 'parent_id')->orderBy('name', 'asc');
+    }
 }
