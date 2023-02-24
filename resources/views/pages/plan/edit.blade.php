@@ -113,44 +113,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="card col-md-5 mr-5">
-                    <div class="card-body">
-                        <h4 class="mb-3">Specification</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="host_website">
-                            <label class="form-check-label" for="host_website">Host Website</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="database">
-                            <label class="form-check-label" for="database">Databases</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="bandwidth">
-                            <label class="form-check-label" for="bandwidth">Bandwidth</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="cpanel">
-                            <label class="form-check-label" for="cpanel">cPanel</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="one_click_install">
-                            <label class="form-check-label" for="one_click_install">One Click Install + 1 cPanel</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ssl">
-                            <label class="form-check-label" for="ssl">SSL</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="antivirus_proctection">
-                            <label class="form-check-label" for="antivirus_proctection">Antivirus Protection</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
-                            <label class="form-check-label" for="24_7_365_support">24*7*365 Support</label>
-                        </div>
-                    </div>
-                </div>    
-                <div class="card col-md-5">
+                <div class="col-md-6">
+                    @include('pages.plan.specificationsList')
+                </div>
+                <div class="col-md-6">
+                <div class="card ">
                     <div class="card-body">
                         <h4 class="mb-3">Billing Cycle Price</h4>
                         <div class="form-check">
@@ -185,6 +152,7 @@
                             <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
                             <label class="form-check-label" for="24_7_365_support">24*7*365 Support</label>
                         </div>
+                    </div>
                     </div>
                 </div>  
                 <div class="card col-md-12 mt-4">
@@ -306,4 +274,5 @@
 @endsection
 @section('bottom-js')
     @include('pages.product.form-script')
+    @include('pages.plan.specification-form-script')
 @endsection
