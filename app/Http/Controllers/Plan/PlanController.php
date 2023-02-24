@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Spatie\Permission\Models\Role;
 use DB;
 use Illuminate\Support\Arr;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -41,7 +42,8 @@ class PlanController extends Controller
         // $category_list = Category::where('sys_state','!=','-1')->get();
         //compact('plan','category_list')
         $specifications = Specification::orderBy('spec_name','desc')->get();
-        return view('pages.plan.edit', compact('specifications'));
+        $product_list = Product::where('sys_state','!=','-1')->get();
+        return view('pages.plan.edit', compact('specifications','product_list'));
     }
 
     public function store(Request $request){

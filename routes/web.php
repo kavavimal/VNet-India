@@ -7,6 +7,7 @@ use App\Http\Controllers\Supplier\SupplierController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Plan\PlanController;
 use App\Http\Controllers\Plan\SpecificationController;
+use App\Http\Controllers\Plan\FeaturedCategoryController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\role\RoleController;
 use App\Http\Controllers\Category\CategoryController;
@@ -74,4 +75,8 @@ Route::middleware(['auth'])->group(function () {
     //Specification Module
     Route::post('/spacification/store',[SpecificationController::class,'store'])->name('specification-store');
     Route::post('/spacification/delete',[SpecificationController::class,'remove'])->name('specification-delete');
+
+    // Featured Category Module
+    Route::post('/featuredCategory/store',[FeaturedCategoryController::class,'store'])->name('featured-category-store');
+    Route::post('/featuredCategory/delete',[FeaturedCategoryController::class,'remove'])->name('featured-category-delete');
 });
