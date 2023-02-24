@@ -36,7 +36,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Parent Id</th>
+                                <th>Parent</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </tr>
@@ -46,7 +46,13 @@
                             <tr>
                                 <td>{{$list->id}}</td>
                                 <td>{{$list->name}}</td>
-                                <td>{{$list->parent_id}}</td>
+                                <td>
+                                    @if($list->parent_id > 0)
+                                        {{$list->parent->name}}
+                                    @else
+                                       -
+                                    @endif
+                                </td>
                                 <td>{{$list->description}}</td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,7 +76,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Parent Id</th>
+                                <th>Parent</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </tr>

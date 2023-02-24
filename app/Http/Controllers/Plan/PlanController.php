@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Category;
 // use App\Models\plan;
+use App\Models\Specification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -39,7 +40,8 @@ class PlanController extends Controller
         // $plan = plan::where('id',$id)->first();
         // $category_list = Category::where('sys_state','!=','-1')->get();
         //compact('plan','category_list')
-        return view('pages.plan.edit');
+        $specifications = Specification::orderBy('spec_name','desc')->get();
+        return view('pages.plan.edit', compact('specifications'));
     }
 
     public function store(Request $request){

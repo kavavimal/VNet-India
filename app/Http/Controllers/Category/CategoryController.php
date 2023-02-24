@@ -37,7 +37,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::where('sys_state','!=','-1')->orderBy('id','desc')->get();
+        $category = Category::with('parent')->where('sys_state','!=','-1')->orderBy('id', 'asc')->get();
         return view('pages.category.list',compact('category'));
     }
 
