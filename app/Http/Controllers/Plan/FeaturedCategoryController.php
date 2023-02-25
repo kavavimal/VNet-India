@@ -72,7 +72,7 @@ class FeaturedCategoryController extends Controller
                         'success' => 'Featured Category updated successfully!',
                         'title' => 'Spacification',
                         'type' => 'update',
-                        'data' => $spec
+                        'data' => $featuredCategory
                     ]);
                 }
                 else{

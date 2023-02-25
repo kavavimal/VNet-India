@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Category;
 // use App\Models\plan;
 use App\Models\Specification;
+use App\Models\FeaturedCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -42,8 +43,9 @@ class PlanController extends Controller
         // $category_list = Category::where('sys_state','!=','-1')->get();
         //compact('plan','category_list')
         $specifications = Specification::orderBy('spec_name','desc')->get();
+        $featuredCategory = FeaturedCategory::orderBy('featured_cat_name','desc')->get();
         $product_list = Product::where('sys_state','!=','-1')->get();
-        return view('pages.plan.edit', compact('specifications','product_list'));
+        return view('pages.plan.edit', compact('specifications','product_list','featuredCategory'));
     }
 
     public function store(Request $request){
