@@ -51,6 +51,15 @@
 </div>
 
 <script>
+    // on add button click open modal
+    $(document).on("click", '#featured-cat-add', function() {
+        $('#type').val('add');
+        $('#featured-cat-id').val('');
+        $('#featured_cat_name').val('');
+        $('#featured_cat_model').modal('show');
+    });
+
+    // on save button clicked on popup
     $(document).on("click", ".erp-plan-featured-category-form", function() {       
         $(".plan-featured-category-submit").submit();
     });
@@ -75,23 +84,17 @@
                     let data = response.data;
                     if (data && data.id > 0)
                     if($('#type').val() === 'add'){
-                        $('.featuredCategory_list_wrap').append(`
-                            <div class="form-check" id="featured-cat-`+data.id+`">
-                                <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `">
-                                <label class="form-check-label mr-4 mb-2" for="` + data.id + `">`+data.featured_cat_name+`</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm edit-item mr-1" data-id="`+data.id+`" data-name="`+data.featured_cat_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+data.id+`" data-name="`+data.featured_cat_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                            </div>
-                        `);
+                        if (response.html){
+                            $('.featuredCategory_list_wrap').append(response.html);
+                        }
                     } else {
-                        $('.featuredCategory_list_wrap').find('#spec-'+data.id).replaceWith(`
-                            <div class="form-check" id="spec-`+data.id+`">
-                                <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `">
-                                <label class="form-check-label mr-4 mb-2" for="` + data.id + `">`+data.featured_cat_name+`</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm edit-item mr-1" data-id="`+data.id+`" data-name="`+data.featured_cat_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+data.id+`" data-name="`+data.featured_cat_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                            </div>
-                        `);
+                        let item = $('.featuredCategory_list_wrap').find('#featured-cat-'+data.id);
+                        $(item).attr('data-name',data.featured_cat_name);
+                        $(item).find('label').text(data.featured_cat_name);
+                        let isChecked = $(item).find('input').is(':checked');
+                        if (isChecked) {
+                            $('#sub-cat-block-'+data.id+' .sub-cat-title').html(data.featured_cat_name);
+                        }
                     }
                     $('#type').val('add');
                     $('#featured-cat-id').val('');
@@ -106,8 +109,9 @@
 
     // edit specification
     $(document).on("click", ".featuredCategory_list_wrap .edit-item", function() {
-        let id = $(this).attr('data-id');
-        let name = $(this).attr('data-name');
+        let curr_item = $(this).closest('.featured_category_item');
+        let id = $(curr_item).attr('data-id');
+        let name = $(curr_item).attr('data-name');
         $('.plan-featured-category-submit').attr('data-id',id).attr('data-name',name);
         $('#featured-cat-id').val(id);
         $('#type').val('edit');
@@ -116,7 +120,7 @@
     });
 
     // remove specification
-    $(document).on("click", ".confirm-delete-item", function(e) {
+    $(document).on("click", "#featured_category_delete_modal .confirm-delete-item", function(e) {
         e.preventDefault();
         var submit_url = $(document).find("#featured_cat_remove_url").val();
         var data_id = $('#featured_cat_id_delete').val();
@@ -131,20 +135,26 @@
             success: function(response) {
                 if (response.success) {
                     $('.error').text('');
-                    $('.featuredCategory_list_wrap').find(`#spec-`+data_id).remove();
-                    $('#spec_id_delete').val('');
-                    $('#spec_name_show').text('');
-                    $('#spec_delete_modal').modal('hide');
+                    let itemwrap = $('.featuredCategory_list_wrap').find(`#featured-cat-`+data_id);
+                    let isitemselected = $(itemwrap).find('input.featuredCat').is(':checked');
+                    if (isitemselected) {
+                        $('#sub-cat-block-'+data_id).remove();
+                    }
+                    $(itemwrap).remove();
+                    $('#featured_cat_id_delete').val('');
+                    $('#featured_cat_name_show').text('');
+                    $('#featured_category_delete_modal').modal('hide');
                 } else if (response.error) {
                     console.log('error', response.error);
                 }
             }
         });
     });
-    
+    // on delete item button clicked
     $(document).on("click", ".featuredCategory_list_wrap .delete-item", function() {
-        $('#spec_name_show').text($(this).attr('data-name'));
-        $('#spec_id_delete').val($(this).attr('data-id'));
-        $('#spec_delete_modal').modal('show');
+        let curr_item = $(this).closest('.featured_category_item');
+        $('#featured_cat_name_show').text($(curr_item).attr('data-name'));
+        $('#featured_cat_id_delete').val($(curr_item).attr('data-id'));
+        $('#featured_category_delete_modal').modal('show');
     });
 </script>

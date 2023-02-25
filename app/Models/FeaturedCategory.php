@@ -18,4 +18,9 @@ class FeaturedCategory extends Model
         'created_at',
         'updated_at'
     ];
+
+    //each category might have multiple children
+    public function children() {
+        return $this->hasMany(FeaturedSubCategory::class, 'featured_id')->where('sys_state','!=','-1')->orderBy('name', 'asc');
+    }
 }

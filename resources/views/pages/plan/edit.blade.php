@@ -131,6 +131,7 @@
     @include('pages.plan.form-script')
     @include('pages.plan.specification-form-script')
     @include('pages.plan.featuredCategory-form-script')
+    @include('pages.plan.featuredSubCat.featuredSubCategory-script')
     @include('pages.plan.billing-form-script')
     @include('pages.plan.plan-form-script')
 @endsection

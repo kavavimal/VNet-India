@@ -121,7 +121,7 @@
     });
 
     // remove specification
-    $(document).on("click", ".confirm-delete-item", function(e) {
+    $(document).on("click", "#spec_delete_modal .confirm-delete-item", function(e) {
         e.preventDefault();
         var submit_url = $(document).find("#spec_remove_url").val();
         var data_id = $('#spec_id_delete').val();
