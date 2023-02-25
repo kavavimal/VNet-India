@@ -6,9 +6,10 @@ use App\helper\helper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Category;
-// use App\Models\plan;
+use App\Models\Plan;
 use App\Models\Specification;
 use App\Models\FeaturedCategory;
+use App\Models\BilingCycle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -33,48 +34,44 @@ class PlanController extends Controller
     }
     public function index()
     {
-        // $plan = Plan::where('sys_state','!=','-1')->orderBy('id','desc')->get();
-        return view('pages.plan.index');
+        $plan = Plan::where('sys_state','!=','-1')->orderBy('id','desc')->get();
+        return view('pages.plan.index', compact('plan'));
     }
 
     public function edit($id)
     {
-        // $plan = plan::where('id',$id)->first();
-        // $category_list = Category::where('sys_state','!=','-1')->get();
-        //compact('plan','category_list')
+        $plan = plan::where('id',$id)->first();
         $specifications = Specification::where('sys_state','!=','-1')->orderBy('spec_name','desc')->get();
         $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->with('children')->orderBy('featured_cat_name','desc')->get();
+        $bilingCycle = BilingCycle::where('sys_state','!=','-1')->orderBy('billing_name','desc')->get();
         $product_list = Product::where('sys_state','!=','-1')->get();
-        return view('pages.plan.edit', compact('specifications','product_list','featuredCategory'));
+        return view('pages.plan.edit', compact('plan','specifications','product_list','featuredCategory','bilingCycle'));
     }
 
     public function store(Request $request){
         if($request->ajax()){           
             if($request->id == "0"){
                 $validator = Validator::make($request->all(), [                   
-                    'name' => 'required',
-                    'cat_id' => 'required|not_in:0'
+                    'planName' => 'required',
+                    'product_id' => 'required|not_in:0'
                 ],
                 $message = [
-                    'name.required' => 'The Prodcut Name Is Required.',
-                    'cat_id.required' => 'Please Select Menu Category.',
-                    'cat_id.not_in' => 'Please Select Menu Category.'
+                    'planName.required' => 'The Plan Name Is Required.',
+                    'product_id.required' => 'Please Select Product.',
+                    'product_id.not_in' => 'Please Select Product.'
                 ]);
                 if ($validator->passes()){
-                    $name = $request->name;
-                    $cat_id = $request->cat_id;
-                    $desc = $request->desc;
+                    $planName = $request->planName;
+                    $product_id = $request->product_id;
 
-                    $save_plan = plan::create(['plan_name'=>$name , 'plan_desc'=>$desc , 'category_id'=> $cat_id]);
+                    $save_plan = Plan::create(['plan_name'=>$planName , 'plan_product_id'=>$product_id]);
                    
-                    session()->flash('success', 'plan created successfully!');
+                    session()->flash('success', 'Plan created successfully!');
 
                     return response()->json([
-                        'success' => 'plan created successfully!',
-                        'title' => 'plan',
-                        'type' => 'create',
+                        'success' => 'plan updated successfully!',
                         'data' => $save_plan
-                    ], Response::HTTP_OK);
+                    ]);
                 }
                 else{
                     return response()->json(['error'=>$validator->getMessageBag()->toArray()]);
@@ -117,18 +114,18 @@ class PlanController extends Controller
     public function remove($id)
     {
         try{
-            $model = new plan();
+            $model = new Plan();
             helper::sysDelete($model,$id);
             return redirect()->back()
                 ->with([
-                    'success' => 'plan deleted successfully!',
-                    'title' => 'plan'
+                    'success' => 'Plan deleted successfully!',
+                    'title' => 'Plan'
                 ]);
         }catch(Exception $e){
             return redirect()->back()
                 ->with([
                     'error' => $e->getMessage(),
-                    'title' => 'plan'
+                    'title' => 'Plan'
                 ]);
         }
     }

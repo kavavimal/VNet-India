@@ -7,7 +7,8 @@ use App\Http\Controllers\Supplier\SupplierController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Plan\PlanController;
 use App\Http\Controllers\Plan\SpecificationController;
-use App\Http\Controllers\Plan\FeaturedCategoryController;
+use App\Http\Controllers\Plan\FeaturedCategoryController; 
+use App\Http\Controllers\Plan\BillingController; 
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\role\RoleController;
 use App\Http\Controllers\Category\CategoryController;
@@ -72,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/plan',[PlanController::class,'index'])->name('plan-index');
     Route::post('/plan/store',[PlanController::class,'store'])->name('plan-store');
     Route::get('/plan/edit/{id}', [PlanController::class, 'edit'])->name('plan-edit');
+    Route::get('/plan/delete/{id}', [PlanController::class, 'remove'])->name('plan-delete');
 
     //Specification Module
     Route::post('/spacification/store',[SpecificationController::class,'store'])->name('specification-store');
@@ -85,4 +87,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/featuredSubCategory/subcatblock',[FeaturedSubCategoryController::class,'getblock'])->name('sub-category-block');
     Route::post('/featuredSubCategory/store',[FeaturedSubCategoryController::class,'store'])->name('featured-sub-category-store');
     Route::post('/featuredSubCategory/delete',[FeaturedSubCategoryController::class,'remove'])->name('featured-sub-category-delete');
+    
+    // Billing Module
+    Route::post('/billing/store',[BillingController::class,'store'])->name('billing-store');
+    Route::post('/billing/delete',[BillingController::class,'remove'])->name('billing-delete');
 });
