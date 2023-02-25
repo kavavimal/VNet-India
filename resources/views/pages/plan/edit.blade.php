@@ -111,7 +111,7 @@
                     </div>
                 </div>  
 
-                <div class="card col-md-12 mt-4">
+                <div class="col-md-12 mt-4">
                     @include('pages.plan.featuredcategoryList')
                 </div> 
                 <div class="card col-md-5 mt-4 mr-5">
