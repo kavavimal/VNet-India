@@ -46,7 +46,8 @@ class FeaturedCategoryController extends Controller
                         'success' => 'Featured Category created successfully!',
                         'title' => 'Featured Category',
                         'type' => 'create',
-                        'data' => $featuredCategorySave
+                        'data' => $featuredCategorySave,
+                        'html' => view('pages.plan.featuredCat.catItemCheckbox', ['id' => $featuredCategorySave->id, 'featured_cat_name' => $featuredCategorySave->featured_cat_name])->render()
                     ], Response::HTTP_OK);
                 }
                 else{
@@ -87,17 +88,15 @@ class FeaturedCategoryController extends Controller
         try{
             $model = new FeaturedCategory();
             helper::sysDelete($model,$request->id);
-            return redirect()->back()
-                ->with([
-                    'success' => 'Featured Category Deleted Successfully!',
-                    'title' => 'Featured Category'
-                ]);
+            return response()->json([
+                'success' => 'Featured Category Deleted Successfully!',
+                'title' => 'Featured Category'
+            ]);
         }catch(Exception $e){
-            return redirect()->back()
-                ->with([
-                    'error' => $e->getMessage(),
-                    'title' => 'Featured Category'
-                ]);
+            return response()->json([
+                'error' => $e->getMessage(),
+                'title' => 'Featured Category'
+            ]);
         }
     }
 }

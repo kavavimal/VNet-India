@@ -43,7 +43,7 @@ class PlanController extends Controller
         // $category_list = Category::where('sys_state','!=','-1')->get();
         //compact('plan','category_list')
         $specifications = Specification::where('sys_state','!=','-1')->orderBy('spec_name','desc')->get();
-        $featuredCategory = FeaturedCategory::orderBy('featured_cat_name','desc')->get();
+        $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->with('children')->orderBy('featured_cat_name','desc')->get();
         $product_list = Product::where('sys_state','!=','-1')->get();
         return view('pages.plan.edit', compact('specifications','product_list','featuredCategory'));
     }

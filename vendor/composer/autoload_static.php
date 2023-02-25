@@ -621,6 +621,7 @@ class ComposerStaticInitf4212e78d4c43c0e15e4db85cc971426
         'App\\Mail\\SendPassWordReset' => __DIR__ . '/../..' . '/app/Mail/SendPassWordReset.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\FeaturedCategory' => __DIR__ . '/../..' . '/app/Models/FeaturedCategory.php',
+        'App\\Models\\FeaturedSubCategory' => __DIR__ . '/../..' . '/app/Models/FeaturedSubCategory.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\Settings' => __DIR__ . '/../..' . '/app/Models/Settings.php',
         'App\\Models\\Specification' => __DIR__ . '/../..' . '/app/Models/Specification.php',

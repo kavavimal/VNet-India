@@ -38,6 +38,7 @@ return array(
     'App\\Mail\\SendPassWordReset' => $baseDir . '/app/Mail/SendPassWordReset.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\FeaturedCategory' => $baseDir . '/app/Models/FeaturedCategory.php',
+    'App\\Models\\FeaturedSubCategory' => $baseDir . '/app/Models/FeaturedSubCategory.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\Settings' => $baseDir . '/app/Models/Settings.php',
     'App\\Models\\Specification' => $baseDir . '/app/Models/Specification.php',

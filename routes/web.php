@@ -15,6 +15,7 @@ use App\Http\Controllers\Consignment\ConsignmentController;
 use App\Http\Controllers\ProfileSettings\ProfileSettingsController;
 use App\Http\Controllers\PurchaseOrder\PurchaseOrderController;
 use App\Http\Controllers\Invoice\InvoiceController;
+use App\Http\Controllers\Plan\FeaturedSubCategoryController;
 use Dcblogdev\Xero\Facades\Xero;
 use App\Http\Controllers\Settings\SettingsController;
 
@@ -79,4 +80,9 @@ Route::middleware(['auth'])->group(function () {
     // Featured Category Module
     Route::post('/featuredCategory/store',[FeaturedCategoryController::class,'store'])->name('featured-category-store');
     Route::post('/featuredCategory/delete',[FeaturedCategoryController::class,'remove'])->name('featured-category-delete');
+
+    //Featured Sub Category Module
+    Route::post('/featuredSubCategory/subcatblock',[FeaturedSubCategoryController::class,'getblock'])->name('sub-category-block');
+    Route::post('/featuredSubCategory/store',[FeaturedSubCategoryController::class,'store'])->name('featured-sub-category-store');
+    Route::post('/featuredSubCategory/delete',[FeaturedSubCategoryController::class,'remove'])->name('featured-sub-category-delete');
 });

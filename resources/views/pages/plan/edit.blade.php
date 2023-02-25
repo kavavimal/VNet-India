@@ -110,92 +110,99 @@
                         </div>
                     </div>
                 </div>  
-
+            </div>
+            <div class="row">
                 <div class="col-md-12 mt-4">
                     @include('pages.plan.featuredcategoryList')
                 </div> 
-                <div class="card col-md-5 mt-4 mr-5">
-                    <div class="card-body">
-                        <h4 class="mb-3">Key Features</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="host_website">
-                            <label class="form-check-label" for="host_website">Easy cPanel Control Panel</label>
+            </div>
+            <div class="row featured-sub-cat-wrap">
+                <!-- <div class="col-md-6 mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Key Features</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="host_website">
+                                <label class="form-check-label" for="host_website">Easy cPanel Control Panel</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="database">
+                                <label class="form-check-label" for="database">99.99% Uptime Commitment</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="bandwidth">
+                                <label class="form-check-label" for="bandwidth">Free Website Migration</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="cpanel">
+                                <label class="form-check-label" for="cpanel">Free Website Builde</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="one_click_install">
+                                <label class="form-check-label" for="one_click_install">Easy Application Installer</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="ssl">
+                                <label class="form-check-label" for="ssl">Password Proctected Directories</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="antivirus_proctection">
+                                <label class="form-check-label" for="antivirus_proctection">Anti-DDOS Protection</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
+                                <label class="form-check-label" for="24_7_365_support">Antivirus Protection on Server</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
+                                <label class="form-check-label" for="24_7_365_support">gZip. Faster Page Load Options</label>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="database">
-                            <label class="form-check-label" for="database">99.99% Uptime Commitment</label>
+                    </div>    
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Resource Features</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="host_website">
+                                <label class="form-check-label" for="host_website">500 MB RAM</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="database">
+                                <label class="form-check-label" for="database">IMBPS I/O</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="bandwidth">
+                                <label class="form-check-label" for="bandwidth">20 Entry Proccess</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="cpanel">
+                                <label class="form-check-label" for="cpanel">1 Core Shared CPU</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="one_click_install">
+                                <label class="form-check-label" for="one_click_install">5000 iNode / Total Files</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="ssl">
+                                <label class="form-check-label" for="ssl">256 MB Max Size per Database</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="antivirus_proctection">
+                                <label class="form-check-label" for="antivirus_proctection">100 MB Storage per Email Account</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
+                                <label class="form-check-label" for="24_7_365_support">0 cron Jobs</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
+                                <label class="form-check-label" for="24_7_365_support">0 Email Accouonts</label>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="bandwidth">
-                            <label class="form-check-label" for="bandwidth">Free Website Migration</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="cpanel">
-                            <label class="form-check-label" for="cpanel">Free Website Builde</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="one_click_install">
-                            <label class="form-check-label" for="one_click_install">Easy Application Installer</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ssl">
-                            <label class="form-check-label" for="ssl">Password Proctected Directories</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="antivirus_proctection">
-                            <label class="form-check-label" for="antivirus_proctection">Anti-DDOS Protection</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
-                            <label class="form-check-label" for="24_7_365_support">Antivirus Protection on Server</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
-                            <label class="form-check-label" for="24_7_365_support">gZip. Faster Page Load Options</label>
-                        </div>
-                    </div>
-                </div>    
-                <div class="card col-md-5 mt-4">
-                    <div class="card-body">
-                        <h4 class="mb-3">Resource Features</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="host_website">
-                            <label class="form-check-label" for="host_website">500 MB RAM</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="database">
-                            <label class="form-check-label" for="database">IMBPS I/O</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="bandwidth">
-                            <label class="form-check-label" for="bandwidth">20 Entry Proccess</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="cpanel">
-                            <label class="form-check-label" for="cpanel">1 Core Shared CPU</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="one_click_install">
-                            <label class="form-check-label" for="one_click_install">5000 iNode / Total Files</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ssl">
-                            <label class="form-check-label" for="ssl">256 MB Max Size per Database</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="antivirus_proctection">
-                            <label class="form-check-label" for="antivirus_proctection">100 MB Storage per Email Account</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
-                            <label class="form-check-label" for="24_7_365_support">0 cron Jobs</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
-                            <label class="form-check-label" for="24_7_365_support">0 Email Accouonts</label>
-                        </div>
-                    </div>
-                </div>   
+                    </div>   
+                </div>    -->
             </div>               
         </form>                {{-- @endif --}}
     </div>
@@ -214,4 +221,5 @@
     @include('pages.product.form-script')
     @include('pages.plan.specification-form-script')
     @include('pages.plan.featuredCategory-form-script')
+    @include('pages.plan.featuredSubCat.featuredSubCategory-script')
 @endsection
