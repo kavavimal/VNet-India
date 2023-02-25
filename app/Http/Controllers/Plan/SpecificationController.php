@@ -86,7 +86,8 @@ class SpecificationController extends Controller
     {
         if($request->ajax() && $request->id > 0){
             $model = new Specification();
-            $model->where('id', $request->id)->delete();
+            helper::sysDelete($model,$request->id);
+            // $model->where('id', $request->id)->delete();
             return response()->json([
                 'success' => 'Specification deleted successfully!',
                 'title' => 'Specification',
