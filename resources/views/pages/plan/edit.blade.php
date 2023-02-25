@@ -34,11 +34,11 @@
         </div>
     </div>
 </div>
-<h4 class="heading-color">Plan</h4> 
+<h4 class="heading-color">Plan</h4>
 @if($plan)
     <form class="erp-plan-submit" data-url="{{route('plan-store')}}">
         <input type="hidden" id="plan_id" class="plan_id" name="uid" value="{{ $plan->id ?? '' }}" />
-        <div class="row">
+        <div class="row featured-sub-cat-wrap">
             <div class="col-md-6">
                 <div class="card mt-4 mb-4">
                     <div class="card-body">
@@ -53,7 +53,7 @@
                             </select>
                             <div class="error" style="color:red;" id="name_error"></div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
@@ -64,23 +64,23 @@
                             <input class="form-control" id="planName" name="planName" type="text" value="{{ $plan->plan_name ?? '' }}">
                             <div class="error" style="color:red;" id="name_error"></div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 mb-4">
                 @include('pages.plan.billingList')
             </div>
             <div class="col-md-6">
-                @include('pages.plan.planList')                
-            </div> 
+                @include('pages.plan.planList')
+            </div>
             <div class="col-md-6">
                 @include('pages.plan.specificationsList')
-            </div> 
+            </div>
             <div class="col-md-6">
                 @include('pages.plan.featuredcategoryList')
-            </div> 
-        </div>                                 
-    </form> 
+            </div>
+        </div>
+    </form>
 @else
     <form class="erp-plan-submit" data-url="{{route('plan-store')}}">
         <input type="hidden" id="plan_id" class="plan_id" name="pid" value="0" />
@@ -100,7 +100,7 @@
                             </select>
                             <div class="error" style="color:red;" id="product_id_error"></div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
@@ -111,17 +111,17 @@
                             <input class="form-control" id="planName" name="planName" type="text">
                             <div class="error" style="color:red;" id="plan_name_error"></div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
-        </div>                                 
-    </form> 
-@endif       
+        </div>
+    </form>
+@endif
 <a href="{{route('plan-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
 <div class="btn-group dropdown float-right">
     <button type="submit" class="btn btn-outline-primary erp-plan-form">
         Save
-    </button>   
+    </button>
 </div>
 @endsection
 @section('page-js')
