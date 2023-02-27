@@ -9,7 +9,22 @@
 
         var submit_url = $(this).attr("data-url");
         var data_id = $('#plan_id').val();
-
+        let billing_cycle = [];
+        $("input:checkbox[name='billing_cycle[]']:checked").each(function(){
+            billing_cycle.push($(this).val());
+        })
+        let specification = [];
+        $("input:checkbox[name='specification[]']:checked").each(function(){
+            specification.push($(this).val());
+        });
+        let featuredCategory = [];
+        $("input:checkbox[name='featuredCategory[]']:checked").each(function(){
+            featuredCategory.push($(this).val());
+        });
+        let featuredSubCategory = [];
+        $("input:checkbox[name='featuredSubCategory[]']:checked").each(function(){
+            featuredSubCategory.push($(this).val());
+        });
         $.ajax({
             url: submit_url,
             type: "POST",
@@ -17,7 +32,11 @@
                 "_token": "{{ csrf_token() }}",
                 id: $('#plan_id').val(),
                 product_id: $('#product_id').val(),
-                planName: $('#planName').val()                
+                planName: $('#planName').val(),
+                billing_cycle: billing_cycle.join(','),
+                specification: specification.join(','),
+                featuredCategory: featuredCategory.join(','),
+                featuredSubCategory: featuredSubCategory.join(','),
             },
             dataType: 'json',
             success: function(response) {                
