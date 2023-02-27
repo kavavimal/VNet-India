@@ -57,7 +57,7 @@ class CategoryController extends Controller
                 if ($validator->passes()){
                     $name = $request->name;
                     $parent_id = $request->parent_id;
-                    $description = $request->description;
+                    $description = $request->description ? $request->description : '';
                     $status = $request->status;
                     $save_category = Category::create([
                         'name'=>$name,
@@ -85,7 +85,7 @@ class CategoryController extends Controller
 
                     $name = $request->name;
                     $parent_id = $request->parent_id;
-                    $description = $request->description;
+                    $description = $request->description ? $request->description : '';
                     $status = $request->status;
 
                     $category->update(['name'=> $name , 'parent_id'=>$parent_id , 'description' => $description, 'status' => $status]);

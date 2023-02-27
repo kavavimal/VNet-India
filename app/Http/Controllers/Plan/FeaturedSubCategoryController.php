@@ -6,6 +6,7 @@ use App\helper\helper;
 use App\Models\FeaturedCategory;
 use App\Http\Controllers\Controller;
 use App\Models\FeaturedSubCategory;
+use App\Models\Plan;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -109,12 +110,19 @@ class FeaturedSubCategoryController extends Controller
     {
         // $items = // fetch the items from the database or elsewhere
         $id = $request->id;
+        $plan_id = $request->plan_id;
         if ($id) {
+            $planSubCat = [];
+            if ($plan_id) {
+                $plan = Plan::find($plan_id);
+                $planSubCat = explode(',', $plan->featured_sub_category);
+            }
             $featuredCategory = FeaturedCategory::find($id);
             $data = [
                 'id' => $id,
                 'name' => $featuredCategory->featured_cat_name,
-                'items' => $featuredCategory->children
+                'items' => $featuredCategory->children,
+                'featuredSubCategorysSelected' => $planSubCat,
             ];
             if ($request->ajax()) {
                 return view('pages.plan.featuredSubCat.featuredCatBlock', $data)->render();

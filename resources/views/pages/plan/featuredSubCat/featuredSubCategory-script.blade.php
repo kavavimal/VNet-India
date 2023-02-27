@@ -53,11 +53,15 @@
 
 <script>
     // on featured category item selected or unselected
+    function addSubCatBlock() {
+
+    }
     $(document).on("change", ".featuredCategory_list_wrap .featuredCat", function() {
         let curr_item = $(this).closest('.featured_category_item');
         // console.log($(this).is(':checked'));
         var id = $(curr_item).attr('data-id');
         var name = $(curr_item).attr('data-name');
+        let plan_id = $("#plan_id").val();
         if($(this).is(':checked')) {
             $.ajax({
                 url: `{{route('sub-category-block')}}`,
@@ -65,6 +69,7 @@
                 data: {
                     "_token": "{{ csrf_token() }}",
                     id: id,
+                    plan_id: plan_id,
                 },
                 success: function(blockHtml) {
                     $('.featured-sub-cat-wrap').append(blockHtml);

@@ -37,7 +37,7 @@
 <h4 class="heading-color">Plan</h4>
 @if($plan)
     <form class="erp-plan-submit" data-url="{{route('plan-store')}}">
-        <input type="hidden" id="plan_id" class="plan_id" name="uid" value="{{ $plan->id ?? '' }}" />
+        <input type="hidden" id="plan_id" class="plan_id" name="id" value="{{ $plan->id ?? '' }}" />
         <div class="row featured-sub-cat-wrap">
             <div class="col-md-6">
                 <div class="card mt-4 mb-4">
@@ -67,10 +67,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-4">
+            <div class="col-md-4 mb-4">
                 @include('pages.plan.billingList')
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
                 @include('pages.plan.planList')
             </div>
             <div class="col-md-6">
@@ -79,6 +79,18 @@
             <div class="col-md-6">
                 @include('pages.plan.featuredcategoryList')
             </div>
+            @if(count($featuredCategorysSelected) > 0)
+                @foreach ($featuredCategory as $featured_cat)
+                    @if (in_array($featured_cat->id, $featuredCategorysSelected))
+                        @include('pages.plan.featuredSubCat.featuredCatBlock', [
+                            'id' => $featured_cat->id,
+                            'name' => $featured_cat->featured_cat_name,
+                            'items' => $featured_cat->children,
+                            'featuredSubCategorysSelected' => $featuredSubCategorySelected,
+                        ])
+                    @endif
+                @endforeach
+            @endif
         </div>
     </form>
 @else

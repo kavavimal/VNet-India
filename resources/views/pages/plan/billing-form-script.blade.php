@@ -77,8 +77,8 @@
                     if($('#type').val() === 'add'){
                         $('.billing_list_wrap').append(`
                             <div class="form-check" id="billing-`+data.id+`">
-                                <input class="form-check-input billing_cycle" type="checkbox" value="` + data.id + `" id="` + data.id + `" name="billing_cycle[]">
-                                <label class="form-check-label mr-4 mb-2" for="` + data.id + `">`+data.billing_name+`</label>
+                                <input class="form-check-input billing_cycle" type="checkbox" value="` + data.id + `" id="billing-cycle-` + data.id + `" name="billing_cycle[]">
+                                <label class="form-check-label mr-4 mb-2" for="billing-cycle-` + data.id + `">`+data.billing_name+`</label>
                                 <button type="button" class="btn btn-outline-primary btn-sm edit-item-billing mr-1" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
                                 <button type="button" class="btn btn-outline-primary btn-sm delete-item-billing" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
                             </div>
@@ -86,8 +86,8 @@
                     } else {
                         $('.billing_list_wrap').find('#billing-'+data.id).replaceWith(`
                             <div class="form-check" id="billing-`+data.id+`">
-                                <input class="form-check-input billing_cycle" type="checkbox" value="` + data.id + `" id="` + data.id + `" name="billing_cycle[]">
-                                <label class="form-check-label mr-4 mb-2" for="` + data.id + `">`+data.billing_name+`</label>
+                                <input class="form-check-input billing_cycle" type="checkbox" value="` + data.id + `" id="billing-cycle-` + data.id + `" name="billing_cycle[]">
+                                <label class="form-check-label mr-4 mb-2" for="billing-cycle-` + data.id + `">`+data.billing_name+`</label>
                                 <button type="button" class="btn btn-outline-primary btn-sm edit-item-billing mr-1" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
                                 <button type="button" class="btn btn-outline-primary btn-sm delete-item-billing" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
                             </div>

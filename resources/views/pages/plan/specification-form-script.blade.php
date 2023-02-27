@@ -82,7 +82,7 @@
                     if($('#type').val() === 'add'){
                         $('.specification_list_wrap').append(`
                             <div class="form-check" id="spec-`+data.id+`">
-                                <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `">
+                                <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `" name="specification[]">
                                 <label class="form-check-label" for="` + data.id + `">`+data.spec_name+`</label>
                                 <button type="button" class="btn text-warning edit-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
                                 <button type="button" class="btn text-danger delete-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
@@ -91,7 +91,7 @@
                     } else {
                         $('.specification_list_wrap').find('#spec-'+data.id).replaceWith(`
                             <div class="form-check" id="spec-`+data.id+`">
-                                <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `">
+                                <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `" name="specification[]">
                                 <label class="form-check-label" for="` + data.id + `">`+data.spec_name+`</label>
                                 <button type="button" class="btn text-warning edit-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
                                 <button type="button" class="btn text-danger delete-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
