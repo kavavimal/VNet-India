@@ -17,6 +17,9 @@
     textarea{
         height: 100px !important;
     }
+    #serverLocation_modal .select2-container{
+        width: 100% !important;
+    }
 </style>
 @endsection
 <div class="loadscreen" id="preloader" style="display: none; z-index:90;">
@@ -25,7 +28,7 @@
 @section('main-content')
 <div class="breadcrumb">
     <div class="col-sm-12 col-md-12">
-        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('plan-index')}}">Plan</a> | Plan  </a>
+        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('plan-index')}}">Plan</a> | Plan {{ $plan ? 'Edit: '.$plan->id : 'New'}} </a>
         <a href="{{route('plan-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
         <div class="btn-group dropdown float-right">
             <button type="submit" class="btn btn-outline-primary erp-plan-form">
@@ -44,7 +47,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="fname">Select Product</label>
-                            <select class="form-control"  id="product_id" name="product_id">
+                            <select class="form-control select2"  id="product_id" name="product_id">
                                 <option value="0">Select Product</option>
                                 @foreach($product_list as $value)
                                 <?php $prodSelect = ''; if ($value->id == $plan->plan_product_id) {$prodSelect = 'selected';} else {$prodSelect = '';}?>
@@ -79,7 +82,7 @@
             <div class="col-md-6">
                 @include('pages.plan.featuredcategoryList')
             </div>
-            @if(count($featuredCategorysSelected) > 0)
+            @if($featuredCategorysSelected != '')
                 @foreach ($featuredCategory as $featured_cat)
                     @if (in_array($featured_cat->id, $featuredCategorysSelected))
                         @include('pages.plan.featuredSubCat.featuredCatBlock', [
@@ -90,7 +93,15 @@
                         ])
                     @endif
                 @endforeach
-            @endif
+            @endif            
+        </div>
+        <div class="row">
+            <div class="col-md-8 mt-4">
+                @include('pages.plan.serverlocation')
+            </div>
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.negotiation')
+            </div>           
         </div>
     </form>
 @else
@@ -146,4 +157,5 @@
     @include('pages.plan.featuredSubCat.featuredSubCategory-script')
     @include('pages.plan.billing-form-script')
     @include('pages.plan.plan-form-script')
+    @include('pages.plan.server-location-form-script')
 @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\Plan\PlanController;
 use App\Http\Controllers\Plan\SpecificationController;
 use App\Http\Controllers\Plan\FeaturedCategoryController; 
 use App\Http\Controllers\Plan\BillingController; 
+use App\Http\Controllers\Plan\ServerLocationController; 
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\role\RoleController;
 use App\Http\Controllers\Category\CategoryController;
@@ -91,4 +92,8 @@ Route::middleware(['auth'])->group(function () {
     // Billing Module
     Route::post('/billing/store',[BillingController::class,'store'])->name('billing-store');
     Route::post('/billing/delete',[BillingController::class,'remove'])->name('billing-delete');
+
+    // serverLocation Module
+    Route::post('/serverLocation/store',[ServerLocationController::class,'store'])->name('serverLocation-store');
+    Route::post('/serverLocation/delete',[ServerLocationController::class,'remove'])->name('serverLocation-delete');
 });

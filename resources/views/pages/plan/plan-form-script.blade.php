@@ -20,22 +20,36 @@
             $('.billing_cycle_select').append($("<option></option>").attr("value", value).text(value)); 
         });       
     });
+    $(document).ready(function(){
+        var billing = [];
+        $('.billing_cycle:checked').each( function () {            
+            billing.push($(this).siblings('label').text());
+        });        
+        $('.billing_cycle_select').find('option').remove().end().append('<option value="">Select Billig Cycle</option>');
+        $.each(billing, function(key, value) {            
+            $('.billing_cycle_select').append($("<option></option>").attr("value", value).text(value)); 
+        });
+    });
     $('body').on('click', '.add_plan_fields', function() {
         $('.plan_list_wrap').append(`
             <div class="row">
                 <div class="col-md-2 form-group">
-                    <div class="">
-                        <input
-                            class="form-check-input planpricing"
-                            type="checkbox"
-                            value="0"
-                            id="planpricing-0"
-                            name="planpricing[]"
+                    <div class="d-flex">
+                        <div class="mr-3">
+                            <input
+                                class="planpricing"
+                                type="checkbox"
+                                value="0"
+                                id="planpricing-0"
+                                name="planpricing[]"
                             />
-                    </div>
-                    <label for="fname">Storage</label>
-                    <input class="form-control" id="productStorage" name="productStorage[]" type="text">
-                    <div class="error" style="color:red;" id="name_error"></div>
+                        </div>
+                        <div>
+                            <label for="fname">Storage</label>
+                            <input class="form-control" id="productName" name="productName" type="text">
+                            <div class="error" style="color:red;" id="name_error"></div>
+                        </div>
+                    </div>               
                 </div>
                 <div class="col-md-2 form-group">
                     <label for="productDesc">Storage Price</label>
@@ -45,7 +59,7 @@
                 </div>
                 <div class="col-md-2 form-group">
                     <label for="productDesc">Billing Cycle</label>
-                    <select name="billing_cycle_select" id="billing_cycle_select" class="form-control billing_cycle_select">
+                    <select name="billing_cycle_select" id="billing_cycle_select" class="form-control billing_cycle_select select2">
                         <option value="">Select Billing Cycle</option>
                     </select>
                     <div class="error" style="color:red;" id="fname_error"></div>
