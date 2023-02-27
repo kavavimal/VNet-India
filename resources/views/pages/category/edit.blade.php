@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="parent_id">Parent Id</label>
-                            <select class="form-control" id="parent_id" name="parent_id">
+                            <select class="form-control select2" id="parent_id" name="parent_id">
                                 <option value="0">No Parent</option>
                                 @foreach($category_list as $cat)
                                 <?php $catSelect = '';
@@ -91,7 +91,7 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="parent_id">Parent Id</label>
-                            <select class="form-control"  id="parent_id" name="parent_id" value="">
+                            <select class="form-control select2"  id="parent_id" name="parent_id" value="">
                                 <option value="0">No Parent</option>
                                 @foreach($category_list as $value)
                                 <option value="{{$value->id}}">

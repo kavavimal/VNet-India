@@ -1,6 +1,7 @@
 <?php
 namespace App\helper;
 use Illuminate\Http\Request;
+use App\Models\ContactsCountryEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Validator;
 class helper
@@ -20,6 +21,10 @@ class helper
     public static function sysDelete($model,$id)
     {
         $model->where('id',$id)->update(['sys_state' => '-1']);
+    }
+    public static function ContactCountryAll()
+    {
+        return ContactsCountryEnum::all();
     }
 }
 

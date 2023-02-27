@@ -44,7 +44,7 @@
                         value="{{$spec->id}}"
                         name="specification[]"
                         id="specification-{{$spec->id}}"
-                        {{in_array($spec->id,$specificationsSelected) ? 'checked="checked"' : ''}}
+                        @if($specificationsSelected != ''){{in_array($spec->id,$specificationsSelected) ? 'checked="checked"' : ''}}@endif
                         />
                     <label class="form-check-label mr-4 mb-2" for="specification-{{$spec->id}}">{{$spec->spec_name}}</label>
                     <button type="button" class="btn btn-outline-primary btn-sm edit-item mr-1" data-id="{{$spec->id}}" data-name="{{$spec->spec_name}}" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>

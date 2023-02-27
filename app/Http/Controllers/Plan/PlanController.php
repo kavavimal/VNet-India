@@ -40,11 +40,11 @@ class PlanController extends Controller
 
     public function edit($id)
     {
-        $plan = Plan::where('id',$id)->first();
-        $billingCycleSelected = explode(',', $plan->billing_cycles);
-        $specificationsSelected = explode(',', $plan->specification);
-        $featuredCategorysSelected = explode(',', $plan->featured_category);
-        $featuredSubCategorySelected = explode(',', $plan->featured_sub_category);
+        $plan = Plan::where('id',$id)->first();        
+        $billingCycleSelected = (!empty($plan->billing_cycles)) ? explode(',', $plan->billing_cycles) : '';
+        $specificationsSelected = (!empty($plan->specification)) ? explode(',', $plan->specification) : '';
+        $featuredCategorysSelected = (!empty($plan->featured_category)) ? explode(',', $plan->featured_category) : '';
+        $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
 
         $specifications = Specification::where('sys_state','!=','-1')->orderBy('spec_name','desc')->get();
         $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->with('children')->orderBy('featured_cat_name','desc')->get();

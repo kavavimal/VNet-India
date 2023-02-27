@@ -9,7 +9,7 @@
         value="{{$id}}"
         id="featuredSubCat-{{$id}}"
         name="featuredSubCategory[]"
-        {{isset($featuredSubCategorysSelected) && in_array($id,$featuredSubCategorysSelected) ? "checked='checked'" : ""}}
+        @if($featuredSubCategorysSelected != ''){{isset($featuredSubCategorysSelected) && in_array($id,$featuredSubCategorysSelected) ? "checked='checked'" : ""}}@endif
     />
     <label class="form-check-label mr-4 mb-2" for="featuredSubCat-{{$id}}">{{$name}}</label>
     <button type="button" class="btn btn-outline-primary btn-sm edit-item mr-1" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
