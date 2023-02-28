@@ -15,9 +15,13 @@ class Plan extends Model
         'plan_name',
         'plan_product_id',
         'billing_cycles',
+        'taxation',
         'specification',
         'featured_category',
         'featured_sub_category',
+        'negotiation_min',
+        'negotiation_max',
+        'negotiation_status',
         'sys_state',
         'created_at',
         'updated_at'

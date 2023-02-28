@@ -101,7 +101,10 @@
             </div>
             <div class="col-md-4 mt-4">
                 @include('pages.plan.negotiation')
-            </div>           
+            </div>      
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.tax')
+            </div>                
         </div>
     </form>
 @else
@@ -158,4 +161,5 @@
     @include('pages.plan.billing-form-script')
     @include('pages.plan.plan-form-script')
     @include('pages.plan.server-location-form-script')
+    @include('pages.plan.tax-form-script')
 @endsection
