@@ -4,14 +4,30 @@
         $(".erp-plan-submit").submit();
     });
 
+    $(document).on('change', "input[name='negotiation_status']", function() {        
+        if($(this).is(':checked')){
+            $(this).val('0');
+        }
+        else if($(this).not(':checked')){           
+            $(this).val('1');
+        }
+    });        
+
     $(".erp-plan-submit").submit(function(e) {
         e.preventDefault();
 
         var submit_url = $(this).attr("data-url");
         var data_id = $('#plan_id').val();
+        var negotiation_min = $('#negotiation_min').val();
+        var negotiation_max = $('#negotiation_max').val();                
+        var negotiation_status = $('#negotiation_status').val();
         let billing_cycle = [];
         $("input:checkbox[name='billing_cycle[]']:checked").each(function(){
             billing_cycle.push($(this).val());
+        })
+        let taxation = [];
+        $("input:checkbox[name='taxation[]']:checked").each(function(){
+            taxation.push($(this).val());
         })
         let specification = [];
         $("input:checkbox[name='specification[]']:checked").each(function(){
@@ -34,9 +50,13 @@
                 product_id: $('#product_id').val(),
                 planName: $('#planName').val(),
                 billing_cycle: billing_cycle.join(','),
+                taxation: taxation.join(','),
                 specification: specification.join(','),
                 featuredCategory: featuredCategory.join(','),
                 featuredSubCategory: featuredSubCategory.join(','),
+                negotiation_min: negotiation_min,
+                negotiation_max: negotiation_max,
+                negotiation_status: negotiation_status,
             },
             dataType: 'json',
             success: function(response) {                

@@ -10,6 +10,7 @@ use App\Models\Plan;
 use App\Models\Specification;
 use App\Models\FeaturedCategory;
 use App\Models\BilingCycle;
+use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -45,10 +46,12 @@ class PlanController extends Controller
         $specificationsSelected = (!empty($plan->specification)) ? explode(',', $plan->specification) : '';
         $featuredCategorysSelected = (!empty($plan->featured_category)) ? explode(',', $plan->featured_category) : '';
         $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
+        $taxationSelected = (!empty($plan->taxation)) ? explode(',', $plan->taxation) : '';
 
         $specifications = Specification::where('sys_state','!=','-1')->orderBy('spec_name','desc')->get();
         $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->with('children')->orderBy('featured_cat_name','desc')->get();
         $bilingCycle = BilingCycle::where('sys_state','!=','-1')->orderBy('billing_name','desc')->get();
+        $tax = Tax::where('sys_state','!=','-1')->get();
         $product_list = Product::where('sys_state','!=','-1')->get();
         return view('pages.plan.edit', compact(
             'plan',
@@ -56,10 +59,12 @@ class PlanController extends Controller
             'product_list',
             'featuredCategory',
             'bilingCycle',
+            'tax',
             'billingCycleSelected',
             'specificationsSelected',
             'featuredCategorysSelected',
             'featuredSubCategorySelected',
+            'taxationSelected',
         ));
     }
 
@@ -91,7 +96,7 @@ class PlanController extends Controller
                 else{
                     return response()->json(['error'=>$validator->getMessageBag()->toArray()]);
                 }
-            }else{
+            }else{                
                 $validator = Validator::make($request->all(), [
                     'planName' => 'required',
                     'product_id' => 'required|not_in:0'
@@ -102,29 +107,38 @@ class PlanController extends Controller
                     'product_id.not_in' => 'Please Select Product.'
                 ]);
 
-                if ($validator->passes()){
+                if ($validator->passes()){                   
                     $plan = Plan::find($request->id);
                     $planName = $request->planName;
                     $product_id = $request->product_id;
                     
                     $billingCycle = $request->billing_cycle;
+                    $taxation = $request->taxation;
                     $specification = $request->specification;
                     $featuredCategory = $request->featuredCategory;
                     $featuredSubCategory = $request->featuredSubCategory;
+                    $negotiation_min = $request->negotiation_min;
+                    $negotiation_max = $request->negotiation_max;
+                    $negotiation_status = $request->negotiation_status;
 
                     $plan->update([
                         'plan_name'=>$planName,
                         'plan_product_id'=>$product_id,
                         'billing_cycles'=>$billingCycle,
+                        'taxation'=>$taxation,
                         'specification'=>$specification,
                         'featured_category'=>$featuredCategory,
                         'featured_sub_category'=>$featuredSubCategory,
+                        'negotiation_min'=>$negotiation_min,
+                        'negotiation_max'=>$negotiation_max,
+                        'negotiation_status'=>$negotiation_status,
                     ]);
-                    session()->flash('success', 'plan Updated successfully!');
+                    
+                    session()->flash('success', 'Plan Updated successfully!');
                     return response()->json([
-                        'success' => 'plan updated successfully!',
-                        'title' => 'plan',
-                        'type' => 'update',
+                        'success' => 'Plan updated successfully!',
+                        'title' => 'Plan',
+                        'type' => 'Update',
                     ]);
                 } else {
                     return response()->json(['error'=>$validator->getMessageBag()->toArray()]);
