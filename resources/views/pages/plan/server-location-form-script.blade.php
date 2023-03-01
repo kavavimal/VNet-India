@@ -128,7 +128,7 @@
                                 data.currency + "</td><td>" +
                                 data.server_location_country + "</td><td>" +
                                 data.percentage + "</td><td>" +
-                                "<button type='button' class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-serverlocation' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
+                                "<button type='button' class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-serverlocation' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
 
                             $('.server_location_list_tbl_view').append(rows);
                         } else {

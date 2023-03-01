@@ -18,9 +18,19 @@
 
         var submit_url = $(this).attr("data-url");
         var data_id = $('#plan_id').val();
+        // negotiation
         var negotiation_min = $('#negotiation_min').val();
         var negotiation_max = $('#negotiation_max').val();                
         var negotiation_status = $('#negotiation_status').val();
+
+        // service type
+        var service_type_type = $("input[name='service_type_type']:checked").val()
+        var service_type_price = $('#service_type_price').val();
+        var servive_type_currency = $('#servive_type_currency').val();
+        var service_type_renewal_price = $('#service_type_renewal_price').val();
+        var service_type_discount = $('#service_type_discount').val();
+
+
         let billing_cycle = [];
         $("input:checkbox[name='billing_cycle[]']:checked").each(function(){
             billing_cycle.push($(this).val());
@@ -57,6 +67,11 @@
                 negotiation_min: negotiation_min,
                 negotiation_max: negotiation_max,
                 negotiation_status: negotiation_status,
+                service_type_type: service_type_type,
+                service_type_price: service_type_price,
+                servive_type_currency: servive_type_currency,
+                service_type_renewal_price: service_type_renewal_price,
+                service_type_discount: service_type_discount,
             },
             dataType: 'json',
             success: function(response) {                
