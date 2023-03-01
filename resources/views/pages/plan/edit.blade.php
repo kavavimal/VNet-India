@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Vnet | Plan | {{$plan->id ?? 'New'}}</title>
+    <title>Vnet | Plan | {{$plan->plan_name ?? 'New'}}</title>
 @endsection
 @section('page-css')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -28,7 +28,7 @@
 @section('main-content')
 <div class="breadcrumb">
     <div class="col-sm-12 col-md-12">
-        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('plan-index')}}">Plan</a> | Plan {{ $plan ? 'Edit: '.$plan->id : 'New'}} </a>
+        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('plan-index')}}">Plan</a> | Plan {{ $plan ? 'Edit: '.$plan->plan_name : 'New'}} </a>
         <a href="{{route('plan-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
         <div class="btn-group dropdown float-right">
             <button type="submit" class="btn btn-outline-primary erp-plan-form">
@@ -100,11 +100,14 @@
                 @include('pages.plan.serverlocation')
             </div>
             <div class="col-md-4 mt-4">
-                @include('pages.plan.negotiation')
-            </div>      
-            <div class="col-md-4 mt-4">
                 @include('pages.plan.tax')
-            </div>                
+            </div> 
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.negotiation')
+            </div>                  
+            <div class="col-md-8 mt-4">
+                @include('pages.plan.servicetype')
+            </div>               
         </div>
     </form>
 @else
@@ -116,7 +119,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="fname">Select Product</label>
-                            <select class="form-control"  id="product_id" name="product_id">
+                            <select class="form-control select2"  id="product_id" name="product_id">
                                 <option value="0">Select Product</option>
                                 @foreach($product_list as $value)
                                 <option value="{{$value->id}}">
@@ -161,5 +164,5 @@
     @include('pages.plan.billing-form-script')
     @include('pages.plan.planPricing.plan-form-script')
     @include('pages.plan.server-location-form-script')
-    @include('pages.plan.tax-form-script')
+    @include('pages.plan.tax-form-script')    
 @endsection

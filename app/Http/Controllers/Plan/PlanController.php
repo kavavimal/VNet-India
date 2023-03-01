@@ -105,8 +105,7 @@ class PlanController extends Controller
                     'planName.required' => 'The Plan Name Is Required.',
                     'product_id.required' => 'Please Select Product.',
                     'product_id.not_in' => 'Please Select Product.'
-                ]);
-
+                ]);                
                 if ($validator->passes()){                   
                     $plan = Plan::find($request->id);
                     $planName = $request->planName;
@@ -120,6 +119,11 @@ class PlanController extends Controller
                     $negotiation_min = $request->negotiation_min;
                     $negotiation_max = $request->negotiation_max;
                     $negotiation_status = $request->negotiation_status;
+                    $service_type_type = $request->service_type_type;
+                    $service_type_price = $request->service_type_price;
+                    $servive_type_currency = $request->servive_type_currency;
+                    $service_type_renewal_price = $request->service_type_renewal_price;
+                    $service_type_discount = $request->service_type_discount;
 
                     $plan->update([
                         'plan_name'=>$planName,
@@ -132,6 +136,11 @@ class PlanController extends Controller
                         'negotiation_min'=>$negotiation_min,
                         'negotiation_max'=>$negotiation_max,
                         'negotiation_status'=>$negotiation_status,
+                        'service_type_type'=>$service_type_type,
+                        'service_type_price'=>$service_type_price,
+                        'servive_type_currency'=>$servive_type_currency,
+                        'service_type_renewal_price'=>$service_type_renewal_price,
+                        'service_type_discount'=>$service_type_discount,
                     ]);
                     
                     session()->flash('success', 'Plan Updated successfully!');

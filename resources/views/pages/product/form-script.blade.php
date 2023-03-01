@@ -28,9 +28,10 @@
                 if (response.success) {
                     $('.error').text('');
                     // toastr.info(response.success, response.title);
-                    if ($(`.cat-id[name=${data_id}`).val() == 0) {
+                    if ($('#prod_id').val() == 0) {
                         var url = window.location.href;
-                        location.href = url.replace('new', response.data.id);
+                        var page = url.replace(/\/edit\/new$/, "/")                        
+                        location.href = page;                       
                     } else {
                         location.reload();
                     }

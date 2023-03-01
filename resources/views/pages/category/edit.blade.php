@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-<title>Vnet | Menu | {{$category->id ?? 'New'}}</title>
+<title>Vnet | Menu | {{$category->name ?? 'New'}}</title>
 @endsection
 @section('page-css')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -24,7 +24,7 @@
 @section('main-content')
 <div class="breadcrumb">
     <div class="col-sm-12 col-md-12">
-        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('category-index')}}">Menus</a> | Menu {{ $category ? 'Edit: '.$category->id : 'New'}} </a>
+        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('category-index')}}">Menus</a> | Menu {{ $category ? 'Edit: '.$category->name : 'New'}} </a>
             <a href="{{route('category-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
             <div class="btn-group dropdown float-right">
                 <button type="submit" class="btn btn-outline-primary erp-category-form">
@@ -71,12 +71,12 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Status</label>
-                            <input class="status" name="status" type="radio" value="1" <?php if ($category->status == 1) {
+                            <input class="status" name="status" type="radio" id="enable" value="1" <?php if ($category->status == 1) {
                                                                                             echo 'checked="checked"';
-                                                                                        } ?>> Enable
-                            <input class="status" name="status" type="radio" value="0" <?php if ($category->status == 0) {
+                                                                                        } ?>> <label for="enable" class="d-inline" style="font-size: 15px;"> Enable</label>
+                            <input class="status" name="status" type="radio" id="disable" value="0" <?php if ($category->status == 0) {
                                                                                             echo 'checked="checked"';
-                                                                                        } ?>> Disable
+                                                                                        } ?>> <label for="disable" class="d-inline" style="font-size: 15px;"> Disable</label>
                         </div>
                     </div>
                 </form>
@@ -108,8 +108,8 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Status</label>
-                            <label><input class="status" name="status" checked="checked" type="radio" value="1"> Enable</label>
-                            <label><input class="status" name="status" type="radio" value="0"> Disable</label>
+                            <input class="status" name="status" type="radio" id="enable" value="1"><label for="enable" class="d-inline" style="font-size: 15px;"> Enable</label>
+                            <input class="status" name="status" type="radio" id="disable" value="0"> <label for="disable" class="d-inline" style="font-size: 15px;"> Disable</label>
                         </div>
                     </div>
                 </form>
