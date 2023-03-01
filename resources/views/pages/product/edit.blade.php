@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Vnet | Product | {{$product->id ?? 'New'}}</title>
+    <title>Vnet | Product | {{$product->product_name ?? 'New'}}</title>
 @endsection
 @section('page-css')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -25,7 +25,7 @@
 @section('main-content')
 <div class="breadcrumb">
     <div class="col-sm-12 col-md-12">
-        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('product-index')}}">Product</a> | Product {{ $product ? 'Edit: '.$product->id : 'New'}} </a>
+        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('product-index')}}">Product</a> | Product {{ $product ? 'Edit: '.$product->product_name : 'New'}} </a>
         <a href="{{route('product-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
         <div class="btn-group dropdown float-right">
             <button type="submit" class="btn btn-outline-primary erp-product-form">

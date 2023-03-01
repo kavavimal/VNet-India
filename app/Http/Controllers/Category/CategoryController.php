@@ -65,10 +65,10 @@ class CategoryController extends Controller
                         'description'=>$description,
                         'status'=>$status
                     ]);
-                    session()->flash('success', 'Category created successfully!');
+                    session()->flash('success', 'Menu created successfully!');
                     return response()->json([
-                        'success' => 'Category created successfully!',
-                        'title' => 'Category',
+                        'success' => 'Menu created successfully!',
+                        'title' => 'Menu',
                         'type' => 'create',
                         'data' => $save_category
                     ], Response::HTTP_OK);
@@ -90,10 +90,10 @@ class CategoryController extends Controller
 
                     $category->update(['name'=> $name , 'parent_id'=>$parent_id , 'description' => $description, 'status' => $status]);
 
-                    session()->flash('success', 'Category Updated successfully!');
+                    session()->flash('success', 'Menu Updated successfully!');
                     return response()->json([
-                        'success' => 'Category updated successfully!',
-                        'title' => 'Category',
+                        'success' => 'Menu updated successfully!',
+                        'title' => 'Menu',
                         'type' => 'update',
                         'data' => $category
                     ]);

@@ -98,7 +98,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tax/store',[TaxController::class,'store'])->name('tax-store');
     Route::post('/tax/delete',[TaxController::class,'remove'])->name('tax-delete');
 
-    // serverLocation Module
+    // Server Location Module
     Route::post('/serverLocation/store',[ServerLocationController::class,'store'])->name('serverLocation-store');
     Route::post('/serverLocation/delete',[ServerLocationController::class,'remove'])->name('serverLocation-delete');
 });

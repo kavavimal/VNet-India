@@ -22,6 +22,11 @@ class Plan extends Model
         'negotiation_min',
         'negotiation_max',
         'negotiation_status',
+        'service_type_type',
+        'service_type_price',
+        'servive_type_currency',
+        'service_type_renewal_price',
+        'service_type_discount',
         'sys_state',
         'created_at',
         'updated_at'
