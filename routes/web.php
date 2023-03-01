@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/product/store',[ProductController::class,'store'])->name('product-store');
     Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product-edit');
     Route::get('/product/delete/{id}', [ProductController::class, 'remove'])->name('product-delete');
-
+    
     //Plan Module
     Route::get('/plan',[PlanController::class,'index'])->name('plan-index');
     Route::post('/plan/store',[PlanController::class,'store'])->name('plan-store');

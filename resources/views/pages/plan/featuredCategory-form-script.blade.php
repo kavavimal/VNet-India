@@ -78,7 +78,7 @@
                 featured_cat_name: $('#featured_cat_name').val(),
             },
             dataType: 'json',
-            success: function(response) {               
+            success: function(response) {
                 if (response.success) {
                     $('.error').text('');
                     let data = response.data;
