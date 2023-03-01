@@ -45,6 +45,7 @@ return array(
     'App\\Models\\FeaturedCategory' => $baseDir . '/app/Models/FeaturedCategory.php',
     'App\\Models\\FeaturedSubCategory' => $baseDir . '/app/Models/FeaturedSubCategory.php',
     'App\\Models\\Plan' => $baseDir . '/app/Models/Plan.php',
+    'App\\Models\\PlanPricing' => $baseDir . '/app/Models/PlanPricing.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\Settings' => $baseDir . '/app/Models/Settings.php',
     'App\\Models\\Specification' => $baseDir . '/app/Models/Specification.php',

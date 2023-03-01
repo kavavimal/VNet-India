@@ -31,6 +31,11 @@ class Plan extends Model
         return $this->hasOne(Product::class,'id','plan_product_id');
     }
 
+     //each plan might have multiple plan pricing
+     public function planPricing() {
+        return $this->hasMany(PlanPricing::class, 'plan_id')->where('sys_state','!=','-1');
+    }
+
     public function getBillingCyclesAttributes()
     {
         $billingcyclesids = $this->getOriginal('billing_cycles');

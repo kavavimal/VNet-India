@@ -1,10 +1,20 @@
 <div class="card mb-4">
     <div class="card-body">
         <h4 class="mb-3" id="prod_name_to_display"></h4>
-        <div class="row">
-            <div class="col-md-2 form-group">
-                <div class="d-flex">
-                    <div class="mr-3">
+        <table class="table">
+            <thead>
+                <th></th>
+                <th>Storage</th>
+                <th>Storage Per GB</th>
+                <th>Billing Cycle</th>
+                <th>Server</th>
+                <th>Window Server</th>
+                <th>Price</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
                         <input
                             class="planpricing"
                             type="checkbox"
@@ -12,6 +22,24 @@
                             id="planpricing-0"
                             name="planpricing[]"
                         />
+                    </td>
+                    <td>30</td>
+                    <td>10</td>
+                    <td>Monthly</td>
+                    <td>Window</td>
+                    <td>Window serv</td>
+                    <td>300</td>
+                    <td class="w-10">
+                        <button type="button" class="btn btn-text text-success mr-2" title="Edit"><i class="nav-icon i-Pen-2 font-weight-bold"></i></button>
+                        <button type="button" class="btn btn-text text-danger mr-2"  title="Delete"><i class="nav-icon i-Close-Window font-weight-bold"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-2 form-group">
+                <div class="d-flex">
+                    <div class="mr-3">
+                        
                     </div>
                     <div>
                         <label for="fname">Storage</label>

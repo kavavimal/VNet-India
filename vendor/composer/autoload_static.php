@@ -628,6 +628,7 @@ class ComposerStaticInitf4212e78d4c43c0e15e4db85cc971426
         'App\\Models\\FeaturedCategory' => __DIR__ . '/../..' . '/app/Models/FeaturedCategory.php',
         'App\\Models\\FeaturedSubCategory' => __DIR__ . '/../..' . '/app/Models/FeaturedSubCategory.php',
         'App\\Models\\Plan' => __DIR__ . '/../..' . '/app/Models/Plan.php',
+        'App\\Models\\PlanPricing' => __DIR__ . '/../..' . '/app/Models/PlanPricing.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\Settings' => __DIR__ . '/../..' . '/app/Models/Settings.php',
         'App\\Models\\Specification' => __DIR__ . '/../..' . '/app/Models/Specification.php',

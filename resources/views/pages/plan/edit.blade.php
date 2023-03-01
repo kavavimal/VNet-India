@@ -74,7 +74,7 @@
                 @include('pages.plan.billingList')
             </div>
             <div class="col-md-8">
-                @include('pages.plan.planList')
+                @include('pages.plan.planPricing.planList')
             </div>
             <div class="col-md-6">
                 @include('pages.plan.specificationsList')
@@ -159,7 +159,7 @@
     @include('pages.plan.featuredCategory-form-script')
     @include('pages.plan.featuredSubCat.featuredSubCategory-script')
     @include('pages.plan.billing-form-script')
-    @include('pages.plan.plan-form-script')
+    @include('pages.plan.planPricing.plan-form-script')
     @include('pages.plan.server-location-form-script')
     @include('pages.plan.tax-form-script')
 @endsection
