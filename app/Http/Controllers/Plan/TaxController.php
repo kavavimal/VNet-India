@@ -43,7 +43,8 @@ class TaxController extends Controller
                 if ($validator->passes()){
                     $tax_type = $request->tax_type;
                     $tax_percentage = $request->tax_percentage;
-                    $save_tax = Tax::create(['tax_name'=>$tax_type,'tax_percentage'=>$tax_percentage]);
+                    $sub_menu_id = $request->sub_menu_id;
+                    $save_tax = Tax::create(['tax_name'=>$tax_type,'tax_percentage'=>$tax_percentage,'sub_menu_id'=>$sub_menu_id]);
                     session()->flash('success', 'Billing Cycle created successfully!');
                     return response()->json([
                         'success' => 'Taxation successfully!',
@@ -70,8 +71,9 @@ class TaxController extends Controller
 
                     $tax_type = $request->tax_type;
                     $tax_percentage = $request->tax_percentage;
+                    $sub_menu_id = $request->sub_menu_id;
 
-                    $tax->update(['tax_name'=>$tax_type,'tax_percentage'=>$tax_percentage]);
+                    $tax->update(['tax_name'=>$tax_type,'tax_percentage'=>$tax_percentage,'sub_menu_id'=>$sub_menu_id]);
 
                     session()->flash('success', 'Taxation Updated successfully!');
                     return response()->json([

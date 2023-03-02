@@ -40,7 +40,8 @@ class SpecificationController extends Controller
                 ]);
                 if ($validator->passes()){
                     $spec_name = $request->spec_name;
-                    $save_spec = Specification::create(['spec_name'=>$spec_name]);
+                    $sub_menu_id = $request->sub_menu_id;
+                    $save_spec = Specification::create(['spec_name'=>$spec_name,'sub_menu_id'=>$sub_menu_id]);
                     session()->flash('success', 'Specification created successfully!');
                     return response()->json([
                         'success' => 'Specification created successfully!',
@@ -64,8 +65,8 @@ class SpecificationController extends Controller
                     $spec = Specification::find($request->id);
 
                     $spec_name = $request->spec_name;
-
-                    $spec->update(['spec_name'=> $spec_name]);
+                    $sub_menu_id = $request->sub_menu_id;
+                    $spec->update(['spec_name'=> $spec_name,'sub_menu_id'=>$sub_menu_id]);
 
                     session()->flash('success', 'Specification Updated successfully!');
                     return response()->json([
