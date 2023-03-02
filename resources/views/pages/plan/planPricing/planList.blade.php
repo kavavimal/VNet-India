@@ -44,6 +44,7 @@
                     <div>
                         <label for="fname">Storage</label>
                         <input class="form-control" id="productName" name="productName" type="text">
+                        <p style="width: 135px;">GB</p>
                         <div class="error" style="color:red;" id="name_error"></div>
                     </div>
                 </div>               

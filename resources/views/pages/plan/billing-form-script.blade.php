@@ -11,6 +11,7 @@
                 <div class="modal-body">
                     <input type="hidden" id="billing-id" class="id" name="id" value="0" />
                     <input type="hidden" id="type" name="type" value="add" />
+                    <input type="hidden" id="sub_menu_id" name="sub_menu_id" value="{{$plan->plan_product_id}}">
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="name">Name</label>
@@ -67,6 +68,7 @@
                 "_token": "{{ csrf_token() }}",
                 id: $('#billing-id').val(),
                 billing_name: $('#billing_name').val(),
+                sub_menu_id: $('#sub_menu_id').val(),
             },
             dataType: 'json',
             success: function(response) {
