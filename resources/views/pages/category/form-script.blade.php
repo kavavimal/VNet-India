@@ -26,7 +26,6 @@
             },
             dataType: 'json',
             success: function(response) {
-                console.log("response",response);
                 if (response.success) {
                     $('.error').text('');
                     // toastr.info(response.success, response.title);
@@ -40,7 +39,9 @@
                 } else if (response.error) {
                     $("#preloader").hide();
                     response.error['name'] ? $('#name_error').text(response.error['name']) : $('#name_error').text('');
+                    response.error['description'] ? $('#description_error').text(response.error['description']) : $('#description_error').text('');
                     response.error['parent_id'] ? $('#parent_id_error').text(response.error['parent_id']) : $('#parent_id_error').text('');
+                    response.error['status'] ? $('#status_error').text(response.error['status']) : $('#status_error').text('');
                 }
             }
         });

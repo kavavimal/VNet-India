@@ -70,7 +70,7 @@
                             <div class="col-md-12 form-group">
                                 <label for="productDesc">Product Description</label>
                                 <textarea name="productDesc" id="productDesc" class="form-control">{{ $product->product_desc ?? ''}}</textarea>
-                                <div class="error" style="color:red;" id="fname_error"></div>
+                                <div class="error" style="color:red;" id="desc_error"></div>
                             </div>
                         </div>
                     </form>
@@ -98,7 +98,7 @@
                         <div class="col-md-12 form-group">
                             <label for="productDesc">Product Description</label>
                             <textarea name="productDesc" id="productDesc" class="form-control"></textarea>
-                            <div class="error" style="color:red;" id="fname_error"></div>
+                            <div class="error" style="color:red;" id="desc_error"></div>
                         </div>
                     </div>
                 </form>

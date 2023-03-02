@@ -10,6 +10,7 @@ use App\Models\Plan;
 use App\Models\Specification;
 use App\Models\FeaturedCategory;
 use App\Models\BilingCycle;
+use App\Models\ServerLocation;
 use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -53,6 +54,8 @@ class PlanController extends Controller
         $bilingCycle = BilingCycle::where('sys_state','!=','-1')->where('sub_menu_id','=',$plan->plan_product_id)->orderBy('billing_name','desc')->get();
         $tax = Tax::where('sys_state','!=','-1')->where('sub_menu_id','=',$plan->plan_product_id)->get();
         $product_list = Product::where('sys_state','!=','-1')->get();
+        
+        $server_locations = ServerLocation::where('sys_state','!=','-1')->get();
         return view('pages.plan.edit', compact(
             'plan',
             'specifications',
@@ -65,6 +68,7 @@ class PlanController extends Controller
             'featuredCategorysSelected',
             'featuredSubCategorySelected',
             'taxationSelected',
+            'server_locations',
         ));
     }
 
