@@ -16,6 +16,7 @@ class FeaturedSubCategory extends Model
         'name',
         'desc',
         'sys_state',
+        'sub_menu_id',
         'created_at',
         'updated_at'
     ];

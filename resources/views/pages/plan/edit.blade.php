@@ -100,14 +100,14 @@
                 @include('pages.plan.serverlocation')
             </div>
             <div class="col-md-4 mt-4">
-                @include('pages.plan.tax')
-            </div> 
-            <div class="col-md-4 mt-4">
                 @include('pages.plan.negotiation')
-            </div>                  
+            </div> 
             <div class="col-md-8 mt-4">
                 @include('pages.plan.servicetype')
-            </div>               
+            </div>    
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.tax')                
+            </div>                                        
         </div>
     </form>
 @else

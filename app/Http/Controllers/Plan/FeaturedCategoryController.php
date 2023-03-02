@@ -40,7 +40,8 @@ class FeaturedCategoryController extends Controller
                 ]);
                 if ($validator->passes()){
                     $featured_cat_name = $request->featured_cat_name;
-                    $featuredCategorySave = FeaturedCategory::create(['featured_cat_name'=>$featured_cat_name]);
+                    $sub_menu_id = $request->sub_menu_id;
+                    $featuredCategorySave = FeaturedCategory::create(['featured_cat_name'=>$featured_cat_name,'sub_menu_id'=>$sub_menu_id]);
                     session()->flash('success', 'Featured Category created successfully!');
                     return response()->json([
                         'success' => 'Featured Category created successfully!',
@@ -65,8 +66,9 @@ class FeaturedCategoryController extends Controller
                     $featuredCategory = FeaturedCategory::find($request->id);
 
                     $featured_cat_name = $request->featured_cat_name;
-
-                    $featuredCategory->update(['featured_cat_name'=> $featured_cat_name]);
+                    $sub_menu_id = $request->sub_menu_id;
+                    
+                    $featuredCategory->update(['featured_cat_name'=> $featured_cat_name,'sub_menu_id'=>$sub_menu_id]);
 
                     session()->flash('success', 'Featured Category Updated successfully!');
                     return response()->json([

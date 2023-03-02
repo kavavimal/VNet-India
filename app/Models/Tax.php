@@ -14,6 +14,7 @@ class Tax extends Model
     protected $fillable = [
         'tax_name',
         'tax_percentage',
+        'sub_menu_id',
         'sys_state',
         'created_at',
         'updated_at'

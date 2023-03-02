@@ -14,6 +14,7 @@ class Specification extends Model
     protected $fillable = [
         'spec_name',
         'spec_desc',
+        'sub_menu_id',
         'created_at',
         'updated_at'
     ];

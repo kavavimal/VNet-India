@@ -40,7 +40,8 @@ class BillingController extends Controller
                 ]);
                 if ($validator->passes()){
                     $billing_name = $request->billing_name;
-                    $save_billing = BilingCycle::create(['billing_name'=>$billing_name]);
+                    $sub_menu_id = $request->sub_menu_id;
+                    $save_billing = BilingCycle::create(['billing_name'=>$billing_name,'sub_menu_id'=>$sub_menu_id]);
                     session()->flash('success', 'Billing Cycle created successfully!');
                     return response()->json([
                         'success' => 'Billing Cycle successfully!',
@@ -64,8 +65,9 @@ class BillingController extends Controller
                     $billing = BilingCycle::find($request->id);
 
                     $billing_name = $request->billing_name;
-
-                    $billing->update(['billing_name'=> $billing_name]);
+                    $sub_menu_id = $request->sub_menu_id;
+                    
+                    $billing->update(['billing_name'=> $billing_name,'sub_menu_id'=>$sub_menu_id]);
 
                     session()->flash('success', 'Billing Cycle Updated successfully!');
                     return response()->json([

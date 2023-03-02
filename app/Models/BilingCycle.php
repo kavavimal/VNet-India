@@ -14,6 +14,7 @@ class BilingCycle extends Model
     protected $fillable = [
         'billing_name',
         'billing_desc',
+        'sub_menu_id',
         'sys_state',
         'created_at',
         'updated_at'

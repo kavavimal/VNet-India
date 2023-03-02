@@ -44,9 +44,11 @@ class FeaturedSubCategoryController extends Controller
                 ]);
                 if ($validator->passes()){
                     $name = $request->name;
+                    $sub_menu_id = $request->sub_menu_id;
                     $CategorySave = FeaturedSubCategory::create([
                         'name'=>$name,
-                        'featured_id'=>$request->featured_id
+                        'featured_id'=>$request->featured_id,
+                        'sub_menu_id'=>$sub_menu_id
                     ]);
                     session()->flash('success', 'Category created successfully!');
                     return response()->json([
@@ -73,7 +75,8 @@ class FeaturedSubCategoryController extends Controller
                 if ($validator->passes()){
                     $UpdateCategory = FeaturedSubCategory::find($request->id);
                     $name = $request->name;
-                    $UpdateCategory->update(['name'=> $name]);
+                    $sub_menu_id = $request->sub_menu_id;
+                    $UpdateCategory->update(['name'=> $name,'sub_menu_id'=>$sub_menu_id]);
 
                     session()->flash('success', 'Category Updated successfully!');
                     return response()->json([
