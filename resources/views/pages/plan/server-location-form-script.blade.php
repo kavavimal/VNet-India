@@ -21,21 +21,21 @@
                                     <option value="{{$country->name;}}">{{ $country->name; }}</option>
                                     @endforeach
                                 </select>
-                                <div class="error" style="color:red;" id="name_error"></div>
+                                <div class="error" style="color:red;" id="base_country_error"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fname">Amount</label>
                                 <input type="text" name="amount" id="amount" class="form-control">
-                                <div class="error" style="color:red;" id="name_error"></div>
+                                <div class="error" style="color:red;" id="amount_error"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fname">Currency</label>
                                 <input type="text" name="currency" id="currency" class="form-control">
-                                <div class="error" style="color:red;" id="name_error"></div>
+                                <div class="error" style="color:red;" id="currency_error"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -47,14 +47,14 @@
                                     <option value="{{$country->name;}}">{{ $country->name; }}</option>
                                     @endforeach
                                 </select>
-                                <div class="error" style="color:red;" id="name_error"></div>
+                                <div class="error" style="color:red;" id="server_location_country_error"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fname">Percentage</label>
                                 <input type="text" name="percentage" id="percentage" class="form-control">
-                                <div class="error" style="color:red;" id="name_error"></div>
+                                <div class="error" style="color:red;" id="percentage_error"></div>
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,6 @@
             },
             dataType: 'json',
             success: function(response) {
-                console.log(submit_url, 'server location response=', response);
                 if (response.success) {
                     $('.error').text('');
                     let data = response.data;
@@ -147,13 +146,17 @@
                             </div>
                         `);
                         }
-                    $('#type').val('add');
-                    $('#billing-id').val('');
-                    $('#billing_name').val('');
+                    // $('#type').val('add');
+                    // $('#billing-id').val('');
+                    // $('#billing_name').val('');
                     $('#serverLocation_modal').modal('hide');
                 } else if (response.error) {
-                    response.error['billing_name'] ? $('#billing_name_error').text(response.error['billing_name']) : $('#billing_name_error').text('');
-                }
+                    response.error['base_country'] ? $('#base_country_error').text(response.error['base_country']) : $('#base_country_error').text('');
+                    response.error['amount'] ? $('#amount_error').text(response.error['amount']) : $('#amount_error').text('');
+                    response.error['currency'] ? $('#currency_error').text(response.error['currency']) : $('#currency_error').text('');
+                    response.error['server_location_country'] ? $('#server_location_country_error').text(response.error['server_location_country']) : $('#server_location_country_error').text('');
+                    response.error['percentage'] ? $('#percentage_error').text(response.error['percentage']) : $('#percentage_error').text('');
+              }
             }
         });
     })

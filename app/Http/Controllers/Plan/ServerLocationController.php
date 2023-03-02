@@ -36,18 +36,20 @@ class ServerLocationController extends Controller
                     $request->all(),
                     [
                         // 'billing_name' => 'required',
-                        'base_country' => 'required',
+                        'base_country' => 'required|not_in:0',
                         'amount' => 'required',
                         'currency' => 'required',
-                        'server_location_country' => 'required',
+                        'server_location_country' => 'required|not_in:0',
                         'percentage' => 'required',
                     ],
                     $message = [
                         // 'billing_name.required' => 'The Billing Name Is Required.',
                         'base_country.required' => 'The Base Country Is Required.',
+                        'base_country.not_in' => 'The Base Country Is Required.',
                         'amount.required' => 'The Amount Is Required.',
                         'currency.required' => 'The Currency Is Required.',
                         'server_location_country.required' => 'The Server Location Country Is Required.',
+                        'server_location_country.not_in' => 'The Server Location Country Is Required.',
                         'percentage.required' => 'The Percentage Is Required.',
                     ]
                 );

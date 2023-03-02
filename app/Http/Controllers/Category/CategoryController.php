@@ -52,7 +52,9 @@ class CategoryController extends Controller
         if($request->ajax()){
             if($request->id == "0"){
                 $validator = Validator::make($request->all(), [
-                    'name' => 'required'
+                    'name' => 'required',
+                    'description' => 'required',
+                    'status' => 'required',
                 ]);
                 if ($validator->passes()){
                     $name = $request->name;
@@ -79,6 +81,8 @@ class CategoryController extends Controller
             }else{
                 $validator = Validator::make($request->all(), [
                     'name' => 'required',
+                    'description' => 'required',
+                    'status' => 'required',
                 ]);
                 if ($validator->passes()){
                     $category = Category::find($request->id);

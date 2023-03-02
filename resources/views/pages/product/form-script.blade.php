@@ -38,6 +38,7 @@
                 } else if (response.error) {
                     $("#preloader").hide();
                     response.error['name'] ? $('#name_error').text(response.error['name']) : $('#name_error').text('');
+                    response.error['desc'] ? $('#desc_error').text(response.error['desc']) : $('#desc_error').text('');
                     response.error['cat_id'] ? $('#cat_error').text(response.error['cat_id']) : $('#cat_error').text('');
                 }
             }

@@ -110,6 +110,7 @@
                             <label>Status</label>
                             <input class="status" name="status" type="radio" id="enable" value="1"><label for="enable" class="d-inline" style="font-size: 15px;"> Enable</label>
                             <input class="status" name="status" type="radio" id="disable" value="0"> <label for="disable" class="d-inline" style="font-size: 15px;"> Disable</label>
+                            <div class="error" style="color:red;" id="status_error"></div>
                         </div>
                     </div>
                 </form>

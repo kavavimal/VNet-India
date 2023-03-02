@@ -46,12 +46,14 @@ class ProductController extends Controller
             if($request->id == "0"){
                 $validator = Validator::make($request->all(), [                   
                     'name' => 'required',
-                    'cat_id' => 'required|not_in:0'
+                    'cat_id' => 'required|not_in:0',
+                    'desc' => 'required',
                 ],
                 $message = [
                     'name.required' => 'The Prodcut Name Is Required.',
                     'cat_id.required' => 'Please Select Menu Category.',
-                    'cat_id.not_in' => 'Please Select Menu Category.'
+                    'cat_id.not_in' => 'Please Select Menu Category.',
+                    'desc' => 'Please Add Description for product.'
                 ]);
                 if ($validator->passes()){
                     $name = $request->name;
@@ -75,12 +77,14 @@ class ProductController extends Controller
             }else{
                 $validator = Validator::make($request->all(), [
                     'name' => 'required',
-                    'cat_id' => 'required|not_in:0'
+                    'cat_id' => 'required|not_in:0',
+                    'desc' => 'required'
                 ],
                 $message = [
                     'name.required' => 'The Prodcut Name Is Required.',
                     'cat_id.required' => 'Please Select Menu Category.',
-                    'cat_id.not_in' => 'Please Select Menu Category.'
+                    'cat_id.not_in' => 'Please Select Menu Category.',
+                    'desc' => 'Please Add Description for product.'
                 ]);
 
                 if ($validator->passes()){
