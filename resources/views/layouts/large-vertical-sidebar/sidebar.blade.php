@@ -18,10 +18,10 @@
                 </li>
             @endcan
             @can('product-tab-show')
-                <li class="nav-item {{ request()->is('product*') ? 'active' : '' }}">
-                    <a class="nav-item-hold" href="{{ route('product-index') }}">
+                <li class="nav-item {{ request()->is('submenu*') ? 'active' : '' }}">
+                    <a class="nav-item-hold" href="{{ route('submenu-index') }}">
                         <i class="nav-icon i-Computer-Secure"></i>
-                        <span class="nav-text">Product</span>
+                        <span class="nav-text">Sub Menu</span>
                     </a>
                     <div class="triangle"></div>
                 </li>

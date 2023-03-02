@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProformaInvoice\ProformaInvoiceController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\SubMenu\SubMenuController;
 use App\Http\Controllers\Supplier\SupplierController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Plan\PlanController;
@@ -70,6 +71,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/product/store',[ProductController::class,'store'])->name('product-store');
     Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product-edit');
     Route::get('/product/delete/{id}', [ProductController::class, 'remove'])->name('product-delete');
+
+    //Sub Menu Module
+    Route::get('/submenu',[SubMenuController::class,'index'])->name('submenu-index');
+    Route::post('/submenu/store',[SubMenuController::class,'store'])->name('submenu-store');
+    Route::get('/submenu/edit/{id}', [SubMenuController::class, 'edit'])->name('submenu-edit');
+    Route::get('/submenu/delete/{id}', [SubMenuController::class, 'remove'])->name('submenu-delete');
     
     //Plan Module
     Route::get('/plan',[PlanController::class,'index'])->name('plan-index');

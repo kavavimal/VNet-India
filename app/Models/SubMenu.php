@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class SubMenu extends Model
 {
     use HasFactory;
 
-    protected $table = "product__rec_tbl";
+    protected $table = "submenu__rec_tbl";
 
     protected $fillable = [
-        'product_name',
-        'product_desc',
+        'submenu_name',
+        'submenu_desc',
         'category_id',
         'created_at',
         'updated_at'

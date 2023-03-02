@@ -47,7 +47,7 @@
                             <input placeholder="Enter Category Name" class="form-control" id="name" name="name" type="text" value="{{ $category->name }}">
                             <div class="error" style="color:red;" id="name_error"></div>
                         </div>
-                        <div class="col-md-6 form-group">
+                        {{-- <div class="col-md-6 form-group">
                             <label for="parent_id">Parent Id</label>
                             <select class="form-control select2" id="parent_id" name="parent_id">
                                 <option value="0">No Parent</option>
@@ -68,8 +68,8 @@
                             <label for="description">Description</label>
                             <textarea placeholder="Enter Description" class="form-control" id="description" name="description">{{$category->description}}</textarea>
                             <div class="error" style="color:red;" id="description_error"></div>
-                        </div>
-                        <div class="col-md-12 form-group">
+                        </div>--}}
+                        <div class="col-md-6 form-group">
                             <label>Status</label>
                             <input class="status" name="status" type="radio" id="enable" value="1" <?php if ($category->status == 1) {
                                                                                             echo 'checked="checked"';
@@ -89,7 +89,7 @@
                             {!! Form::text('name', null, array('placeholder' => 'Enter Name','class' => 'form-control' , 'id' => 'name')) !!}
                             <div class="error" style="color:red;" id="name_error"></div>
                         </div>
-                        <div class="col-md-6 form-group">
+                        {{--<div class="col-md-6 form-group">
                             <label for="parent_id">Parent Id</label>
                             <select class="form-control select2"  id="parent_id" name="parent_id" value="">
                                 <option value="0">No Parent</option>
@@ -105,10 +105,10 @@
                             <label for="description">Description</label>
                             <textarea placeholder="Enter Description" class="form-control" id="description" name="description"></textarea>
                             <div class="error" style="color:red;" id="description_error"></div>
-                        </div>
-                        <div class="col-md-12 form-group">
+                        </div>--}}
+                        <div class="col-md-6 form-group">
                             <label>Status</label>
-                            <input class="status" name="status" type="radio" id="enable" value="1"><label for="enable" class="d-inline" style="font-size: 15px;"> Enable</label>
+                            <input class="status" name="status" type="radio" id="enable" checked value="1"><label for="enable" class="d-inline" style="font-size: 15px;"> Enable</label>
                             <input class="status" name="status" type="radio" id="disable" value="0"> <label for="disable" class="d-inline" style="font-size: 15px;"> Disable</label>
                             <div class="error" style="color:red;" id="status_error"></div>
                         </div>

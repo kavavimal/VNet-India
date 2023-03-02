@@ -53,7 +53,7 @@ class CategoryController extends Controller
             if($request->id == "0"){
                 $validator = Validator::make($request->all(), [
                     'name' => 'required',
-                    'description' => 'required',
+                    // 'description' => 'required',
                     'status' => 'required',
                 ]);
                 if ($validator->passes()){
@@ -63,8 +63,8 @@ class CategoryController extends Controller
                     $status = $request->status;
                     $save_category = Category::create([
                         'name'=>$name,
-                        'parent_id'=>$parent_id,
-                        'description'=>$description,
+                        // 'parent_id'=>$parent_id,
+                        // 'description'=>$description,
                         'status'=>$status
                     ]);
                     session()->flash('success', 'Menu created successfully!');
@@ -81,7 +81,7 @@ class CategoryController extends Controller
             }else{
                 $validator = Validator::make($request->all(), [
                     'name' => 'required',
-                    'description' => 'required',
+                    // 'description' => 'required',
                     'status' => 'required',
                 ]);
                 if ($validator->passes()){

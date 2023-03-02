@@ -12,7 +12,7 @@
                     <input type="hidden" id="id" class="id" name="id" value="0" />
                     <input type="hidden" id="featured_id" class="id" name="featured_id" value="0" />
                     <input type="hidden" id="type" name="type" value="add" />
-                    <input type="hidden" id="sub_menu_id" name="sub_menu_id" value="{{$plan->plan_product_id}}">
+                    <input type="hidden" id="sub_menu_id" name="sub_menu_id" value="{{$plan->plan_product_id ?? ''}}">
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="name">Name</label>
