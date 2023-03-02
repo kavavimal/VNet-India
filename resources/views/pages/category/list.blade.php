@@ -35,9 +35,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Parent</th>
-                                <th>Description</th>
+                                <th>Menu Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,15 +43,7 @@
                             @foreach($category as $key => $list)
                             <tr>
                                 <td>{{$list->id}}</td>
-                                <td>{{$list->name}}</td>
-                                <td>
-                                    @if($list->parent_id > 0)
-                                        {{$list->parent->name}}
-                                    @else
-                                       -
-                                    @endif
-                                </td>
-                                <td>{{$list->description}}</td>
+                                <td>{{$list->name}}</td>                                
                                 <td>
                                     <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span class="_dot _inline-dot"></span>
@@ -75,9 +65,7 @@
                         <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Parent</th>
-                                <th>Description</th>
+                                <th>Name</th>                                
                                 <th>Action</th>
                             </tr>
                         </tfoot>

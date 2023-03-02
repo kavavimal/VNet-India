@@ -32,8 +32,8 @@ class Plan extends Model
         'updated_at'
     ];
 
-    public function product(){
-        return $this->hasOne(Product::class,'id','plan_product_id');
+    public function submenu(){
+        return $this->hasOne(SubMenu::class,'id','plan_product_id');
     }
 
      //each plan might have multiple plan pricing

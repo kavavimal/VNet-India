@@ -51,7 +51,7 @@
                                 <option value="0">Select Product</option>
                                 @foreach($product_list as $value)
                                 <?php $prodSelect = ''; if ($value->id == $plan->plan_product_id) {$prodSelect = 'selected';} else {$prodSelect = '';}?>
-                                <option value="{{$value->id}}" {{$prodSelect}}>{{ $value->product_name }}</option>
+                                <option value="{{$value->id}}" {{$prodSelect}}>{{ $value->submenu_name }}</option>
                                 @endforeach
                             </select>
                             <div class="error" style="color:red;" id="name_error"></div>
@@ -123,7 +123,7 @@
                                 <option value="0">Select Product</option>
                                 @foreach($product_list as $value)
                                 <option value="{{$value->id}}">
-                                    {{ $value->product_name }}
+                                    {{ $value->submenu_name }}
                                 </option>
                                 @endforeach
                             </select>

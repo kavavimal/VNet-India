@@ -1,10 +1,10 @@
 <script>
-    $(document).on("click", ".erp-product-form", function() {
-        $(".erp-product-submit").submit();
+    $(document).on("click", ".erp-submenu-form", function() {
+        $(".erp-submenu-submit").submit();
         $("#preloader").show();
     });
 
-    $(".erp-product-submit").submit(function(e) {
+    $(".erp-submenu-submit").submit(function(e) {        
         e.preventDefault();
 
         var submit_url = $(this).attr("data-url");
@@ -17,10 +17,10 @@
             type: "POST",
             data: {
                 "_token": "{{ csrf_token() }}",
-                id: $('#prod_id').val(),
-                name: $('#productName').val(),
+                id: $('#submemu_id').val(),
+                name: $('#submenuName').val(),
                 cat_id: $('#menu_category').val(),
-                desc: $('#productDesc').val(),               
+                desc: $('#submenuDesc').val(),               
             },
             dataType: 'json',
             success: function(response) {
@@ -28,7 +28,7 @@
                 if (response.success) {
                     $('.error').text('');
                     // toastr.info(response.success, response.title);
-                    if ($('#prod_id').val() == 0) {
+                    if ($('#submemu_id').val() == 0) {
                         var url = window.location.href;
                         var page = url.replace(/\/edit\/new$/, "/")                        
                         location.href = page;                       

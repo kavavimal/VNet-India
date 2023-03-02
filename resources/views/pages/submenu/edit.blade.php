@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Vnet | Product | {{$product->product_name ?? 'New'}}</title>
+    <title>Vnet | Sub Menu | {{$submenu->submenu_name ?? 'New'}}</title>
 @endsection
 @section('page-css')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -25,27 +25,27 @@
 @section('main-content')
 <div class="breadcrumb">
     <div class="col-sm-12 col-md-12">
-        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('product-index')}}">Product</a> | Product {{ $product ? 'Edit: '.$product->product_name : 'New'}} </a>
-        <a href="{{route('product-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
+        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('submenu-index')}}">Sub Menu</a> | Sub Menu {{ $submenu ? 'Edit: '.$submenu->submenu_name : 'New'}} </a>
+        <a href="{{route('submenu-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
         <div class="btn-group dropdown float-right">
-            <button type="submit" class="btn btn-outline-primary erp-product-form">
+            <button type="submit" class="btn btn-outline-primary erp-submenu-form">
                 Save
             </button>
         </div>
     </div>
 </div>
-<h4 class="heading-color">Product</h4>
+<h4 class="heading-color">Sub Menu</h4>
 <div class="row">
     <div class="col-md-12">
         <div class="card mb-4">
             <div class="card-body">
-                @if($product)
-                    <form class="erp-product-submit" data-url="{{route('product-store')}}" data-id="uid" data-name="name" data-email="email" data-pass="password">
-                        <input type="hidden" id="prod_id" class="prod_id" value="{{$product->id}}" name="uid" />
+                @if($submenu)
+                    <form class="erp-submenu-submit" data-url="{{route('submenu-store')}}" data-id="uid" data-name="name" data-email="email" data-pass="password">
+                        <input type="hidden" id="submemu_id" class="submemu_id" value="{{$submenu->id}}" name="uid" />
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for="fname">Product Name</label>
-                                <input placeholder="Enter Product Name" class="form-control" id="productName" name="productName" type="productName" value="{{ $product->product_name ?? ''}}">
+                                <label for="fname">Sub Menu Name</label>
+                                <input placeholder="Enter Sub Menu Name" class="form-control" id="submenuName" name="submenuName" type="submenuName" value="{{ $submenu->submenu_name ?? ''}}">
                                 <div class="error" style="color:red;" id="name_error"></div>
                             </div>
                             <div class="col-md-6 form-group">
@@ -54,7 +54,7 @@
                                     <option value="0">Select Category</option>
                                     @foreach($category_list as $value)
                                     <?php $catSelect = '';
-                                    if ($value->id == $product->category_id) {
+                                    if ($value->id == $submenu->category_id) {
                                         $catSelect = 'selected';
                                     } else {
                                         $catSelect = '';
@@ -67,20 +67,20 @@
                                 </select>
                                 <div class="error" style="color:red;" id="cat_error"></div>
                             </div>
-                            <div class="col-md-12 form-group">
-                                <label for="productDesc">Product Description</label>
-                                <textarea name="productDesc" id="productDesc" class="form-control">{{ $product->product_desc ?? ''}}</textarea>
+                           {{-- <div class="col-md-12 form-group">
+                                <label for="submenuDesc">submenu Description</label>
+                                <textarea name="submenuDesc" id="submenuDesc" class="form-control">{{ $submenu->submenu_desc ?? ''}}</textarea>
                                 <div class="error" style="color:red;" id="desc_error"></div>
-                            </div>
+                            </div> --}}
                         </div>
                     </form>
                 @else
-                <form class="erp-product-submit" data-url="{{route('product-store')}}" data-id="uid" data-name="name" data-email="email" data-pass="password">
-                    <input type="hidden" id="prod_id" class="prod_id" name="uid" value="0" />
+                <form class="erp-submenu-submit" data-url="{{route('submenu-store')}}" data-id="uid" data-name="name" data-email="email" data-pass="password">
+                    <input type="hidden" id="submemu_id" class="submemu_id" name="uid" value="0" />
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label for="fname">Product Name</label>
-                            <input placeholder="Enter Product Name" class="form-control" id="productName" name="productName" type="productName">
+                            <label for="fname">submenu Name</label>
+                            <input placeholder="Enter submenu Name" class="form-control" id="submenuName" name="submenuName" type="submenuName">
                             <div class="error" style="color:red;" id="name_error"></div>
                         </div>
                         <div class="col-md-6 form-group">
@@ -95,11 +95,11 @@
                             </select>
                             <div class="error" style="color:red;" id="cat_error"></div>
                         </div>
-                        <div class="col-md-12 form-group">
-                            <label for="productDesc">Product Description</label>
-                            <textarea name="productDesc" id="productDesc" class="form-control"></textarea>
+                       {{-- <div class="col-md-12 form-group">
+                            <label for="submenuDesc">submenu Description</label>
+                            <textarea name="submenuDesc" id="submenuDesc" class="form-control"></textarea>
                             <div class="error" style="color:red;" id="desc_error"></div>
-                        </div>
+                        </div>--}}
                     </div>
                 </form>
                 @endif
@@ -107,9 +107,9 @@
         </div>
     </div>
 </div>
-<a href="{{route('product-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
+<a href="{{route('submenu-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
 <div class="btn-group dropdown float-right">
-    <button type="submit" class="btn btn-outline-primary erp-product-form">
+    <button type="submit" class="btn btn-outline-primary erp-submenu-form">
         Save
     </button>   
 </div>
@@ -118,5 +118,5 @@
 <script src="{{asset('assets/js/carousel.script.js')}}"></script>
 @endsection
 @section('bottom-js')
-    @include('pages.product.form-script')
+    @include('pages.submenu.form-script')
 @endsection

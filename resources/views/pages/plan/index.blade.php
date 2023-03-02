@@ -36,7 +36,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Plan Name</th>
-                                <th>Product Name</th>                                                               
+                                <th>Sub Menu Name</th>                                                               
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,7 +45,7 @@
                                 <tr>
                                     <td>{{$list->id}}</td>
                                     <td>{{$list->plan_name}}</td>
-                                    <td>{{$list->product->product_name}}</td>                                   
+                                    <td>{{$list->submenu->submenu_name}}</td>                                   
                                     <td>
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="_dot _inline-dot"></span>
@@ -68,7 +68,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Plan Name</th>
-                                <th>Product Name</th>                                                               
+                                <th>Sub Menu Name</th>                                                               
                                 <th>Action</th>
                             </tr>
                         </tfoot>
