@@ -97,17 +97,17 @@
                 @include('pages.plan.serverlocation')
             </div>
             <div class="col-md-4 mt-4">
-                @include('pages.plan.billingList')
-            </div>
-            <div class="col-md-4 mt-4">
                 @include('pages.plan.servicetype')
             </div>    
             <div class="col-md-4 mt-4">
                 @include('pages.plan.amountCalc')
-            </div>                     
+            </div>        
             <div class="col-md-4 mt-4">
                 @include('pages.plan.totalPrice')                
-            </div>
+            </div>            
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.billingList')
+            </div>                                                    
             <div class="col-md-4 mt-4">
                 @include('pages.plan.tax')                
             </div> 
