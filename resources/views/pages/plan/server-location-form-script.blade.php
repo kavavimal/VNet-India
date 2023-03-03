@@ -56,16 +56,22 @@
                                 <input type="text" name="percentage" id="percentage" class="form-control">
                                 <div class="error" style="color:red;" id="percentage_error"></div>
                             </div>
+                            <div id="final_amount"></div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group updownradios">
                                 <label>Upgrade/Downgrade</label>
-                                <div class="toggle w-10">
+                                <!-- <div class="toggle w-10">
                                     <input type="radio" name="upgrade_downgrade" class="upgrade_downgrade" value="upgrade" id="upgrade" />
                                     <label for="upgrade"><i class='nav-icon i-up1'></i></label>
                                     <input type="radio" name="upgrade_downgrade" class="upgrade_downgrade" value="downgrade" id="downgrade" />
                                     <label for="downgrade"><i class='nav-icon i-down1'></i></label>
-                                </div>
+                                </div> -->
+                                <select id="upgrade_downgrade" name="upgrade_downgrade" class="form-control select2 upgrade_downgrade">
+                                    <option value="none">None</option>
+                                    <option value="upgrade">Upgrade</option>
+                                    <option value="downgrade">Downgrade</option>
+                                </select>
                                 <div class="error" style="color:red;" id="upgrade_downgrade_error"></div>
                             </div>
                         </div>
@@ -109,21 +115,23 @@
     function calculate_percentage() {
         let amount = $('#amount').val();
         let percent = $('#percentage').val();
-        let upgrade_downgrade = $('input[name="upgrade_downgrade"]').val();
+        let upgrade_downgrade = $('select[name="upgrade_downgrade"]').val();
         if (amount && percent && upgrade_downgrade) {
             let final_amount = amount * percent / 100;
             if (upgrade_downgrade === 'upgrade') {
-                $('#amount').val(parseInt(amount) + parseInt(final_amount));
+                $('#final_amount').html(parseInt(amount) + parseInt(final_amount));
             } else if (upgrade_downgrade === 'downgrade') {
-                $('#amount').val(parseInt(amount) - parseInt(final_amount));
+                $('#final_amount').html(parseInt(amount) - parseInt(final_amount));
+            }else if(upgrade_downgrade === 'none'){
+                $('#final_amount').html('');
             }
         }
     }
 
-    $(document).on('change', '#amount', function() {
-        $('#percentage').val('');
-    })
-    $(document).on('change', '#percentage,input[name="upgrade_downgrade"]', function() {
+    // $(document).on('change', '#amount', function() {
+    //     $('#percentage').val('');
+    // })
+    $(document).on('change', 'select[name="upgrade_downgrade"]', function() {
         calculate_percentage();
     })
 
