@@ -2,7 +2,7 @@
     <div class="card-body">
         <h4 class="mb-3">Server Location</h4>
         <div class="server_location_list_wrap">
-        <table class="table table-sm table-responsive">
+        <table class="table table-hover">
             <thead>
                 <th></th>
                 <th>Base Country</th>

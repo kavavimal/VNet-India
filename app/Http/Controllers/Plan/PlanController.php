@@ -72,10 +72,12 @@ class PlanController extends Controller
         $featuredCategory = '';
         $tax = '';        
         if(!empty($plan)){
-            $specifications = Specification::where('sys_state','!=','-1')->where('sub_menu_id','=',$plan->plan_product_id)->orderBy('spec_name','desc')->get();
-            $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->where('sub_menu_id','=',$plan->plan_product_id)->with('children')->orderBy('featured_cat_name','desc')->get();
-            $bilingCycle = BilingCycle::where('sys_state','!=','-1')->where('sub_menu_id','=',$plan->plan_product_id)->orderBy('billing_name','desc')->get();
-            $tax = Tax::where('sys_state','!=','-1')->where('sub_menu_id','=',$plan->plan_product_id)->get();
+            $menu_id = SubMenu::where('id',$plan->plan_product_id)->where('sys_state','!=','-1')->get()->pluck('category_id')->first();
+            
+            $specifications = Specification::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('spec_name','desc')->get();
+            $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->with('children')->orderBy('featured_cat_name','desc')->get();
+            $bilingCycle = BilingCycle::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('billing_name','desc')->get();
+            $tax = Tax::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->get();
         }
         $product_list = SubMenu::where('sys_state','!=','-1')->get();
         $server_locations = ServerLocation::where('sys_state','!=','-1')->get();
