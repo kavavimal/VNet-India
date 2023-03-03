@@ -77,12 +77,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/submenu/store',[SubMenuController::class,'store'])->name('submenu-store');
     Route::get('/submenu/edit/{id}', [SubMenuController::class, 'edit'])->name('submenu-edit');
     Route::get('/submenu/delete/{id}', [SubMenuController::class, 'remove'])->name('submenu-delete');
+    Route::get('/submenu/getByMenuId/{id}/{type?}', [SubMenuController::class, 'getByMenuId'])->name('getByMenuId');
     
     //Plan Module
     Route::get('/plan',[PlanController::class,'index'])->name('plan-index');
     Route::post('/plan/store',[PlanController::class,'store'])->name('plan-store');
     Route::get('/plan/edit/{id}', [PlanController::class, 'edit'])->name('plan-edit');
     Route::get('/plan/delete/{id}', [PlanController::class, 'remove'])->name('plan-delete');
+    Route::get('/plan/getByCategoryId/{id}', [PlanController::class, 'getByCategoryId'])->name('plan-getByCategoryId');
 
     //Specification Module
     Route::post('/spacification/store',[SpecificationController::class,'store'])->name('specification-store');

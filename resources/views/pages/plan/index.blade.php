@@ -27,11 +27,38 @@
 <div class="separator-breadcrumb border-top"></div>
 <div class="row mb-4">
     <div class="col-md-12 mb-4">
+        <div class="card text-left mb-2">
+            <div class="card-body">
+            <form class="filter-plan-submit">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="filter_by_menu">Filter By Menu</label>                            
+                        <select class="form-control select2"  id="filtery_by_menu" name="filter_by_menu">
+                            <option value="0">All</option>
+                            @foreach($category_list as $value)
+                                <option value="{{$value->id}}" >
+                                    {{ $value->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="filter_by_submenu">Filter By Sub Menu</label>                            
+                        <div id="submenuwrap">
+                        <select class="form-control select2"  id="filtery_by_submenu" name="filter_by_submenu">
+                            @include('pages.submenu.subMenuSelectbox')
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
         <div class="card text-left">
             <div class="card-body">
                 <h4 class="card-title mb-3">Plan    </h4>
                 <div class="table-responsive">
-                    <table id="zero_configuration_table" class="display table table-striped table-bordered" style="width:100%">
+                    <table id="plan_table" class="display table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -40,30 +67,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($plan as $key => $list)
-                                <tr>
-                                    <td>{{$list->id}}</td>
-                                    <td>{{$list->plan_name}}</td>
-                                    <td>{{isset($list->submenu) ? $list->submenu->submenu_name : ''}}</td>                                   
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="_dot _inline-dot"></span>
-                                            <span class="_dot _inline-dot"></span>
-                                            <span class="_dot _inline-dot"></span>
-                                        </button>
-                                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 34px, 0px);">
-                                        @can('plan-edit')
-                                            <a class="dropdown-item" href="{{route('plan-edit',$list->id)}}"><i class="nav-icon i-Pen-2 font-weight-bold" aria-hidden="true"> </i> Edit</a>
-                                        @endcan                                        
-                                        @can('plan-delete')
-                                            <a class="dropdown-item" href="{{route('plan-delete',$list->id)}}"><i class="nav-icon i-Close-Window font-weight-bold" aria-hidden="true"> </i> Delete</a>
-                                        @endcan
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                        @include('pages.plan.planTableBody')
                         <tfoot>
                             <tr>
                                 <th>#</th>
@@ -84,6 +88,7 @@
     <script src="{{asset('assets/js/datatables.script.js')}}"></script>
 @endsection
 @section('bottom-js')
+        @include('pages.submenu.filter-script')
 <script type="text/javascript">
 </script>
 @endsection
