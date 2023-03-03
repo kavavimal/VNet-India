@@ -17,6 +17,7 @@ class ServerLocation extends Model
         'currency',
         'server_location_country',
         'percentage',
+        'upgrade_downgrade',
         'created_at',
         'updated_at'
     ];

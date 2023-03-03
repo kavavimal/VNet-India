@@ -61,9 +61,9 @@
                             <div class="form-group updownradios">
                                 <label>Upgrade/Downgrade</label>
                                 <div class="toggle">
-                                    <input type="radio" name="upgrade_downgrade" value="upgrade" id="upgrade" />
+                                    <input type="radio" name="upgrade_downgrade" class="upgrade_downgrade" value="upgrade" id="upgrade" />
                                     <label for="upgrade">Upgrade</label>
-                                    <input type="radio" name="upgrade_downgrade" value="downgrade" id="downgrade" />
+                                    <input type="radio" name="upgrade_downgrade" class="upgrade_downgrade" value="downgrade" id="downgrade" />
                                     <label for="downgrade">Downgrade</label>
                                 </div>
                                 <div class="error" style="color:red;" id="upgrade_downgrade_error"></div>
@@ -145,7 +145,7 @@
                 currency: $('#currency').val(),
                 server_location_country: $('#server_location_country').val(),
                 percentage: $('#percentage').val(),
-                upgrade_downgrade: $('#upgrade_downgrade').val(),
+                upgrade_downgrade: $('.upgrade_downgrade:checked').val(),
             },
             dataType: 'json',
             success: function(response) {
