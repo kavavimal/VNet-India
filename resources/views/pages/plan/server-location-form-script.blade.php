@@ -60,11 +60,11 @@
                         <div class="col-md-6">
                             <div class="form-group updownradios">
                                 <label>Upgrade/Downgrade</label>
-                                <div class="toggle">
+                                <div class="toggle w-10">
                                     <input type="radio" name="upgrade_downgrade" class="upgrade_downgrade" value="upgrade" id="upgrade" />
-                                    <label for="upgrade">Upgrade</label>
+                                    <label for="upgrade"><i class='nav-icon i-up1'></i></label>
                                     <input type="radio" name="upgrade_downgrade" class="upgrade_downgrade" value="downgrade" id="downgrade" />
-                                    <label for="downgrade">Downgrade</label>
+                                    <label for="downgrade"><i class='nav-icon i-down1'></i></label>
                                 </div>
                                 <div class="error" style="color:red;" id="upgrade_downgrade_error"></div>
                             </div>
@@ -79,22 +79,21 @@
         </div>
     </div>
 </div>
-<div class="modal fade bd-Delete-modal-sm" id="billing_delete_modal" tabindex="-1" role="dialog" aria-labelledby="delete-billing" aria-hidden="true">
+<div class="modal fade bd-Delete-modal-sm" id="sl_delete_modal" tabindex="-1" role="dialog" aria-labelledby="delete-billing" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="delete-billing">Confirm Delete</h5>
+                <h5 class="modal-title" id="sl-billing">Confirm Delete</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <strong>Are you sure to delete this Billing Cycle?</strong>
-                <span id="billing_name_show"></span>
+                <strong>Are you sure to delete this Server Location?</strong>
+                <span id="sl_name_show"></span>
             </div>
             <div class="modal-footer">
-                <input type="hidden" id="billing_remove_url" name="billing_remove_url" value="{{route('billing-delete')}}" />
-                <input type="hidden" id="billing_id_delete" name="billing_id_delete" value="" />
+                <input type="hidden" id="sl_id_delete" name="sl_id_delete" value="" />
                 <button type="button" class="btn btn-secondary " data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-danger confirm-delete-item-billing">Yes Delete</button>
             </div>
@@ -154,7 +153,7 @@
                     let data = response.data;
                     if (data && data.id > 0)
                         if ($('#type').val() === 'add') {
-                            var rows = $("<tr><td>" +
+                            var rows = $("<tr id='serverlocation-"+data.id+"'><td>" +
                                 data.id + "</td><td>" +
                                 data.base_country + "</td><td>" +
                                 data.amount + "</td><td>" +
@@ -259,38 +258,39 @@
     //     $('#billing_modal').modal('show');
     // });
 
-    // // remove billing
-    // $(document).on("click", ".confirm-delete-item-billing", function(e) {
-    //     e.preventDefault();
-    //     var submit_url = $(document).find("#billing_remove_url").val();
-    //     var data_id = $('#billing_id_delete').val();
-    //     $.ajax({
-    //         url: submit_url,
-    //         type: "POST",
-    //         data: {
-    //             "_token": "{{ csrf_token() }}",
-    //             id: data_id,
-    //         },
-    //         dataType: 'json',
-    //         success: function(response) {
-    //             if (response.success) {
-    //                 $('.error').text('');
-    //                 $('.billing_list_wrap').find(`#billing-`+data_id).remove();
-    //                 $('#billing_id_delete').val('');
-    //                 $('#billing_name_show').text('');
-    //                 $('#billing_delete_modal').modal('hide');
-    //             } else if (response.error) {
-    //                 console.log('error', response.error);
-    //             }
-    //         }
-    //     });
-    // });
+    // remove server location
+    $(document).on("click", "#sl_delete_modal .confirm-delete-item-billing", function(e) {
+        e.preventDefault();
+        var url = "{{ route('serverLocation-delete', ":id") }}";
+        var data_id = $('#sl_id_delete').val();
+        url = url.replace(':id', data_id);
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                id: data_id,
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    $('.error').text('');
+                    $('.server_location_list_wrap').find(`#serverlocation-`+data_id).remove();
+                    $('#sl_id_delete').val('');
+                    $('#sl_name_show').text('');
+                    $('#sl_delete_modal').modal('hide');
+                } else if (response.error) {
+                    console.log('error', response.error);
+                }
+            }
+        });
+    });
 
-    // $(document).on("click", ".billing_list_wrap .delete-item-billing", function() {        
-    //     $('#billing_name_show').text($(this).attr('data-name'));
-    //     $('#billing_id_delete').val($(this).attr('data-id'));
-    //     $('#billing_delete_modal').modal('show');
-    // });
+    $(document).on("click", ".server_location_list_wrap .delete-item-serverlocation", function() {        
+        $('#sl_name_show').text($(this).attr('data-name'));
+        $('#sl_id_delete').val($(this).attr('data-id'));
+        $('#sl_delete_modal').modal('show');
+    });
     // $(document).ready(function(){
     //     $('.base-country').select2({
     //         dropdownParent: $('#serverLocation_modal')

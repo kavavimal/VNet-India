@@ -8,7 +8,6 @@
             type: "GET",
             dataType: 'json',
             success: function(response) {
-                console.log("response",response);
                 if(response.html){
                     $('#sub_menu_table tbody').replaceWith(response.html)
                 }
@@ -29,13 +28,18 @@
                 if(response.html){
                     $('.filter-plan-submit #filtery_by_submenu').html('');
                     $('.filter-plan-submit #filtery_by_submenu').html(response.html);
+                    // getFilteredPlans();
                 }
             }
         });
     });
 
-    $(document).on("change", ".filter-plan-submit #filtery_by_submenu", function() {
-        var val = $(this).val();
+    $(document).on("click", "#apply_plan_filter", function() {
+        getFilteredPlans();
+    });
+
+    function getFilteredPlans () {
+        var val = $('.filter-plan-submit #filtery_by_submenu').val();
         var url = "{{ route('plan-getByCategoryId',":id") }}";
         url = url.replace(':id', val);
         $.ajax({
@@ -43,11 +47,10 @@
             type: "GET",
             dataType: 'json',
             success: function(response) {
-                console.log("rs",response);
                 if(response.html){
                     $('#plan_table tbody').replaceWith(response.html)
                 }
             }
         });
-    });
+    }
 </script>

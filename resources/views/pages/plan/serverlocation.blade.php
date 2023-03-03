@@ -16,7 +16,7 @@
             <tbody class="server_location_list_tbl_view">
                 @if(isset($server_locations) && count($server_locations) > 0) 
                     @foreach ($server_locations as $locationItem)
-                        <tr>
+                        <tr id="serverlocation-{{$locationItem->id}}">
                             <td>{{$locationItem->id}}</td>
                             <td>{{$locationItem->base_country}}</td>
                             <td>{{$locationItem->amount}}</td>

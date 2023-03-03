@@ -31,7 +31,7 @@
             <div class="card-body">
             <form class="filter-plan-submit">
                 <div class="row">
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-4 form-group">
                         <label for="filter_by_menu">Filter By Menu</label>                            
                         <select class="form-control select2"  id="filtery_by_menu" name="filter_by_menu">
                             <option value="0">All</option>
@@ -42,13 +42,16 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-4 form-group">
                         <label for="filter_by_submenu">Filter By Sub Menu</label>                            
                         <div id="submenuwrap">
                         <select class="form-control select2"  id="filtery_by_submenu" name="filter_by_submenu">
                             @include('pages.submenu.subMenuSelectbox')
                         </select>
                         </div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <button class="btn btn-primary" type="button" id="apply_plan_filter">Filter</button>
                     </div>
                 </div>
             </form>
