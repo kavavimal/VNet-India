@@ -31,7 +31,8 @@ class SubMenuController extends Controller
     public function index()
     {
         $submenu = SubMenu::where('sys_state','!=','-1')->orderBy('id','desc')->get();
-        return view('pages.submenu.index',compact('submenu'));
+        $category_list = Category::where('sys_state','!=','-1')->get();
+        return view('pages.submenu.index',compact('submenu','category_list'));
     }
 
     public function edit($id)
@@ -39,6 +40,28 @@ class SubMenuController extends Controller
         $submenu = SubMenu::where('id',$id)->first();
         $category_list = Category::where('sys_state','!=','-1')->get();
         return view('pages.submenu.edit',compact('submenu','category_list'));
+    }
+
+    public function getByMenuId($id, $type = 'tbody'){
+        $get_submenu = [];
+        if(isset($id) && $id !== "0"){
+            $get_submenu = SubMenu::where('category_id', $id)->where('sys_state','!=','-1')->get();
+        } else {
+            $get_submenu = SubMenu::where('sys_state','!=','-1')->get();
+        }
+        $html = '';
+        if ($type === 'select') {
+            $html = view('pages.submenu.subMenuSelectbox', ['submenu' => $get_submenu])->render();
+        } else {
+            $html = view('pages.submenu.subMenuTableBody', ['submenu' => $get_submenu])->render();
+        }
+        return response()->json([
+            'success' => 'Sub Menu Listed successfully!',
+            'title' => 'Sub Menu',
+            'type' => 'list',
+            'list' => $get_submenu,
+            'html' => $html,
+        ], Response::HTTP_OK);
     }
 
     public function store(Request $request){

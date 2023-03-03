@@ -27,11 +27,31 @@
 <div class="separator-breadcrumb border-top"></div>
 <div class="row mb-4">
     <div class="col-md-12 mb-4">
+        <div class="card text-left mb-2">
+            <div class="card-body">
+            <form class="filter-submenu-submit">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="filter_by_menu">Filter By Menu</label>                            
+                        <select class="form-control select2"  id="filtery_by_menu" name="filter_by_menu">
+                            <option value="0">All</option>
+                            @foreach($category_list as $value)
+                                <option value="{{$value->id}}" >
+                                    {{ $value->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+        
         <div class="card text-left">
             <div class="card-body">
                 <h4 class="card-title mb-3">Sub Menu</h4>
                 <div class="table-responsive">
-                    <table id="zero_configuration_table" class="display table table-striped table-bordered" style="width:100%">
+                    <table id="sub_menu_table" class="display table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -40,30 +60,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($submenu as $key => $list)
-                                <tr>
-                                    <td>{{$list->id}}</td>
-                                    <td>{{$list->submenu_name}}</td>
-                                    <td>{{$list->category->name}}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="_dot _inline-dot"></span>
-                                            <span class="_dot _inline-dot"></span>
-                                            <span class="_dot _inline-dot"></span>
-                                        </button>
-                                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 34px, 0px);">
-                                        @can('submenu-edit')
-                                            <a class="dropdown-item" href="{{route('submenu-edit',$list->id)}}"><i class="nav-icon i-Pen-2 font-weight-bold" aria-hidden="true"> </i> Edit</a>
-                                        @endcan                                        
-                                        @can('submenu-delete')
-                                            <a class="dropdown-item" href="{{route('submenu-delete',$list->id)}}"><i class="nav-icon i-Close-Window font-weight-bold" aria-hidden="true"> </i> Delete</a>
-                                        @endcan
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                        @include('pages.submenu.subMenuTableBody')
                         <tfoot>
                             <tr>
                                 <th>#</th>
@@ -82,8 +79,10 @@
 @section('page-js')
     <script src="{{asset('assets/js/vendor/datatables.min.js')}}"></script>
     <script src="{{asset('assets/js/datatables.script.js')}}"></script>
+    <script src="{{asset('assets/js/datatables.script.js')}}"></script>
 @endsection
 @section('bottom-js')
+    @include('pages.submenu.filter-script')
 <script type="text/javascript">
 </script>
 @endsection
