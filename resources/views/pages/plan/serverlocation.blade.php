@@ -25,8 +25,25 @@
                             <td>{{$locationItem->percentage}}</td>
                             <td>{{$locationItem->upgrade_downgrade}}</td>
                             <td>
-                                <button type='button' class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1' data-id='{{$locationItem->id}}' data-name='{{$locationItem->base_country}}'  data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button>
-                                <button type='button' class='btn btn-outline-primary btn-sm delete-item-serverlocation' data-id='{{$locationItem->id}}' data-name='{{$locationItem->base_country}}' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>
+                                <button type='button'
+                                class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1'
+                                data-id='{{$locationItem->id}}'
+                                data-basecountry='{{$locationItem->base_country}}'
+                                data-amount='{{$locationItem->amount}}'
+                                data-currency='{{$locationItem->currency}}'
+                                data-server-location-country='{{$locationItem->server_location_country}}'
+                                data-percentage='{{$locationItem->percentage}}'
+                                data-upgrade-downgrade='{{$locationItem->upgrade_downgrade}}'
+                                data-toggle='modal' title='Edit'>
+                                <i class='nav-icon i-pen-4'></i>
+                            </button>
+                                <button type='button'
+                                class='btn btn-outline-primary btn-sm delete-item-serverlocation'
+                                data-id='{{$locationItem->id}}'
+                                data-name='{{$locationItem->base_country}}'
+                                data-toggle='modal' title='Delete'>
+                                <i class='nav-icon i-remove'></i>
+                            </button>
                             </td>
                         </tr>
                     @endforeach

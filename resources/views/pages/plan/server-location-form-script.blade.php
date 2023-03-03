@@ -2,12 +2,12 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle-1">Add Server Location</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle-1">Add/Edit Server Location</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="plan-server-location-submit" data-url="{{route('serverLocation-store')}}" data-id="id" data-name="billing-name">
+            <form class="plan-server-location-submit" data-url="{{route('serverLocation-store')}}" data-id="id" data-name="server-location-name">
                 <div class="modal-body">
                     <input type="hidden" id="server-loaction-id" class="id" name="id" value="0" />
                     <input type="hidden" id="type" name="type" value="add" />
@@ -106,7 +106,7 @@
         $(".plan-server-location-submit").submit();
     });
 
-    function calculate_percentage(){
+    function calculate_percentage() {
         let amount = $('#amount').val();
         let percent = $('#percentage').val();
         let upgrade_downgrade = $('input[name="upgrade_downgrade"]').val();
@@ -126,6 +126,7 @@
     $(document).on('change', '#percentage,input[name="upgrade_downgrade"]', function() {
         calculate_percentage();
     })
+
     // save server location data
     $(".plan-server-location-submit").submit(function(e) {
         e.preventDefault();
@@ -153,7 +154,7 @@
                     let data = response.data;
                     if (data && data.id > 0)
                         if ($('#type').val() === 'add') {
-                            var rows = $("<tr id='serverlocation-"+data.id+"'><td>" +
+                            var rows = $("<tr id='serverlocation-" + data.id + "'><td>" +
                                 data.id + "</td><td>" +
                                 data.base_country + "</td><td>" +
                                 data.amount + "</td><td>" +
@@ -165,21 +166,16 @@
 
                             $('.server_location_list_tbl_view').append(rows);
                         } else {
-                            $('.server_location_list_wrap').find('#server-location-' + data.id).replaceWith(`
-                            <div class="form-check" id="server-location-` + data.id + `">
-                            <input class="form-check-input server_location" type="checkbox" value="` + data.id + `" id="server-location-` + data.id + `" name="server_location[]">
-                                <input class="form-check-input server_location" type="checkbox" value="` + data.id + `" id="server-location-` + data.id + `" name="server_location[]">
-                                <label class="form-check-label mr-4 mb-2" for="server-location-` + data.id + `">` + data.base_country + `</label>
-                                <label class="form-check-label mr-4 mb-2" for="server-location-` + data.id + `">` + data.amount + `</label>
-                                <label class="form-check-label mr-4 mb-2" for="server-location-` + data.id + `">` + data.currency + `</label>
-                                <label class="form-check-label mr-4 mb-2" for="server-location-` + data.id + `">` + data.server_location_country + `</label>
-                                <label class="form-check-label mr-4 mb-2" for="server-location-` + data.id + `">` + data.percentage + `</label>
-                                <label class="form-check-label mr-4 mb-2" for="server-location-` + data.id + `">` + data.upgrade_downgrade + `</label>
-
-                                <button type="button" class="btn btn-outline-primary btn-sm edit-item-serverlocation mr-1" data-id="` + data.id + `" data-name="` + data.base_country + `" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-sm delete-item-serverlocation" data-id="` + data.id + `" data-name="` + data.base_country + `" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                            </div>
-                        `);
+                            var rows2 = $("<tr id='serverlocation-" + data.id + "'><td>" +
+                                data.id + "</td><td>" +
+                                data.base_country + "</td><td>" +
+                                data.amount + "</td><td>" +
+                                data.currency + "</td><td>" +
+                                data.server_location_country + "</td><td>" +
+                                data.percentage + "</td><td>" +
+                                data.upgrade_downgrade + "</td><td>" +
+                                "<button type='button' class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-serverlocation' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
+                            $('.server_location_list_wrap').find('#serverlocation-' + data.id).replaceWith(rows2);
                         }
                     // $('#type').val('add');
                     // $('#billing-id').val('');
@@ -192,76 +188,15 @@
                     response.error['server_location_country'] ? $('#server_location_country_error').text(response.error['server_location_country']) : $('#server_location_country_error').text('');
                     response.error['percentage'] ? $('#percentage_error').text(response.error['percentage']) : $('#percentage_error').text('');
                     response.error['upgrade_downgrade'] ? $('#upgrade_downgrade_error').text(response.error['upgrade_downgrade']) : $('#upgrade_downgrade_error').text('');
-              }
+                }
             }
         });
     })
 
-    // // save billing
-    // $(".plan-billing-submit").submit(function(e) {
-    //     e.preventDefault();
-    //     var submit_url = $(this).attr("data-url");
-    //     var data_id = $(this).attr("data-id");
-    //     var data_name = $(this).attr("data-name");
-    //     $.ajax({
-    //         url: submit_url,
-    //         type: "POST",
-    //         data: {
-    //             "_token": "{{ csrf_token() }}",
-    //             id: $('#billing-id').val(),
-    //             billing_name: $('#billing_name').val(),
-    //         },
-    //         dataType: 'json',
-    //         success: function(response) {
-    //             if (response.success) {
-    //                 $('.error').text('');
-    //                 let data = response.data;
-    //                 if (data && data.id > 0)
-    //                 if($('#type').val() === 'add'){
-    //                     $('.billing_list_wrap').append(`
-    //                         <div class="form-check" id="billing-`+data.id+`">
-    //                             <input class="form-check-input billing_cycle" type="checkbox" value="` + data.id + `" id="billing-cycle-` + data.id + `" name="billing_cycle[]">
-    //                             <label class="form-check-label mr-4 mb-2" for="billing-cycle-` + data.id + `">`+data.billing_name+`</label>
-    //                             <button type="button" class="btn btn-outline-primary btn-sm edit-item-billing mr-1" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-    //                             <button type="button" class="btn btn-outline-primary btn-sm delete-item-billing" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-    //                         </div>
-    //                     `);
-    //                 } else {
-    //                     $('.billing_list_wrap').find('#billing-'+data.id).replaceWith(`
-    //                         <div class="form-check" id="billing-`+data.id+`">
-    //                             <input class="form-check-input billing_cycle" type="checkbox" value="` + data.id + `" id="billing-cycle-` + data.id + `" name="billing_cycle[]">
-    //                             <label class="form-check-label mr-4 mb-2" for="billing-cycle-` + data.id + `">`+data.billing_name+`</label>
-    //                             <button type="button" class="btn btn-outline-primary btn-sm edit-item-billing mr-1" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-    //                             <button type="button" class="btn btn-outline-primary btn-sm delete-item-billing" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-    //                         </div>
-    //                     `);
-    //                 }
-    //                 $('#type').val('add');
-    //                 $('#billing-id').val('');
-    //                 $('#billing_name').val('');
-    //                 $('#billing_modal').modal('hide');
-    //             } else if (response.error) {
-    //                 response.error['billing_name'] ? $('#billing_name_error').text(response.error['billing_name']) : $('#billing_name_error').text('');
-    //             }
-    //         }
-    //     });
-    // });
-
-    // // edit billing
-    // $(document).on("click", ".billing_list_wrap .edit-item-billing", function() {
-    //     let id = $(this).attr('data-id');
-    //     let name = $(this).attr('data-name');
-    //     $('.plan-billing-submit').attr('data-id',id).attr('data-name',name);
-    //     $('#billing-id').val(id);
-    //     $('#type').val('edit');
-    //     $('#billing_name').val(name);
-    //     $('#billing_modal').modal('show');
-    // });
-
     // remove server location
     $(document).on("click", "#sl_delete_modal .confirm-delete-item-billing", function(e) {
         e.preventDefault();
-        var url = "{{ route('serverLocation-delete', ":id") }}";
+        var url = "{{ route('serverLocation-delete', ':id') }}";
         var data_id = $('#sl_id_delete').val();
         url = url.replace(':id', data_id);
         $.ajax({
@@ -275,7 +210,7 @@
             success: function(response) {
                 if (response.success) {
                     $('.error').text('');
-                    $('.server_location_list_wrap').find(`#serverlocation-`+data_id).remove();
+                    $('.server_location_list_wrap').find(`#serverlocation-` + data_id).remove();
                     $('#sl_id_delete').val('');
                     $('#sl_name_show').text('');
                     $('#sl_delete_modal').modal('hide');
@@ -285,18 +220,40 @@
             }
         });
     });
-
-    $(document).on("click", ".server_location_list_wrap .delete-item-serverlocation", function() {        
+    $(document).on("click", ".server_location_list_wrap .delete-item-serverlocation", function() {
         $('#sl_name_show').text($(this).attr('data-name'));
         $('#sl_id_delete').val($(this).attr('data-id'));
         $('#sl_delete_modal').modal('show');
     });
-    // $(document).ready(function(){
-    //     $('.base-country').select2({
-    //         dropdownParent: $('#serverLocation_modal')
-    //     });
-    //     $('.server-location-country').select2({
-    //         dropdownParent: $('#serverLocation_modal')
-    //     });
-    // });
+
+    // edit server location
+    $(document).on("click", ".server_location_list_wrap .edit-item-serverlocation", function() {
+        let id = $(this).attr('data-id');
+        let basecountry = $(this).attr('data-basecountry');
+        let amount = $(this).attr('data-amount');
+        let currency = $(this).attr('data-currency');
+        let server_location_country = $(this).attr('data-server-location-country');
+        let percentage = $(this).attr('data-percentage');
+        let upgrade_downgrade = $(this).attr('data-upgrade-downgrade');
+
+        $('.plan-server-location-submit').attr('data-id',id).attr('data-name',basecountry);
+        $('#server-loaction-id').val(id);
+        $('#type').val('edit');
+
+        $('#base_country').val(basecountry).trigger('change');;
+        $('#amount').val(amount);
+        $('#currency').val(currency);
+        $('#server_location_country').val(server_location_country).trigger('change');;
+        $('#percentage').val(percentage);
+        if(upgrade_downgrade==='upgrade'){
+            $('#upgrade').attr('checked', 'checked');
+        }else if(upgrade_downgrade==='downgrade'){
+            $('#downgrade').attr('checked', 'checked');
+        }else{
+            $('.upgrade_downgrade').removeAttr('checked');
+        }
+        
+        $('#serverLocation_modal').modal('show');
+    })
+
 </script>
