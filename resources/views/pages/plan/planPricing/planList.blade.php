@@ -35,7 +35,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-2 form-group">
                 <div class="d-flex">
                     <div class="mr-3">
@@ -86,7 +86,7 @@
                 <input class="form-control" id="productName" name="productName" type="text">
                 <div class="error" style="color:red;" id="fname_error"></div>
             </div>
-        </div>
+        </div> -->
         <div class="plan_list_wrap"></div>
         <div class="text-right">
             <!-- <a href="javascript:void(0);" class="btn btn-primary add_plan_fields"><i class="nav-icon i-add"></i> Add</a>         -->

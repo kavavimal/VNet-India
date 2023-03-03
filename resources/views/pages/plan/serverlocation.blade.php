@@ -2,11 +2,12 @@
     <div class="card-body">
         <h4 class="mb-3">Server Location</h4>
         <div class="server_location_list_wrap">
-        <table class="table table-sm">
+        <table class="table table-sm table-responsive">
             <thead>
                 <th></th>
                 <th>Base Country</th>
                 <th>Amount</th>
+                <th>Updated Amount</th>
                 <th>Currency</th>
                 <th>Server Location Country</th>
                 <th>Percentage</th>
@@ -19,6 +20,14 @@
                         <tr id="serverlocation-{{$locationItem->id}}">
                             <td>{{$locationItem->id}}</td>
                             <td>{{$locationItem->base_country}}</td>
+                            <td>@if($locationItem->upgrade_downgrade != '' && $locationItem->percentage != '')
+                                    @if($locationItem->upgrade_downgrade == 'upgrade' )
+                                        {{($locationItem->amount + ($locationItem->amount * $locationItem->percentage / 100))}}
+                                        @elseif ($locationItem->upgrade_downgrade == 'downgrade')
+                                        {{($locationItem->amount - ($locationItem->amount * $locationItem->percentage / 100))}}
+                                    @endif
+                                @endif
+                            </td>
                             <td>{{$locationItem->amount}}</td>
                             <td>{{$locationItem->currency}}</td>
                             <td>{{$locationItem->server_location_country}}</td>
