@@ -37,7 +37,26 @@ class PlanController extends Controller
     public function index()
     {
         $plan = Plan::where('sys_state','!=','-1')->orderBy('id','desc')->get();
-        return view('pages.plan.index', compact('plan'));
+        $category_list = Category::where('sys_state','!=','-1')->get();
+        $submenu = [];
+        return view('pages.plan.index', compact('plan','category_list','submenu'));
+    }
+
+    public function getByCategoryId($id){
+        $get_filter_plans = [];
+        if(isset($id) && $id !== "0"){
+            $get_filter_plans = Plan::where('plan_product_id', $id)->where('sys_state','!=','-1')->get();
+        } else {
+            $get_filter_plans = Plan::where('sys_state','!=','-1')->get();
+        }
+        $html = view('pages.plan.planTableBody', ['plan' => $get_filter_plans])->render();
+        return response()->json([
+            'success' => 'Plan Listed successfully!',
+            'title' => 'Plan',
+            'type' => 'list',
+            'list' => $get_filter_plans,
+            'html' => $html,
+        ], Response::HTTP_OK);
     }
 
     public function edit($id)

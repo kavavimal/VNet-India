@@ -44,17 +44,12 @@
                         <input type="hidden" id="submemu_id" class="submemu_id" value="{{$submenu->id}}" name="uid" />
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for="fname">Sub Menu Name</label>
-                                <input placeholder="Enter Sub Menu Name" class="form-control" id="submenuName" name="submenuName" type="submenuName" value="{{ $submenu->submenu_name ?? ''}}">
-                                <div class="error" style="color:red;" id="name_error"></div>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="menu_category">Menu Category</label>                            
+                                <label for="menu_category">Menu</label>       
                                 <select class="form-control select2"  id="menu_category" name="menu_category">
-                                    <option value="0">Select Category</option>
+                                    <option value="0">Select Menu</option>
                                     @foreach($category_list as $value)
                                     <?php $catSelect = '';
-                                    if ($value->id == $submenu->category_id) {
+                                    if ($value->id == $submenu->category_id) {                                        
                                         $catSelect = 'selected';
                                     } else {
                                         $catSelect = '';
@@ -66,6 +61,11 @@
                                     @endforeach
                                 </select>
                                 <div class="error" style="color:red;" id="cat_error"></div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="fname">Sub Menu Name</label>
+                                <input placeholder="Enter Sub Menu Name" class="form-control" id="submenuName" name="submenuName" type="submenuName" value="{{ $submenu->submenu_name ?? ''}}">
+                                <div class="error" style="color:red;" id="name_error"></div>
                             </div>
                            {{-- <div class="col-md-12 form-group">
                                 <label for="submenuDesc">submenu Description</label>
@@ -79,14 +79,9 @@
                     <input type="hidden" id="submemu_id" class="submemu_id" name="uid" value="0" />
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label for="fname">submenu Name</label>
-                            <input placeholder="Enter submenu Name" class="form-control" id="submenuName" name="submenuName" type="submenuName">
-                            <div class="error" style="color:red;" id="name_error"></div>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label for="menu_category">Menu Category</label>                            
+                            <label for="menu_category">Menu</label>                            
                             <select class="form-control select2"  id="menu_category" name="menu_category">
-                                <option value="0">Select Category</option>
+                                <option value="0">Select Menu</option>
                                 @foreach($category_list as $value)
                                 <option value="{{$value->id}}">
                                     {{ $value->name }}
@@ -94,6 +89,11 @@
                                 @endforeach
                             </select>
                             <div class="error" style="color:red;" id="cat_error"></div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="fname">Sub Menu Name</label>
+                            <input placeholder="Enter Sub Menu Name" class="form-control" id="submenuName" name="submenuName" type="submenuName">
+                            <div class="error" style="color:red;" id="name_error"></div>
                         </div>
                        {{-- <div class="col-md-12 form-group">
                             <label for="submenuDesc">submenu Description</label>

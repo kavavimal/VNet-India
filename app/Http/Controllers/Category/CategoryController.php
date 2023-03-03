@@ -55,6 +55,10 @@ class CategoryController extends Controller
                     'name' => 'required',
                     // 'description' => 'required',
                     'status' => 'required',
+                ],
+                $message = [
+                    'name.required' => 'The Menu Name Is Required.',                    
+                    'status.required' => 'The Status Is Required.',                    
                 ]);
                 if ($validator->passes()){
                     $name = $request->name;
@@ -83,6 +87,10 @@ class CategoryController extends Controller
                     'name' => 'required',
                     // 'description' => 'required',
                     'status' => 'required',
+                ],
+                $message = [
+                    'name.required' => 'The Menu Name Is Required.',                    
+                    'status.required' => 'The Status Is Required.',                    
                 ]);
                 if ($validator->passes()){
                     $category = Category::find($request->id);

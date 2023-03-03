@@ -46,9 +46,9 @@
                 <div class="card mt-4 mb-4">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="fname">Select Product</label>
+                            <label for="fname">Select Sub Menu</label>
                             <select class="form-control select2"  id="product_id" name="product_id">
-                                <option value="0">Select Product</option>
+                                <option value="0">Select Sub Menu</option>
                                 @foreach($product_list as $value)
                                 <?php $prodSelect = ''; if ($value->id == $plan->plan_product_id) {$prodSelect = 'selected';} else {$prodSelect = '';}?>
                                 <option value="{{$value->id}}" {{$prodSelect}}>{{ $value->submenu_name }}</option>
@@ -118,9 +118,9 @@
                 <div class="card mt-4 mb-4">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="fname">Select Product</label>
+                            <label for="fname">Select Sub Menu</label>
                             <select class="form-control select2"  id="product_id" name="product_id">
-                                <option value="0">Select Product</option>
+                                <option value="0">Select Sub Menu</option>
                                 @foreach($product_list as $value)
                                 <option value="{{$value->id}}">
                                     {{ $value->submenu_name }}
