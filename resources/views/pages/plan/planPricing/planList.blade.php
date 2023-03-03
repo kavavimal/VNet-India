@@ -89,7 +89,10 @@
         </div>
         <div class="plan_list_wrap"></div>
         <div class="text-right">
-            <a href="javascript:void(0);" class="btn btn-primary add_plan_fields"><i class="nav-icon i-add"></i> Add</a>        
+            <!-- <a href="javascript:void(0);" class="btn btn-primary add_plan_fields"><i class="nav-icon i-add"></i> Add</a>         -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-md-plan-list">
+                <i class="nav-icon i-add"></i> Add    
+            </button>
         </div>
         
     </div>
