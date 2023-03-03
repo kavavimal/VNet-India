@@ -1,4 +1,4 @@
-<div class="modal fade bd-example-modal-md-server-location" id="serverLocation_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-1" aria-hidden="true">
+<div class="modal fade bd-example-modal-md-server-location" id="serverLocation_modal"  role="dialog" aria-labelledby="exampleModalCenterTitle-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -67,7 +67,7 @@
                                     <input type="radio" name="upgrade_downgrade" class="upgrade_downgrade" value="downgrade" id="downgrade" />
                                     <label for="downgrade"><i class='nav-icon i-down1'></i></label>
                                 </div> -->
-                                <select id="upgrade_downgrade" name="upgrade_downgrade" class="form-control select2 upgrade_downgrade">
+                                <select id="upgrade_downgrade" name="upgrade_downgrade" class="form-control upgrade_downgrade">
                                     <option value="none">None</option>
                                     <option value="upgrade">Upgrade</option>
                                     <option value="downgrade">Downgrade</option>
@@ -119,18 +119,22 @@
         if (amount && percent && upgrade_downgrade) {
             let final_amount = amount * percent / 100;
             if (upgrade_downgrade === 'upgrade') {
-                $('#final_amount').html(parseInt(amount) + parseInt(final_amount));
+                let am = parseInt(amount) + parseInt(final_amount)
+                $('#final_amount').html('Updated Amount: ' + am);
             } else if (upgrade_downgrade === 'downgrade') {
-                $('#final_amount').html(parseInt(amount) - parseInt(final_amount));
+                let am = parseInt(amount) - parseInt(final_amount)
+                $('#final_amount').html('Updated Amount: ' + am);
             }else if(upgrade_downgrade === 'none'){
                 $('#final_amount').html('');
             }
         }
     }
 
-    // $(document).on('change', '#amount', function() {
-    //     $('#percentage').val('');
-    // })
+    $(document).on('change', '#amount', function() {
+        $('#percentage').val('');
+        $('select[name=upgrade_downgrade]').val('');
+        $('#final_amount').html('');
+    })
     $(document).on('change', 'select[name="upgrade_downgrade"]', function() {
         calculate_percentage();
     })
@@ -153,7 +157,7 @@
                 currency: $('#currency').val(),
                 server_location_country: $('#server_location_country').val(),
                 percentage: $('#percentage').val(),
-                upgrade_downgrade: $('.upgrade_downgrade:checked').val(),
+                upgrade_downgrade: $('.upgrade_downgrade').val(),
             },
             dataType: 'json',
             success: function(response) {
@@ -253,15 +257,19 @@
         $('#currency').val(currency);
         $('#server_location_country').val(server_location_country).trigger('change');;
         $('#percentage').val(percentage);
-        if(upgrade_downgrade==='upgrade'){
-            $('#upgrade').attr('checked', 'checked');
-        }else if(upgrade_downgrade==='downgrade'){
-            $('#downgrade').attr('checked', 'checked');
-        }else{
-            $('.upgrade_downgrade').removeAttr('checked');
-        }
+        $('select[name=upgrade_downgrade]').val(upgrade_downgrade);
+        calculate_percentage();
+        // if(upgrade_downgrade==='upgrade'){
+        //     $('#upgrade').attr('checked', 'checked');
+        // }else if(upgrade_downgrade==='downgrade'){
+        //     $('#downgrade').attr('checked', 'checked');
+        // }else{
+        //     $('.upgrade_downgrade').removeAttr('checked');
+        // }
         
         $('#serverLocation_modal').modal('show');
     })
-
+    $('#base_country').select2({
+        dropdownParent: $('#serverLocation_modal')
+    });
 </script>

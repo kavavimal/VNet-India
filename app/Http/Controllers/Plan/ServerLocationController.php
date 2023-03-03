@@ -95,7 +95,7 @@ class ServerLocationController extends Controller
                         'server_location_country.required' => 'The Server Location Country Is Required.',
                         'server_location_country.not_in' => 'The Server Location Country Is Required.',
                         'percentage.required' => 'The Percentage Is Required.',
-                        'upgrade_downgrade.required' => 'The Percentage Is Required.',
+                        'upgrade_downgrade.required' => 'Select Percentage Upgrades or Downgrades',
                     ]
                 );
 
