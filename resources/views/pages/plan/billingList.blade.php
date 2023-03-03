@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="mb-3">Billing Cycle</h4>
+        <h4 class="mb-3">Billing Cycle Price</h4>
         <div class="billing_list_wrap">
         @if(count($bilingCycle) > 0)
             @foreach ($bilingCycle as $list)

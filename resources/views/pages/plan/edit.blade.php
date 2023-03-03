@@ -70,10 +70,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                @include('pages.plan.billingList')
-            </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 @include('pages.plan.planPricing.planList')
             </div>
             <div class="col-md-6">
@@ -96,18 +93,27 @@
             @endif            
         </div>
         <div class="row">
-            <div class="col-md-8 mt-4">
+            <div class="col-md-12 mt-4">
                 @include('pages.plan.serverlocation')
             </div>
             <div class="col-md-4 mt-4">
-                @include('pages.plan.negotiation')
-            </div> 
-            <div class="col-md-8 mt-4">
+                @include('pages.plan.billingList')
+            </div>
+            <div class="col-md-4 mt-4">
                 @include('pages.plan.servicetype')
             </div>    
             <div class="col-md-4 mt-4">
+                @include('pages.plan.amountCalc')
+            </div>                     
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.totalPrice')                
+            </div>
+            <div class="col-md-4 mt-4">
                 @include('pages.plan.tax')                
-            </div>                                        
+            </div> 
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.negotiation')
+            </div>                                           
         </div>
     </form>
 @else
