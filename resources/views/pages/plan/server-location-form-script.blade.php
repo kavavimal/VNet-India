@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="fname">Base Country</label>
+                                <label for="base_country">Base Country</label>
                                 <select id="base_country" name="base_country" class="form-control select2 base-country">
                                     <option value="0">Select Base Country</option>
                                     @foreach(Helper::ContactCountryAll() as $country)
@@ -26,21 +26,21 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="fname">Amount</label>
+                                <label for="amount">Amount</label>
                                 <input type="text" name="amount" id="amount" class="form-control">
                                 <div class="error" style="color:red;" id="amount_error"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="fname">Currency</label>
+                                <label for="currency">Currency</label>
                                 <input type="text" name="currency" id="currency" class="form-control">
                                 <div class="error" style="color:red;" id="currency_error"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="fname">Server Location Country</label>
+                                <label for="server_location_country">Server Location Country</label>
                                 <select id="server_location_country" name="server_location_country" class="form-control select2 server-location-country">
                                     <option value="0">Select Base Country</option>
                                     @foreach(Helper::ContactCountryAll() as $country)
@@ -52,9 +52,21 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="fname">Percentage</label>
+                                <label for="percentage">Percentage</label>
                                 <input type="text" name="percentage" id="percentage" class="form-control">
                                 <div class="error" style="color:red;" id="percentage_error"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group updownradios">
+                                <label>Upgrade/Downgrade</label>
+                                <div class="toggle">
+                                    <input type="radio" name="upgrade_downgrade" value="upgrade" id="upgrade" />
+                                    <label for="upgrade">Upgrade</label>
+                                    <input type="radio" name="upgrade_downgrade" value="downgrade" id="downgrade" />
+                                    <label for="downgrade">Downgrade</label>
+                                </div>
+                                <div class="error" style="color:red;" id="upgrade_downgrade_error"></div>
                             </div>
                         </div>
                     </div>
@@ -94,6 +106,27 @@
     $(document).on("click", ".erp-plan-server-location-form", function() {
         $(".plan-server-location-submit").submit();
     });
+
+    function calculate_percentage(){
+        let amount = $('#amount').val();
+        let percent = $('#percentage').val();
+        let upgrade_downgrade = $('input[name="upgrade_downgrade"]').val();
+        if (amount && percent && upgrade_downgrade) {
+            let final_amount = amount * percent / 100;
+            if (upgrade_downgrade === 'upgrade') {
+                $('#amount').val(parseInt(amount) + parseInt(final_amount));
+            } else if (upgrade_downgrade === 'downgrade') {
+                $('#amount').val(parseInt(amount) - parseInt(final_amount));
+            }
+        }
+    }
+
+    $(document).on('change', '#amount', function() {
+        $('#percentage').val('');
+    })
+    $(document).on('change', '#percentage,input[name="upgrade_downgrade"]', function() {
+        calculate_percentage();
+    })
     // save server location data
     $(".plan-server-location-submit").submit(function(e) {
         e.preventDefault();
@@ -112,6 +145,7 @@
                 currency: $('#currency').val(),
                 server_location_country: $('#server_location_country').val(),
                 percentage: $('#percentage').val(),
+                upgrade_downgrade: $('#upgrade_downgrade').val(),
             },
             dataType: 'json',
             success: function(response) {
@@ -127,6 +161,7 @@
                                 data.currency + "</td><td>" +
                                 data.server_location_country + "</td><td>" +
                                 data.percentage + "</td><td>" +
+                                data.upgrade_downgrade + "</td><td>" +
                                 "<button type='button' class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-serverlocation' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
 
                             $('.server_location_list_tbl_view').append(rows);
@@ -140,6 +175,7 @@
                                 <label class="form-check-label mr-4 mb-2" for="server-location-` + data.id + `">` + data.currency + `</label>
                                 <label class="form-check-label mr-4 mb-2" for="server-location-` + data.id + `">` + data.server_location_country + `</label>
                                 <label class="form-check-label mr-4 mb-2" for="server-location-` + data.id + `">` + data.percentage + `</label>
+                                <label class="form-check-label mr-4 mb-2" for="server-location-` + data.id + `">` + data.upgrade_downgrade + `</label>
 
                                 <button type="button" class="btn btn-outline-primary btn-sm edit-item-serverlocation mr-1" data-id="` + data.id + `" data-name="` + data.base_country + `" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
                                 <button type="button" class="btn btn-outline-primary btn-sm delete-item-serverlocation" data-id="` + data.id + `" data-name="` + data.base_country + `" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
@@ -156,6 +192,7 @@
                     response.error['currency'] ? $('#currency_error').text(response.error['currency']) : $('#currency_error').text('');
                     response.error['server_location_country'] ? $('#server_location_country_error').text(response.error['server_location_country']) : $('#server_location_country_error').text('');
                     response.error['percentage'] ? $('#percentage_error').text(response.error['percentage']) : $('#percentage_error').text('');
+                    response.error['upgrade_downgrade'] ? $('#upgrade_downgrade_error').text(response.error['upgrade_downgrade']) : $('#upgrade_downgrade_error').text('');
               }
             }
         });

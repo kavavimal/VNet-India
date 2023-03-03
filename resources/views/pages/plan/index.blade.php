@@ -45,7 +45,7 @@
                                 <tr>
                                     <td>{{$list->id}}</td>
                                     <td>{{$list->plan_name}}</td>
-                                    <td>{{$list->submenu->submenu_name}}</td>                                   
+                                    <td>{{isset($list->submenu) ? $list->submenu->submenu_name : ''}}</td>                                   
                                     <td>
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="_dot _inline-dot"></span>
