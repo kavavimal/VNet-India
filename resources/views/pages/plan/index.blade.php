@@ -50,7 +50,7 @@
                         </select>
                         </div>
                     </div>
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4 form-group mt-3">
                         <button class="btn btn-primary" type="button" id="apply_plan_filter">Filter</button>
                     </div>
                 </div>
