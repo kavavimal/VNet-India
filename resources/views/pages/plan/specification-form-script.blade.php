@@ -87,8 +87,8 @@
                             <div class="form-check" id="spec-`+data.id+`">
                                 <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `" name="specification[]">
                                 <label class="form-check-label" for="` + data.id + `">`+data.spec_name+`</label>
-                                <button type="button" class="btn text-warning edit-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn text-danger delete-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
+                                <button type="button" class="btn btn-outline-primary btn-sm edit-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
+                                <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
                             </div>
                         `);
                     } else {
@@ -96,8 +96,8 @@
                             <div class="form-check" id="spec-`+data.id+`">
                                 <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `" name="specification[]">
                                 <label class="form-check-label" for="` + data.id + `">`+data.spec_name+`</label>
-                                <button type="button" class="btn text-warning edit-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn text-danger delete-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
+                                <button type="button" class="btn btn-outline-primary btn-sm edit-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
+                                <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
                             </div>
                         `);
                     }
