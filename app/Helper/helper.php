@@ -2,6 +2,7 @@
 namespace App\helper;
 use Illuminate\Http\Request;
 use App\Models\ContactsCountryEnum;
+use App\Models\PlanPlanBillingCycle;
 use Illuminate\Database\Eloquent\Builder;
 use Validator;
 class helper
@@ -25,6 +26,10 @@ class helper
     public static function ContactCountryAll()
     {
         return ContactsCountryEnum::all();
+    }
+    public static function PlanPlanBillingCycleAll()
+    {
+        return PlanPlanBillingCycle::all();
     }
 }
 

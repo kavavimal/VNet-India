@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUpgradeDowngradeToUsersTable extends Migration
+class AddFieldsToPlans extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddUpgradeDowngradeToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('plan_server_location_tbl', function (Blueprint $table) {
-            $table->string('upgrade_downgrade',100)->after('percentage');
+        Schema::table('plan__rec_tbl', function (Blueprint $table) {
+            $table->string('plan_pricingids',100);
         });
     }
 
@@ -25,8 +25,8 @@ class AddUpgradeDowngradeToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('plan_server_location_tbl', function (Blueprint $table) {
-            $table->dropColumn('upgrade_downgrade');
+        Schema::table('plan__rec_tbl', function (Blueprint $table) {
+            $table->dropColumn('plan_pricingids');
         });
     }
 }

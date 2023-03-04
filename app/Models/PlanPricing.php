@@ -8,22 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class PlanPricing extends Model
 {
     use HasFactory;
-    protected $table = "plan__pricing_tbl";
+    protected $table = "plan_pricing_rec_tbl";
 
     protected $fillable = [
-        'plan_id',
         'storage',
         'storage_price',
         'billing_cycle',
         'server',
         'window_server',
+        'upgrade_downgrade',
         'price',
         'sys_state',
         'created_at',
         'updated_at'
-    ];
-
-    public function plan(){
-        return $this->hasOne(Plan::class,'id','plan_id');
-    }
+    ];    
 }
