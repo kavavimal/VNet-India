@@ -15,6 +15,7 @@ class Plan extends Model
         'plan_name',
         'plan_product_id',
         'billing_cycles',
+        'plan_pricingids',
         'taxation',
         'specification',
         'featured_category',

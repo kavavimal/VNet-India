@@ -51,6 +51,12 @@
         $("input:checkbox[name='featuredSubCategory[]']:checked").each(function(){
             featuredSubCategory.push($(this).val());
         });
+
+        let planPricing = [];
+        $("input:checkbox[name='plan_pricing_check_box[]']:checked").each(function(){
+            planPricing.push($(this).val());
+        });
+
         $.ajax({
             url: submit_url,
             type: "POST",
@@ -60,6 +66,7 @@
                 product_id: $('#product_id').val(),
                 planName: $('#planName').val(),
                 billing_cycle: billing_cycle.join(','),
+                planPricing: planPricing.join(','),
                 taxation: taxation.join(','),
                 specification: specification.join(','),
                 featuredCategory: featuredCategory.join(','),

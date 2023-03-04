@@ -1,5 +1,5 @@
 <div class="modal fade bd-example-modal-sm-billing" id="billing_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-1" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle-1">Add Billing Cycle</h5>
@@ -13,12 +13,31 @@
                     <input type="hidden" id="type" name="type" value="add" />
                     <input type="hidden" id="sub_menu_id" name="sub_menu_id" value="{{$plan->plan_product_id ?? ''}}">
                     <div class="row">
-                        <div class="col-md-12 form-group">
-                            <label for="name">Name</label>
+                        <div class="col-sm-12 col-md-6 form-group">
+                            <label for="billing_name">Name</label>
                             {!! Form::text('billing_name', null, array('placeholder' => 'Enter Name','class' => 'form-control' , 'id' => 'billing_name')) !!}
                             <div class="error" style="color:red;" id="billing_name_error"></div>
                         </div>                     
-                    </div>    
+                        <div class="col-sm-12 col-md-6 form-group">
+                            <label for="billing_amount">Amount</label>
+                            {!! Form::text('billing_amount', null, array('placeholder' => 'Enter Amount','class' => 'form-control' , 'id' => 'billing_amount')) !!}
+                            <div class="error" style="color:red;" id="billing_amount_error"></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 form-group">
+                            <label for="billing_percentage">Percentage</label>
+                            {!! Form::text('billing_percentage', null, array('placeholder' => 'Enter Percentage','class' => 'form-control' , 'id' => 'billing_percentage')) !!}
+                            <div class="error" style="color:red;" id="billing_percentage_error"></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 form-group">
+                            <label for="billing_upgrade_downgrade">Upgrade Downgrade</label>
+                            <select id="billing_upgrade_downgrade" name="billing_upgrade_downgrade" class="form-control">
+                                <option value="none">None</option>
+                                <option value="upgrade">Upgrade</option>
+                                <option value="downgrade">Downgrade</option>
+                            </select>
+                            <div class="error" style="color:red;" id="billing_upgrade_downgrade_error"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
