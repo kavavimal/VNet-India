@@ -19,7 +19,8 @@
                     @foreach ($server_locations as $locationItem)
                         <tr id="serverlocation-{{$locationItem->id}}">
                             <td>{{$locationItem->id}}</td>
-                            <td>{{$locationItem->base_country}}</td>
+                            <td>{{$locationItem->base_country}}</td>                            
+                            <td>{{$locationItem->amount}}</td>
                             <td>@if($locationItem->upgrade_downgrade != '' && $locationItem->percentage != '')
                                     @if($locationItem->upgrade_downgrade == 'upgrade' )
                                         {{($locationItem->amount + ($locationItem->amount * $locationItem->percentage / 100))}}
@@ -28,7 +29,6 @@
                                     @endif
                                 @endif
                             </td>
-                            <td>{{$locationItem->amount}}</td>
                             <td>{{$locationItem->currency}}</td>
                             <td>{{$locationItem->server_location_country}}</td>
                             <td>{{$locationItem->percentage}}</td>

@@ -17,7 +17,7 @@
                         <div class="col-md-12 form-group">
                             <label for="name">Name</label>
                             {!! Form::text('name', null, array('placeholder' => 'Enter Name','class' => 'form-control' , 'id' => 'name')) !!}
-                            <div class="error" style="color:red;" id="name_error"></div>
+                            <div class="error" style="color:red;" id="fs_name_error"></div>
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                     $('#featured_sub_cat_model #featured_id').val('');
                     $('#featured_sub_cat_model').modal('hide');
                 } else if (response.error) {
-                    response.error['name'] ? $('#name_error').text(response.error['name']) : $('#name_error').text('');
+                    response.error['name'] ? $('#fs_name_error').text(response.error['name']) : $('#fs_name_error').text('');
                 }
             }
         });

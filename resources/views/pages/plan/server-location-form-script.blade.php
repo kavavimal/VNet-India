@@ -164,12 +164,21 @@
                 if (response.success) {
                     $('.error').text('');
                     let data = response.data;
-                    if (data && data.id > 0)
+                    if (data && data.id > 0) {
+                        let updated_amount = '';
+                        if(data.upgrade_downgrade != '' && data.percentage != ''){
+                            if(data.upgrade_downgrade == 'upgrade' ){
+                                updated_amount = parseInt(data.amount) + parseInt((data.amount * data.percentage / 100));
+                            }else if(data.upgrade_downgrade == 'downgrade'){
+                                    updated_amount = data.amount - (data.amount * data.percentage / 100);
+                                }
+                        }                        
                         if ($('#type').val() === 'add') {
                             var rows = $("<tr id='serverlocation-" + data.id + "'><td>" +
                                 data.id + "</td><td>" +
                                 data.base_country + "</td><td>" +
                                 data.amount + "</td><td>" +
+                                updated_amount + "</td><td>" +
                                 data.currency + "</td><td>" +
                                 data.server_location_country + "</td><td>" +
                                 data.percentage + "</td><td>" +
@@ -182,6 +191,7 @@
                                 data.id + "</td><td>" +
                                 data.base_country + "</td><td>" +
                                 data.amount + "</td><td>" +
+                                updated_amount + "</td><td>" +
                                 data.currency + "</td><td>" +
                                 data.server_location_country + "</td><td>" +
                                 data.percentage + "</td><td>" +
@@ -193,6 +203,7 @@
                     // $('#billing-id').val('');
                     // $('#billing_name').val('');
                     $('#serverLocation_modal').modal('hide');
+                }
                 } else if (response.error) {
                     response.error['base_country'] ? $('#base_country_error').text(response.error['base_country']) : $('#base_country_error').text('');
                     response.error['amount'] ? $('#amount_error').text(response.error['amount']) : $('#amount_error').text('');
