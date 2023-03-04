@@ -33,7 +33,7 @@
                             <td>{{$item->server}}</td>
                             <td>{{$item->window_server}}</td>
                             <td>{{$item->upgrade_downgrade}}</td>
-                            <td>{{$item->price}}</td>
+                            <td class="total_price">{{$item->price}}</td>
                             <td>
                                 <button type='button'
                                 class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1'

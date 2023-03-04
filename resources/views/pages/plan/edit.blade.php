@@ -105,13 +105,13 @@
             <div class="col-md-4 mt-4">
                 @include('pages.plan.totalPrice')                
             </div>            
-            <div class="col-md-12 mt-4">
+            <div class="col-md-6 mt-4">
                 @include('pages.plan.billingList')
             </div>                                                    
-            <div class="col-md-4 mt-4">
+            <div class="col-md-3 mt-4">
                 @include('pages.plan.tax')                
             </div> 
-            <div class="col-md-4 mt-4">
+            <div class="col-md-3 mt-4">
                 @include('pages.plan.negotiation')
             </div>                                           
         </div>

@@ -87,6 +87,9 @@
                 "_token": "{{ csrf_token() }}",
                 id: $('#billing-id').val(),
                 billing_name: $('#billing_name').val(),
+                billing_amount: $('#billing_amount').val(),
+                billing_percentage: $('#billing_percentage').val(),
+                billing_upgrade_downgrade: $('#billing_upgrade_downgrade').val(),
                 sub_menu_id: $('#sub_menu_id').val(),
             },
             dataType: 'json',
@@ -96,23 +99,33 @@
                     let data = response.data;
                     if (data && data.id > 0)
                     if($('#type').val() === 'add'){
-                        $('.billing_list_wrap').append(`
-                            <div class="form-check" id="billing-`+data.id+`">
-                                <input class="form-check-input billing_cycle" type="checkbox" value="` + data.id + `" id="billing-cycle-` + data.id + `" name="billing_cycle[]">
-                                <label class="form-check-label mr-4 mb-2" for="billing-cycle-` + data.id + `">`+data.billing_name+`</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm edit-item-billing mr-1" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-sm delete-item-billing" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                            </div>
-                        `);
+                        var rows = $(`<tr id='billingPrice-` + data.id + `'><td>
+                                    <input class='billing_cycle'
+                                    type='checkbox'
+                                    value='`+data.id+`'
+                                    id='billing-cycle-`+data.id+`'
+                                    name='billing_cycle[]'
+                                /></td><td>` +
+                                data.billing_name + "</td><td>" +
+                                data.billing_amount + "</td><td>" +
+                                data.billing_percentage + "</td><td>" +
+                                data.billing_upgrade_downgrade + "</td><td>" +                                
+                                "<button type='button' class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1' data-id='` + data.id + `'data-storage='` + data.storage + `'data-storage_price='` + data.storage_price + `'data-billing_cycle='` + data.billing_cycle + `'data-server='` + data.server + `'data-window_server='` +data.window_server + `'data-upgrade_downgrade='` +data.upgrade_downgrade + `'data-price='` + data.price + `'data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `'data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
+                            $('.billing_price_table').append(rows);
                     } else {
-                        $('.billing_list_wrap').find('#billing-'+data.id).replaceWith(`
-                            <div class="form-check" id="billing-`+data.id+`">
-                                <input class="form-check-input billing_cycle" type="checkbox" value="` + data.id + `" id="billing-cycle-` + data.id + `" name="billing_cycle[]">
-                                <label class="form-check-label mr-4 mb-2" for="billing-cycle-` + data.id + `">`+data.billing_name+`</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm edit-item-billing mr-1" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-sm delete-item-billing" data-id="`+data.id+`" data-name="`+data.billing_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                            </div>
-                        `);
+                        var rows2 =  $(`<tr id='billingPrice-` + data.id + `'><td>
+                                    <input class='billing_cycle'
+                                    type='checkbox'
+                                    value='`+data.id+`'
+                                    id='billing-cycle-`+data.id+`'
+                                    name='billing_cycle[]'
+                                /></td><td>` +
+                                data.billing_name + "</td><td>" +
+                                data.billing_amount + "</td><td>" +
+                                data.billing_percentage + "</td><td>" +
+                                data.billing_upgrade_downgrade + "</td><td>" +                                
+                                "<button type='button' class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1' data-id='` + data.id + `'data-storage='` + data.storage + `'data-storage_price='` + data.storage_price + `'data-billing_cycle='` + data.billing_cycle + `'data-server='` + data.server + `'data-window_server='` +data.window_server + `'data-upgrade_downgrade='` +data.upgrade_downgrade + `'data-price='` + data.price + `'data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `'data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
+                            $('.billing_price_table').find('#planPricing-' + data.id).replaceWith(rows2);
                     }
                     $('#type').val('add');
                     $('#billing-id').val('');
@@ -120,6 +133,9 @@
                     $('#billing_modal').modal('hide');
                 } else if (response.error) {
                     response.error['billing_name'] ? $('#billing_name_error').text(response.error['billing_name']) : $('#billing_name_error').text('');
+                    response.error['billing_percentage'] ? $('#billing_percentage_error').text(response.error['billing_percentage']) : $('#billing_percentage_error').text('');
+                    response.error['billing_amount'] ? $('#billing_amount_error').text(response.error['billing_amount']) : $('#billing_amount_error').text('');
+                    response.error['billing_upgrade_downgrade'] ? $('#billing_upgrade_downgrade_error').text(response.error['billing_upgrade_downgrade']) : $('#billing_upgrade_downgrade').text('');
                 }
             }
         });
@@ -129,10 +145,16 @@
     $(document).on("click", ".billing_list_wrap .edit-item-billing", function() {
         let id = $(this).attr('data-id');
         let name = $(this).attr('data-name');
+        let amount = $(this).attr('data-amount');
+        let percentage = $(this).attr('data-percentage');
+        let type = $(this).attr('data-type');
         $('.plan-billing-submit').attr('data-id',id).attr('data-name',name);
         $('#billing-id').val(id);
         $('#type').val('edit');
         $('#billing_name').val(name);
+        $('#billing_amount').val(amount),
+        $('#billing_percentage').val(percentage),
+        $('#billing_upgrade_downgrade').val(type),
         $('#billing_modal').modal('show');
     });
 
@@ -167,5 +189,32 @@
         $('#billing_name_show').text($(this).attr('data-name'));
         $('#billing_id_delete').val($(this).attr('data-id'));
         $('#billing_delete_modal').modal('show');
+    });
+
+    function calculate_amounts(){
+        let old_value = $(".first_year_info .default_amount").text();
+        let amount = $('#billing_amount').val();
+        let billling_percentage = $('#billing_percentage').val();   
+        let final_price = $('#billing_amount');
+        let upgrade_downgrade = $('select[name="billing_upgrade_downgrade"]').val();        
+        let final_amount = amount * billling_percentage / 100;
+        if (upgrade_downgrade === 'upgrade') {            
+            let am = parseInt(amount) + parseInt(final_amount)            
+            final_price.val(am);
+        } else if (upgrade_downgrade === 'downgrade') {
+            let am = parseInt(amount) - parseInt(final_amount)
+            final_price.val(am);
+        }else if(upgrade_downgrade === 'none'){
+            final_price.val(old_value);
+        }      
+    }
+    $('body').on('keyup', '#billing_amount', function() {   
+        calculate_amounts();
+    });
+    $('body').on('keyup', '#billing_percentage', function() {   
+        calculate_amounts();
+    });
+    $(document).on('change', 'select[name="billing_upgrade_downgrade"]', function() {   
+        calculate_amounts();
     });
 </script>
