@@ -11,6 +11,7 @@ use App\Models\Specification;
 use App\Models\FeaturedCategory;
 use App\Models\BilingCycle;
 use App\Models\ServerLocation;
+use App\Models\PlanPricing;
 use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -63,6 +64,7 @@ class PlanController extends Controller
     {
         $plan = Plan::where('id',$id)->first();        
         $billingCycleSelected = (!empty($plan->billing_cycles)) ? explode(',', $plan->billing_cycles) : '';
+        $planPricingSelected = (!empty($plan->plan_pricingids)) ? explode(',', $plan->plan_pricingids) : '';
         $specificationsSelected = (!empty($plan->specification)) ? explode(',', $plan->specification) : '';
         $featuredCategorysSelected = (!empty($plan->featured_category)) ? explode(',', $plan->featured_category) : '';
         $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
@@ -81,6 +83,7 @@ class PlanController extends Controller
         }
         $product_list = SubMenu::where('sys_state','!=','-1')->get();
         $server_locations = ServerLocation::where('sys_state','!=','-1')->get();
+        $plan_pricing = PlanPricing::where('sys_state','!=','-1')->get();
 
         return view('pages.plan.edit', compact(
             'plan',
@@ -95,6 +98,8 @@ class PlanController extends Controller
             'featuredSubCategorySelected',
             'taxationSelected',
             'server_locations',
+            'plan_pricing',
+            'planPricingSelected',
         ));
     }
 
@@ -142,6 +147,7 @@ class PlanController extends Controller
                     $product_id = $request->product_id;
                     
                     $billingCycle = $request->billing_cycle;
+                    $planPricing = $request->planPricing;
                     $taxation = $request->taxation;
                     $specification = $request->specification;
                     $featuredCategory = $request->featuredCategory;
@@ -159,6 +165,7 @@ class PlanController extends Controller
                         'plan_name'=>$planName,
                         'plan_product_id'=>$product_id,
                         'billing_cycles'=>$billingCycle,
+                        'plan_pricingids'=>$planPricing,
                         'taxation'=>$taxation,
                         'specification'=>$specification,
                         'featured_category'=>$featuredCategory,

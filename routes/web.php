@@ -12,6 +12,7 @@ use App\Http\Controllers\Plan\FeaturedCategoryController;
 use App\Http\Controllers\Plan\BillingController; 
 use App\Http\Controllers\Plan\TaxController; 
 use App\Http\Controllers\Plan\ServerLocationController; 
+use App\Http\Controllers\Plan\PlanPricingController; 
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\role\RoleController;
 use App\Http\Controllers\Category\CategoryController;
@@ -110,4 +111,9 @@ Route::middleware(['auth'])->group(function () {
     // Server Location Module
     Route::post('/serverLocation/store',[ServerLocationController::class,'store'])->name('serverLocation-store');
     Route::post('/serverLocation/delete',[ServerLocationController::class,'remove'])->name('serverLocation-delete');
+
+    // Plan Pricing Module
+    Route::post('/planpricing/store',[PlanPricingController::class,'store'])->name('planpricing-store');
+    Route::post('/planpricing/delete',[PlanPricingController::class,'remove'])->name('planpricing-delete');
+    Route::post('/planpricing/planBillingStore',[PlanPricingController::class,'planBillingStore'])->name('plan-billing-store');    
 });
