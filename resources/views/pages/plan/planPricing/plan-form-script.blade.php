@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="plan-server-location-submit" data-url="{{route('serverLocation-store')}}" data-id="id" data-name="billing-name">
+            <form class="plan-pricing-form-submit" data-url="{{route('serverLocation-store')}}" data-id="id" data-name="billing-name">
                 <div class="modal-body">
                     <input type="hidden" id="plan-list-id" class="id" name="id" value="0" />
                     <input type="hidden" id="type" name="type" value="add" />

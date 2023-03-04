@@ -112,6 +112,17 @@
         $(".plan-server-location-submit").submit();
     });
 
+    $(document).on("click", '#serverlocation-add', function() {
+        $('#server-loaction-id').val('');
+        $('#base_country').val('').trigger('change');
+        $('#amount').val('');
+        $('#currency').val('');
+        $('#server_location_country').val('').trigger('change');
+        $('#percentage').val('');
+        $('.upgrade_downgrade').val('');
+        $('#final_amount').html('');
+        $('#serverLocation_modal').modal('show');
+    });
     function calculate_percentage() {
         let amount = $('#amount').val();
         let percent = $('#percentage').val();
@@ -174,29 +185,60 @@
                                 }
                         }                        
                         if ($('#type').val() === 'add') {
-                            var rows = $("<tr id='serverlocation-" + data.id + "'><td>" +
-                                data.id + "</td><td>" +
-                                data.base_country + "</td><td>" +
-                                data.amount + "</td><td>" +
-                                updated_amount + "</td><td>" +
-                                data.currency + "</td><td>" +
-                                data.server_location_country + "</td><td>" +
-                                data.percentage + "</td><td>" +
-                                data.upgrade_downgrade + "</td><td>" +
-                                "<button type='button' class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-serverlocation' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
+                            var rows = $(`<tr id='serverlocation-` + data.id + `'><td>
+                                <input class='server-location-checkbox'
+                                type='checkbox'
+                                value='`+data.id+`'
+                                id='serverlocations-`+data.id+`'
+                                name='serverlocations[]'
+                            /></td><td>` +
+                                data.base_country + `</td><td>` +
+                                data.amount + `</td><td>` +
+                                updated_amount + `</td><td>` +
+                                data.currency + `</td><td>` +
+                                data.server_location_country + `</td><td>` +
+                                data.percentage + `</td><td>` +
+                                data.upgrade_downgrade + `</td><td>` +
+                                `<button type='button'
+                                class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1'
+                                data-id=`+data.id+`
+                                data-basecountry=`+data.base_country+`
+                                data-amount=`+data.amount+`
+                                data-currency=`+data.currency+`
+                                data-server-location-country=`+data.server_location_country+`
+                                data-percentage=`+data.percentage+`
+                                data-upgrade-downgrade=`+data.upgrade_downgrade+`
+                                data-toggle='modal' title='Edit'>
+                                <i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-serverlocation' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>` + `</td></tr>`);
 
                             $('.server_location_list_tbl_view').append(rows);
                         } else {
-                            var rows2 = $("<tr id='serverlocation-" + data.id + "'><td>" +
-                                data.id + "</td><td>" +
-                                data.base_country + "</td><td>" +
-                                data.amount + "</td><td>" +
-                                updated_amount + "</td><td>" +
-                                data.currency + "</td><td>" +
-                                data.server_location_country + "</td><td>" +
-                                data.percentage + "</td><td>" +
-                                data.upgrade_downgrade + "</td><td>" +
-                                "<button type='button' class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-serverlocation' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
+                            var rows2 = $(`<tr id='serverlocation-` + data.id + `'><td><input
+                                class="server-location-checkbox"
+                                type="checkbox"
+                                value="`+data.id+`"
+                                id="serverlocations-`+data.id+`"
+                                name="serverlocations[]"
+                            /></td><td>` +
+                                data.base_country + `</td><td>` +
+                                data.amount + `</td><td>` +
+                                updated_amount + `</td><td>` +
+                                data.currency + `</td><td>` +
+                                data.server_location_country + `</td><td>` +
+                                data.percentage + `</td><td>` +
+                                data.upgrade_downgrade + `</td><td>` +
+                                `<button type='button'
+                                class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1'
+                                data-id=`+data.id+`
+                                data-basecountry=`+data.base_country+`
+                                data-amount=`+data.amount+`
+                                data-currency=`+data.currency+`
+                                data-server-location-country=`+data.server_location_country+`
+                                data-percentage=`+data.percentage+`
+                                data-upgrade-downgrade=`+data.upgrade_downgrade+`
+                                data-toggle='modal' title='Edit'>
+                                <i class='nav-icon i-pen-4'></i></button>
+                                <button type='button' class='btn btn-outline-primary btn-sm delete-item-serverlocation' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>` + `</td></tr>`);
                             $('.server_location_list_wrap').find('#serverlocation-' + data.id).replaceWith(rows2);
                         }
                     // $('#type').val('add');

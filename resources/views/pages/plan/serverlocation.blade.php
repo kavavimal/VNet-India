@@ -18,7 +18,13 @@
                 @if(isset($server_locations) && count($server_locations) > 0) 
                     @foreach ($server_locations as $locationItem)
                         <tr id="serverlocation-{{$locationItem->id}}">
-                            <td>{{$locationItem->id}}</td>
+                            <td><input
+                                class="server-location-checkbox"
+                                type="checkbox"
+                                value="0"
+                                id="serverlocations-{{$locationItem->id}}"
+                                name="serverlocations[]"
+                            /> </td>
                             <td>{{$locationItem->base_country}}</td>                            
                             <td>{{$locationItem->amount}}</td>
                             <td>@if($locationItem->upgrade_downgrade != '' && $locationItem->percentage != '')
@@ -61,7 +67,7 @@
         </table>
         </div>
         <div class="text-right">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-md-server-location">
+            <button type="button" class="btn btn-primary" id="serverlocation-add">
                 <i class="nav-icon i-add"></i> Add
             </button>
         </div>

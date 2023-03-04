@@ -64,7 +64,7 @@ class ServerLocationController extends Controller
                     $percentage = $request->percentage;
                     $upgrade_downgrade = $request->upgrade_downgrade;
                     $save_server_location = ServerLocation::create(['base_country' => $base_country, 'amount' => $amount, 'currency' => $currency, 'server_location_country' => $server_location_country, 'percentage' => $percentage, 'upgrade_downgrade' => $upgrade_downgrade]);
-                    session()->flash('success', 'Server Location created successfully!');
+                    // session()->flash('success', 'Server Location created successfully!');
                     return response()->json([
                         'success' => 'Server Location successfully!',
                         'title' => 'Server Location',
@@ -112,7 +112,7 @@ class ServerLocationController extends Controller
 
                     $billing->update(['base_country' => $base_country, 'amount' => $amount, 'currency' => $currency, 'server_location_country' => $server_location_country, 'percentage' => $percentage, 'upgrade_downgrade' => $upgrade_downgrade]);
 
-                    session()->flash('success', 'Server Location Updated successfully!');
+                    // session()->flash('success', 'Server Location Updated successfully!');
                     return response()->json([
                         'success' => 'Server Location updated successfully!',
                         'title' => 'Server Location',
