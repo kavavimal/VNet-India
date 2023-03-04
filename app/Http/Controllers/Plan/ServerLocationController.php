@@ -37,10 +37,10 @@ class ServerLocationController extends Controller
                     [
                         // 'billing_name' => 'required',
                         'base_country' => 'required|not_in:0',
-                        'amount' => 'required',
+                        'amount' => 'required|numeric',
                         'currency' => 'required',
                         'server_location_country' => 'required|not_in:0',
-                        'percentage' => 'required',
+                        'percentage' => 'required|numeric',
                         'upgrade_downgrade' => 'required',
                     ],
                     $message = [
