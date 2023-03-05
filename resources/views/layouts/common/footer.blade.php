@@ -2,7 +2,7 @@
 <div class="flex-grow-1"></div>
 <div class="app-footer">
     <div class="row">
-        <div class="col-md-6"><p><strong>Vnet India 2023 All rights reserved</strong></p></div>
+        <div class="col-md-6"><p><strong>Vnet India 2023 All Rights Reserved</strong></p></div>
         <div class="col-md-6">
             <p class="text-right"><strong>Powred By <a href="https://www.infinitysoftech.co/">Infinity Softech</a></strong></p>
         </div>                
