@@ -23,7 +23,7 @@
                     @if(count($bilingCycle) > 0)
                         @foreach ($bilingCycle as $list)
                             @include('pages.plan.billingCycle.billingCycleItem')
-                        @endforeach                
+                        @endforeach
                     @endif
                 </tbody>
             </table>

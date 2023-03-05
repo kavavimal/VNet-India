@@ -289,33 +289,60 @@
                     if (data && data.id > 0){
                         if ($('#type').val() === 'add') {
                             var rows = $(`<tr id='planPricing-` + data.id + `'><td>
-                                    <input class='plan_pricing_check_box'
-                                    type='checkbox'
-                                    value='`+data.id+`'
-                                    id='plan_pricing_check_box-`+data.id+`'
-                                    name='plan_pricing_check_box[]'
+                                <input class='plan_pricing_check_box'
+                                type='checkbox'
+                                value='`+data.id+`'
+                                id='plan_pricing_check_box-`+data.id+`'
+                                name='plan_pricing_check_box[]'
                                 /></td><td>` +
-                                data.storage + "</td><td>" +
-                                data.storage_price + "</td><td>" +
-                                data.billing_cycle + "</td><td>" +
-                                data.server + "</td><td>" +
-                                data.window_server + "</td><td>" +
-                                data.upgrade_downgrade + "</td><td>" +
-                                data.price + "</td><td>" +
-                                "<button type='button' class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1' data-id='` + data.id + `'data-storage='` + data.storage + `'data-storage_price='` + data.storage_price + `'data-billing_cycle='` + data.billing_cycle + `'data-server='` + data.server + `'data-window_server='` +data.window_server + `'data-upgrade_downgrade='` +data.upgrade_downgrade + `'data-price='` + data.price + `'data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `'data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
+                                data.storage + `</td><td>` +
+                                data.storage_price + `</td><td>` +
+                                data.billing_cycle + `</td><td>` +
+                                data.server + `</td><td>` +
+                                data.window_server + `</td><td>` +
+                                data.upgrade_downgrade + `</td><td>` +
+                                data.price + `</td><td>` +
+                                `<button type='button'
+                                class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1'
+                                data-id=`+data.id+`
+                                data-storage=`+data.storage+`
+                                data-storage_price=`+data.storage_price+`
+                                data-billing_cycle=`+data.billing_cycle+`
+                                data-server=`+data.server+`
+                                data-window_server=`+data.window_server+`
+                                data-upgrade_downgrade=`+data.upgrade_downgrade+`
+                                data-price=`+data.price+`
+                                data-toggle='modal' title='Edit'>
+                                <i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>` + `</td></tr>`);
                             $('.plan_price_list_tbl_view').append(rows);
                         }
                         else {
-                            var rows2 = $("<tr id='planPricing-" + data.id + "'><td>" +
-                                data.id + "</td><td>" +
-                                data.storage + "</td><td>" +
-                                data.storage_price + "</td><td>" +
-                                data.billing_cycle + "</td><td>" +
-                                data.server + "</td><td>" +
-                                data.window_server + "</td><td>" +
-                                data.upgrade_downgrade + "</td><td>" +
-                                data.price + "</td><td>" +
-                                "<button type='button' class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1' data-id='` + data.id + `'data-storage='` + data.storage + `'data-storage_price='` + data.storage_price + `'data-billing_cycle='` + data.billing_cycle + `'data-server='` + data.server + `'data-window_server='` +data.window_server + `'data-upgrade_downgrade='` +data.upgrade_downgrade + `'data-price='` + data.price + `'data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `'data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
+                            var rows2 = $(`<tr id='planPricing-` + data.id + `'><td>
+                                <input class='plan_pricing_check_box'
+                                type='checkbox'
+                                value='`+data.id+`'
+                                id='plan_pricing_check_box-`+data.id+`'
+                                name='plan_pricing_check_box[]'
+                                /></td><td>` +
+                                data.storage + `</td><td>` +
+                                data.storage_price + `</td><td>` +
+                                data.billing_cycle + `</td><td>` +
+                                data.server + `</td><td>` +
+                                data.window_server + `</td><td>` +
+                                data.upgrade_downgrade + `</td><td>` +
+                                data.price + `</td><td>` +
+                                `<button type='button'
+                                class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1'
+                                data-id=`+data.id+`
+                                data-storage=`+data.storage+`
+                                data-storage_price=`+data.storage_price+`
+                                data-billing_cycle=`+data.billing_cycle+`
+                                data-server=`+data.server+`
+                                data-window_server=`+data.window_server+`
+                                data-upgrade_downgrade=`+data.upgrade_downgrade+`
+                                data-price=`+data.price+`
+                                data-toggle='modal' title='Edit'>
+                                <i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `' data-name='` + data.base_country + `' data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>` + `</td></tr>`);
                             $('.plan_price_list_tbl_view').find('#planPricing-' + data.id).replaceWith(rows2);
                         }
                     }                                  
