@@ -53,6 +53,15 @@
                     <div class="triangle"></div>
                 </li>
             @endcan           
+            @can('user-plan-tab-show')
+                <li class="nav-item {{ request()->is('userPlan*') ? 'active' : '' }}">
+                    <a class="nav-item-hold" href="{{ route('user-plan-index') }}">
+                        <i class="nav-icon i-Data-Cloud"></i>
+                        <span class="nav-text">User Plans</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+            @endcan           
         </ul>
     </div>
 

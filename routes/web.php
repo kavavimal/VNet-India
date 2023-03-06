@@ -21,7 +21,7 @@ use App\Http\Controllers\ProfileSettings\ProfileSettingsController;
 use App\Http\Controllers\PurchaseOrder\PurchaseOrderController;
 use App\Http\Controllers\Invoice\InvoiceController;
 use App\Http\Controllers\Plan\FeaturedSubCategoryController;
-use Dcblogdev\Xero\Facades\Xero;
+use App\Http\Controllers\UserPlan\UserPlanController;
 use App\Http\Controllers\Settings\SettingsController;
 
 /*
@@ -116,4 +116,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/planpricing/store',[PlanPricingController::class,'store'])->name('planpricing-store');
     Route::post('/planpricing/delete',[PlanPricingController::class,'remove'])->name('planpricing-delete');
     Route::post('/planpricing/planBillingStore',[PlanPricingController::class,'planBillingStore'])->name('plan-billing-store');    
+
+
+    // User Plan Module
+    Route::get('/userPlan',[UserPlanController::class,'index'])->name('user-plan-index');
+    Route::post('/userPlan/store',[UserPlanController::class,'store'])->name('user-plan-store');
+    Route::get('/userPlan/edit/{id}', [UserPlanController::class, 'edit'])->name('user-plan-edit');
+    Route::get('/userPlan/delete/{id}', [UserPlanController::class, 'remove'])->name('user-plan-delete');
+    Route::get('/userPlan/getByCategoryId/{id}', [UserPlanController::class, 'getByCategoryId'])->name('user-plan-getByCategoryId');
+
 });
