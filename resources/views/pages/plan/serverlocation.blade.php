@@ -69,7 +69,7 @@
             </tbody>
         </table>
         </div>
-        <button class="expand_collapse_table">Expand List</button>
+        <button class="expand_collapse_table btn btn-primary">Expand List</button>
         <div class="text-right">
             <button type="button" class="btn btn-primary" id="serverlocation-add">
                 <i class="nav-icon i-add"></i> Add

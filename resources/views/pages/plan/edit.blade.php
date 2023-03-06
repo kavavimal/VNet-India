@@ -94,27 +94,30 @@
             <div class="col-md-12 mt-4">
                 @include('pages.plan.serverlocation')
             </div>
-            <div class="col-md-12 mt-3">@include('pages.plan.planButtons')</div>
-            <div class="col-md-4 mt-4">
+            <div class="col-md-12 mt-3">
+                @include('pages.plan.planButtons')
+            </div>
+            <div class="col-md-6 mt-4">
                 @include('pages.plan.servicetype')
-            </div>    
-                  
-            <div class="col-md-4 mt-4">
+            </div>                      
+            <div class="col-md-6 mt-4">
                 @include('pages.plan.totalPrice')                
             </div>            
-            <div class="col-md-8 mt-4">
+            <div class="col-md-6 mt-4">
                 @include('pages.plan.billingList')
             </div>
-            <div class="col-md-4 mt-4">
-                @include('pages.plan.negotiation')
-            </div>                                  
-            <div class="col-md-4 mt-4">
+            <div class="col-md-6 mt-4">
                 @include('pages.plan.tax')                
             </div> 
             <div class="col-md-4 mt-4">
                 @include('pages.plan.amountCalc')
             </div>  
-                                                     
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.finalTotalAfterTax')
+            </div>  
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.negotiation')
+            </div>                                                                 
         </div>
     </form>
 @else

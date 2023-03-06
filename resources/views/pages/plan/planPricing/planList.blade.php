@@ -61,7 +61,7 @@
             </tbody>
         </table>
         <div class="plan_list_wrap"></div>
-        <button class="expand_collapse_table">Expand List</button>
+        <button class="expand_collapse_table btn btn-primary">Expand List</button>
         <div class="text-right">
             <!-- <a href="javascript:void(0);" class="btn btn-primary add_plan_fields"><i class="nav-icon i-add"></i> Add</a>         -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-md-plan-list">
