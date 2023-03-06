@@ -15,6 +15,7 @@
 
     $(document).on('change', '.section_show_status', function () {
         console.log('change', $(this).is(":checked"));
+        
     });
 
 
