@@ -1,6 +1,9 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="mb-3">Specification</h4>
+        <h4 class="mb-3 d-inline-block">Specification</h4>
+        <div class="float-right">
+            @include('pages.common.plan-section-switch', array("switch_name"=> 'show_specification_status', "switch_id" => "show_specification_status", "status" => $plan_sections_statuses['section_specification']))
+        </div>
         <div class="specification_list_wrap">
         <!-- <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="host_website">

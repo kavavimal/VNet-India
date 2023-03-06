@@ -1,13 +1,16 @@
 <div class="card">
-    <div class="card-body">
-        <h4 class="mb-3">Server Location</h4>
+    <div class="card-body table_wrap">
+        <h4 class="mb-3 d-inline-block">Server Location</h4>
+        <div class="float-right">
+            @include('pages.common.plan-section-switch', array("switch_name"=> 'show_server_location_status', "switch_id" => "show_server_location_status", "status" => 0))
+        </div>
         <div class="server_location_list_wrap">
-        <table class="table table-hover">
+        <table class="table table-hover collapsible">
             <thead>
                 <th></th>
                 <th>Base Country</th>
-                <th>Amount</th>
-                <th>Updated Amount</th>
+                <th>Base Amount</th>
+                <th>Allocate Country Amount</th>
                 <th>Currency</th>
                 <th>Server Location Country</th>
                 <th>Percentage</th>
@@ -66,6 +69,7 @@
             </tbody>
         </table>
         </div>
+        <button class="expand_collapse_table">Expand List</button>
         <div class="text-right">
             <button type="button" class="btn btn-primary" id="serverlocation-add">
                 <i class="nav-icon i-add"></i> Add

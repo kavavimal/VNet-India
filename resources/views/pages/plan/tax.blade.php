@@ -1,6 +1,9 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="mb-3">Taxation</h4>
+        <h4 class="mb-3 d-inline-block">Taxation</h4>
+        <div class="float-right">
+            @include('pages.common.plan-section-switch', array("switch_name"=> 'show_taxation_status', "switch_id" => "show_taxation_status", "status" => 0))
+        </div>
         <div class="tax_list_wrap">
             @if(count($tax) > 0)
                 @foreach ($tax as $list)

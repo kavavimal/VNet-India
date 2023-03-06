@@ -634,6 +634,7 @@ class ComposerStaticInitf4212e78d4c43c0e15e4db85cc971426
         'App\\Models\\Plan' => __DIR__ . '/../..' . '/app/Models/Plan.php',
         'App\\Models\\PlanPlanBillingCycle' => __DIR__ . '/../..' . '/app/Models/PlanPlanBillingCycle.php',
         'App\\Models\\PlanPricing' => __DIR__ . '/../..' . '/app/Models/PlanPricing.php',
+        'App\\Models\\PlanSectionsStatus' => __DIR__ . '/../..' . '/app/Models/PlanSectionsStatus.php',
         'App\\Models\\ServerLocation' => __DIR__ . '/../..' . '/app/Models/ServerLocation.php',
         'App\\Models\\Settings' => __DIR__ . '/../..' . '/app/Models/Settings.php',
         'App\\Models\\Specification' => __DIR__ . '/../..' . '/app/Models/Specification.php',

@@ -1,6 +1,9 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="mb-3">Featured Category</h4>
+        <h4 class="mb-3 d-inline-block">Featured Category</h4>
+        <div class="float-right">
+            @include('pages.common.plan-section-switch', array("switch_name"=> 'show_featured_cat_status', "switch_id" => "show_featured_cat_status", "status" => 0))
+        </div>
         <div class="featuredCategory_list_wrap">
             @if(count($featuredCategory) > 0)
                 @foreach ($featuredCategory as $featured_cat)

@@ -11,7 +11,36 @@
         else if($(this).not(':checked')){           
             $(this).val('1');
         }
-    });        
+    });
+
+    $(document).on('change', '.section_show_status', function () {
+        console.log('change', $(this).is(":checked"));
+    });
+
+
+    function initCollapsible() {
+        let tablewrap = $('.table_wrap');
+        let table = $('.table_wrap table');
+        if ($(table).hasClass('collapsible')){
+            $(table).addClass('collapsed');
+            $(table).find('tbody').addClass('d-none');
+        }
+    }
+    
+    $(document).on('click', ".expand_collapse_table", function(e) {
+        e.preventDefault();
+        let table = $(this).closest('.table_wrap').find('table');
+        if($(table).hasClass('collapsed')){
+            $(table).removeClass('collapsed');
+            $(table).find('tbody').removeClass('d-none');
+            $(this).text('Collapse Table');
+        } else {
+            $(table).addClass('collapsed');
+            $(table).find('tbody').addClass('d-none');
+            $(this).text('Expand Table');
+
+        }
+    })
 
     $(".erp-plan-submit").submit(function(e) {
         e.preventDefault();
@@ -99,6 +128,7 @@
         });
     });   
     $(document).ready(function(){
+        initCollapsible();
         var price_plan = 0;
         $('input[name="plan_pricing_check_box[]"]:checked').each(function() {
             price_plan += parseInt($(this).parent().siblings('.total_price').text());
