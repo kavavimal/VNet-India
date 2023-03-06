@@ -30,7 +30,7 @@
                 <li class="nav-item {{ request()->is('plan*') ? 'active' : '' }}">
                     <a class="nav-item-hold" href="{{ route('plan-index') }}">
                         <i class="nav-icon i-Plane"></i>
-                        <span class="nav-text">Plans</span>
+                        <span class="nav-text">Plan Bucket</span>
                     </a>
                     <div class="triangle"></div>
                 </li>
@@ -49,6 +49,15 @@
                     <a class="nav-item-hold" href="{{ route('roles.index') }}">
                         <i class="nav-icon i-Add-UserStar"></i>
                         <span class="nav-text">Roles</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+            @endcan           
+            @can('user-plan-tab-show')
+                <li class="nav-item {{ request()->is('userPlan*') ? 'active' : '' }}">
+                    <a class="nav-item-hold" href="{{ route('user-plan-index') }}">
+                        <i class="nav-icon i-Data-Cloud"></i>
+                        <span class="nav-text">User Plans</span>
                     </a>
                     <div class="triangle"></div>
                 </li>

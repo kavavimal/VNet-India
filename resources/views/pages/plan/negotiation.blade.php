@@ -2,12 +2,7 @@
     <div class="card-body">
         <h4 class="mb-3 d-inline-block">Negotiation</h4>
         <div class="float-right">
-            <label class="switch switch-primary mr-3">
-                <span>Enable/Disable</span>
-                <?php $checked='checked'; ?>
-                <input type="checkbox" name="negotiation_status" id="negotiation_status" value="1" @if($plan->negotiation_status == 0){{$checked}}@endif>
-                <span class="slider"></span>
-            </label>
+            @include('pages.common.plan-section-switch', array("switch_name"=> 'show_negotiation_status', "switch_id" => "show_negotiation_status", "status" => 1))
         </div>
         <div class="negotiation_list_wrap">
             <div class="row">

@@ -3,6 +3,7 @@ namespace App\helper;
 use Illuminate\Http\Request;
 use App\Models\ContactsCountryEnum;
 use App\Models\PlanPlanBillingCycle;
+use App\Models\PlanSectionsStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Validator;
 class helper
@@ -30,6 +31,15 @@ class helper
     public static function PlanPlanBillingCycleAll()
     {
         return PlanPlanBillingCycle::all();
+    }
+    public static function getPlanSectionsStatus()
+    {
+        $sections = PlanSectionsStatus::where('sys_state','!=','-1')->get();
+        $data = [];
+        foreach ($sections as $section) {
+            $data[$section->section_name] = $section->status;
+        }
+        return $data;
     }
 }
 

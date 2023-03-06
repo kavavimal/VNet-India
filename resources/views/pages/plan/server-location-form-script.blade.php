@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="amount">Amount</label>
+                                <label for="amount">Base Amount</label>
                                 <input type="text" name="amount" id="amount" class="form-control">
                                 <div class="error" style="color:red;" id="amount_error"></div>
                             </div>
@@ -131,10 +131,10 @@
             let final_amount = amount * percent / 100;
             if (upgrade_downgrade === 'upgrade') {
                 let am = parseInt(amount) + parseInt(final_amount)
-                $('#final_amount').html('Updated Amount: ' + am);
+                $('#final_amount').html('Allocate Country Amount: ' + am);
             } else if (upgrade_downgrade === 'downgrade') {
                 let am = parseInt(amount) - parseInt(final_amount)
-                $('#final_amount').html('Updated Amount: ' + am);
+                $('#final_amount').html('Allocate Country Amount: ' + am);
             }else if(upgrade_downgrade === 'none'){
                 $('#final_amount').html('');
             }
@@ -168,7 +168,7 @@
                 currency: $('#currency').val(),
                 server_location_country: $('#server_location_country').val(),
                 percentage: $('#percentage').val(),
-                upgrade_downgrade: $('.upgrade_downgrade').val(),
+                upgrade_downgrade: $('.plan-server-location-submit select[name=upgrade_downgrade]').val(),
             },
             dataType: 'json',
             success: function(response) {

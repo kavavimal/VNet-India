@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Vnet | Plan</title>
+    <title>Vnet | User Plan</title>
 @endsection
 @section('page-css')
     <link rel="stylesheet" href="{{asset('assets/styles/vendor/datatables.min.css')}}">
@@ -16,13 +16,8 @@
 @section('main-content')
 <div class="breadcrumb">
     <div class="col-sm-12 col-md-6">
-        <h4><a href="{{route('dashboard')}}">Vnet</a> | Plan Bucket </h4>
+        <h4><a href="{{route('dashboard')}}">Vnet</a> | User Plan </h4>
     </div>
-    @can('plan-create')
-        <div class="col-sm-12 col-md-6">
-            <a href="{{route('plan-edit','new')}}" class="btn btn-primary btn-sm" style="float: right !important;">Create Plan</a>
-        </div>
-    @endcan
 </div>
 <div class="separator-breadcrumb border-top"></div>
 <div class="row mb-4">
@@ -51,8 +46,13 @@
                         </div>
                     </div>
                     <div class="col-md-4 form-group mt-3">
-                        <button class="btn btn-primary" type="button" id="apply_plan_filter">Filter</button>
-                    </div>
+                        <div class="d-flex">
+                            <button class="btn btn-primary btn-sm mr-4" type="button" id="apply_plan_filter">Filter</button>
+                            @can('user-plan-create')
+                                <a href="{{route('plan-edit','new')}}" class="btn btn-primary btn-sm" style="float: right !important;">Create Plan</a>
+                            @endcan
+                        </div>                        
+                    </div>              
                 </div>
             </form>
             </div>
