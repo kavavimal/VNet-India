@@ -29,12 +29,7 @@
 <div class="breadcrumb">
     <div class="col-sm-12 col-md-12">
         <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('plan-index')}}">Plan</a> | Plan {{ $plan ? 'Edit: '.$plan->plan_name : 'New'}} </a>
-        <a href="{{route('plan-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
-        <div class="btn-group dropdown float-right">
-            <button type="submit" class="btn btn-outline-primary erp-plan-form">
-                Save
-            </button>
-        </div>
+        @include('pages.plan.planButtons')
     </div>
 </div>
 <h4 class="heading-color">Plan</h4>
@@ -72,12 +67,14 @@
             </div>
             <div class="col-md-12">
                 @include('pages.plan.planPricing.planList')
+                @include('pages.plan.planButtons')
             </div>
             <div class="col-md-6">
                 @include('pages.plan.specificationsList')
             </div>
             <div class="col-md-6">
                 @include('pages.plan.featuredcategoryList')
+               
             </div>
             @if($featuredCategorysSelected != '')
                 @foreach ($featuredCategory as $featured_cat)
@@ -92,28 +89,32 @@
                 @endforeach
             @endif            
         </div>
+        <div class="row"><div class="col-md-12 mt-3">@include('pages.plan.planButtons')</div></div>
         <div class="row">
             <div class="col-md-12 mt-4">
                 @include('pages.plan.serverlocation')
             </div>
+            <div class="col-md-12 mt-3">@include('pages.plan.planButtons')</div>
             <div class="col-md-4 mt-4">
                 @include('pages.plan.servicetype')
             </div>    
-            <div class="col-md-4 mt-4">
-                @include('pages.plan.amountCalc')
-            </div>        
+                  
             <div class="col-md-4 mt-4">
                 @include('pages.plan.totalPrice')                
             </div>            
-            <div class="col-md-6 mt-4">
+            <div class="col-md-8 mt-4">
                 @include('pages.plan.billingList')
-            </div>                                                    
-            <div class="col-md-3 mt-4">
+            </div>
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.negotiation')
+            </div>                                  
+            <div class="col-md-4 mt-4">
                 @include('pages.plan.tax')                
             </div> 
-            <div class="col-md-3 mt-4">
-                @include('pages.plan.negotiation')
-            </div>                                           
+            <div class="col-md-4 mt-4">
+                @include('pages.plan.amountCalc')
+            </div>  
+                                                     
         </div>
     </form>
 @else
@@ -152,12 +153,7 @@
         </div>
     </form>
 @endif
-<a href="{{route('plan-index')}}" class="btn btn-outline-primary ml-2 float-right">Cancel</a>
-<div class="btn-group dropdown float-right">
-    <button type="submit" class="btn btn-outline-primary erp-plan-form">
-        Save
-    </button>
-</div>
+@include('pages.plan.planButtons')
 @endsection
 @section('page-js')
 <script src="{{asset('assets/js/carousel.script.js')}}"></script>

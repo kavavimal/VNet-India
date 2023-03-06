@@ -51,6 +51,7 @@ return array(
     'App\\Models\\Plan' => $baseDir . '/app/Models/Plan.php',
     'App\\Models\\PlanPlanBillingCycle' => $baseDir . '/app/Models/PlanPlanBillingCycle.php',
     'App\\Models\\PlanPricing' => $baseDir . '/app/Models/PlanPricing.php',
+    'App\\Models\\PlanSectionsStatus' => $baseDir . '/app/Models/PlanSectionsStatus.php',
     'App\\Models\\ServerLocation' => $baseDir . '/app/Models/ServerLocation.php',
     'App\\Models\\Settings' => $baseDir . '/app/Models/Settings.php',
     'App\\Models\\Specification' => $baseDir . '/app/Models/Specification.php',

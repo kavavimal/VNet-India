@@ -16,7 +16,7 @@
 @section('main-content')
 <div class="breadcrumb">
     <div class="col-sm-12 col-md-6">
-        <h4><a href="{{route('dashboard')}}">Vnet</a> | Plan </h4>
+        <h4><a href="{{route('dashboard')}}">Vnet</a> | Plan Bucket </h4>
     </div>
     @can('plan-create')
         <div class="col-sm-12 col-md-6">

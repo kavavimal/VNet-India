@@ -1,7 +1,7 @@
 <div class="card mb-4">
-    <div class="card-body">
+    <div class="card-body table_wrap">
         <h4 class="mb-3" id="prod_name_to_display"></h4>
-        <table class="table table-hover">
+        <table class="table table-hover collapsible">
             <thead>
                 <th></th>
                 <th>Storage in GB</th>
@@ -61,6 +61,7 @@
             </tbody>
         </table>
         <div class="plan_list_wrap"></div>
+        <button class="expand_collapse_table">Expand List</button>
         <div class="text-right">
             <!-- <a href="javascript:void(0);" class="btn btn-primary add_plan_fields"><i class="nav-icon i-add"></i> Add</a>         -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-md-plan-list">

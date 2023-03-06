@@ -14,9 +14,9 @@
                     <div class="row align-items-center">                       
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="storage">Storage</label>
+                                <label for="storage">Storage (GB)</label>
                                 <input type="number" name="storage" id="storage" class="form-control">
-                                <p>GB</p>
+                                <!-- <p>GB</p> -->
                                 <div class="error" style="color:red;" id="storage_error"></div>
                             </div>
                         </div>
@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <label for="storage_price">Storage Price</label>
                                 <input type="number" name="storage_price" id="storage_price" class="form-control">
-                                <p>Per GB</p>
+                                <!-- <p>Per GB</p> -->
                                 <div class="error" style="color:red;" id="storage_price_error"></div>
                             </div>
                         </div>

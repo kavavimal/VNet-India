@@ -12,6 +12,7 @@ use App\Models\FeaturedCategory;
 use App\Models\BilingCycle;
 use App\Models\ServerLocation;
 use App\Models\PlanPricing;
+use App\Models\PlanSectionsStatus;
 use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -38,9 +39,10 @@ class PlanController extends Controller
     public function index()
     {
         $plan = Plan::where('sys_state','!=','-1')->orderBy('id','desc')->get();
+        $plan_sections_statuses = PlanSectionsStatus::where('sys_state','!=','-1')->get();
         $category_list = Category::where('sys_state','!=','-1')->get();
         $submenu = [];
-        return view('pages.plan.index', compact('plan','category_list','submenu'));
+        return view('pages.plan.index', compact('plan','category_list','submenu','plan_sections_statuses'));
     }
 
     public function getByCategoryId($id){
@@ -69,6 +71,9 @@ class PlanController extends Controller
         $featuredCategorysSelected = (!empty($plan->featured_category)) ? explode(',', $plan->featured_category) : '';
         $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
         $taxationSelected = (!empty($plan->taxation)) ? explode(',', $plan->taxation) : '';
+        
+        $plan_sections_statuses = PlanSectionStatus::getPlanSectionsStatus();
+                
         $specifications = '';
         $bilingCycle = '';
         $featuredCategory = '';
@@ -100,8 +105,18 @@ class PlanController extends Controller
             'server_locations',
             'plan_pricing',
             'planPricingSelected',
+            'plan_sections_statuses'
         ));
     }
+
+    // public function getPlanSectionsStatus(){
+    //     $sections = PlanSectionsStatus::get();
+    //     $data = [];
+    //     foreach ($sections as $section) {
+    //         $data[$section->section_name] = $section->status;
+    //     }
+    //     return $data;
+    // }
 
     public function store(Request $request){
         if($request->ajax()){
