@@ -153,8 +153,8 @@ class SubMenuController extends Controller
         $featuredCategorysSelected = (!empty($plan->featured_category)) ? explode(',', $plan->featured_category) : '';
         $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
         $taxationSelected = (!empty($plan->taxation)) ? explode(',', $plan->taxation) : '';
-               
-        $plan_sections_statuses = helper::getPlanSectionsStatus();
+        $serverlocationSelected = (!empty($plan->server_location)) ? explode(',', $plan->server_location) : '';
+        $plan_sections_statuses = helper::getPlanSectionsStatus(true);
                 
         $specifications = '';
         $bilingCycle = '';
@@ -185,6 +185,7 @@ class SubMenuController extends Controller
             'featuredCategorysSelected',
             'featuredSubCategorySelected',
             'taxationSelected',
+            'serverlocationSelected',
             'server_locations',
             'plan_pricing',
             'planPricingSelected',
@@ -201,6 +202,7 @@ class SubMenuController extends Controller
         $specification = $request->specification;
         $featuredCategory = $request->featuredCategory;
         $featuredSubCategory = $request->featuredSubCategory;
+        $serverlocations = $request->serverlocations;
         $negotiation_min = 0;
         $negotiation_max = 0;
         $negotiation_status = 0;
@@ -222,6 +224,7 @@ class SubMenuController extends Controller
                 'featured_sub_category'=>$featuredSubCategory,
                 'negotiation_min'=>$negotiation_min,
                 'negotiation_max'=>$negotiation_max,
+                'server_location'=>$serverlocations,
                 'negotiation_status'=>$negotiation_status,
                 'service_type_type'=>$service_type_type,
                 'service_type_price'=>$service_type_price,
@@ -248,6 +251,7 @@ class SubMenuController extends Controller
                 'featured_sub_category'=>$featuredSubCategory,
                 'negotiation_min'=>$negotiation_min,
                 'negotiation_max'=>$negotiation_max,
+                'server_location'=>$serverlocations,
                 'negotiation_status'=>$negotiation_status,
                 'service_type_type'=>$service_type_type,
                 'service_type_price'=>$service_type_price,

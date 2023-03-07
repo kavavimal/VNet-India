@@ -20,6 +20,7 @@ class SubMenSpecification extends Model
         'featured_sub_category',
         'plan_pricing',
         'taxation',
+        'server_location',
         'negotiation_min',
         'negotiation_max',
         'negotiation_status',

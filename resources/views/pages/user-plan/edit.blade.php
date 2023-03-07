@@ -66,20 +66,19 @@
                 </div>
             </div>
             <div class="col-md-12">
-                @include('pages.plan.planPricing.planList')
-                @include('pages.plan.planButtons')
+                @include('pages.user-plan.planPricing.planList')
+                @include('pages.user-plan.planButtons')
             </div>
             <div class="col-md-6">
-                @include('pages.plan.specificationsList')
+                @include('pages.user-plan.specificationsList')
             </div>
             <div class="col-md-6">
-                @include('pages.plan.featuredcategoryList')
-               
-            </div>
+                @include('pages.user-plan.featuredcategoryList')
+            </div>            
             @if($featuredCategorysSelected != '')
                 @foreach ($featuredCategory as $featured_cat)
                     @if (in_array($featured_cat->id, $featuredCategorysSelected))
-                        @include('pages.plan.featuredSubCat.featuredCatBlock', [
+                        @include('pages.user-plan.featuredSubCat.featuredCatBlock', [
                             'id' => $featured_cat->id,
                             'name' => $featured_cat->featured_cat_name,
                             'items' => $featured_cat->children,
@@ -87,36 +86,37 @@
                         ])
                     @endif
                 @endforeach
-            @endif            
+            @endif
+                        
         </div>
-        <div class="row"><div class="col-md-12 mt-3">@include('pages.plan.planButtons')</div></div>
+        <div class="row"><div class="col-md-12 mt-3">@include('pages.user-plan.planButtons')</div></div>
         <div class="row">
             <div class="col-md-12 mt-4">
-                @include('pages.plan.serverlocation')
+                @include('pages.user-plan.serverlocation')
             </div>
             <div class="col-md-12 mt-3">
-                @include('pages.plan.planButtons')
+                @include('pages.user-plan.planButtons')
             </div>
             <div class="col-md-6 mt-4">
-                @include('pages.plan.servicetype')
+                @include('pages.user-plan.servicetype')
             </div>                      
             <div class="col-md-6 mt-4">
-                @include('pages.plan.totalPrice')                
+                @include('pages.user-plan.totalPrice')                
             </div>            
             <div class="col-md-6 mt-4">
-                @include('pages.plan.billingList')
+                @include('pages.user-plan.billingList')
             </div>
             <div class="col-md-6 mt-4">
-                @include('pages.plan.tax')                
+                @include('pages.user-plan.tax')                
             </div> 
             <div class="col-md-4 mt-4">
-                @include('pages.plan.amountCalc')
+                @include('pages.user-plan.amountCalc')
             </div>  
             <div class="col-md-4 mt-4">
-                @include('pages.plan.finalTotalAfterTax')
+                @include('pages.user-plan.finalTotalAfterTax')
             </div>  
             <div class="col-md-4 mt-4">
-                @include('pages.plan.negotiation')
+                @include('pages.user-plan.negotiation')
             </div>                                                                 
         </div>
     </form>
@@ -156,18 +156,12 @@
         </div>
     </form>
 @endif
-@include('pages.plan.planButtons')
+@include('pages.user-plan.planButtons')
 @endsection
 @section('page-js')
 <script src="{{asset('assets/js/carousel.script.js')}}"></script>
 @endsection
 @section('bottom-js')
-    @include('pages.user-plan.form-script')
-    @include('pages.plan.specification-form-script')
-    @include('pages.plan.featuredCategory-form-script')
-    @include('pages.plan.featuredSubCat.featuredSubCategory-script')
-    @include('pages.plan.billing-form-script')
-    @include('pages.plan.planPricing.plan-form-script')
-    @include('pages.plan.server-location-form-script')
-    @include('pages.plan.tax-form-script')    
+    @include('pages.user-plan.form-script')  
+    @include('pages.user-plan.tax-form-script')  
 @endsection
