@@ -96,4 +96,10 @@ class SpecificationController extends Controller
             ], Response::HTTP_OK);
         }
     }
+
+    public function getsubmenus(Request $request)
+    {
+        $speciDataBysubmenu = Specification::where('sub_menu_id', $request->id)->get();
+        return $speciDataBysubmenu;
+    }
 }
