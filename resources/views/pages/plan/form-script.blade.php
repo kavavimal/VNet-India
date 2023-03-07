@@ -156,20 +156,30 @@
                 }
             }
         });
-    });   
-    $(document).ready(function(){
-        initCollapsible();
+    });
+    function refreshTotalPrice () {
         var price_plan = 0;
         $('input[name="plan_pricing_check_box[]"]:checked').each(function() {
             price_plan += parseInt($(this).parent().siblings('.total_price').text());
         });
         var service_type_price = parseInt($("#service_type_price").val());
         var total = price_plan + service_type_price;
-        // var discount = parseInt($("#service_type_discount").val());
-        // var final_total_remove = total * discount / 100;
-        // var fianl_total = total - final_total_remove;
         $("#servive_type_total").val(total);
         $(".first_year_info .default_amount").text(total);
         $("#billing_amount").val(total);
+
+        // Final amount after tax
+        var discount = parseInt($("#service_type_discount").val());
+        var final_total_remove = total * discount / 100;
+        var final_total = total - final_total_remove;
+
+        $('#after_tax_servive_type_total').val(final_total)
+    }
+    $(document).on('change','#service_type_price,#service_type_discount', function(){
+        refreshTotalPrice();
+    })
+    $(document).ready(function(){
+        initCollapsible();
+        refreshTotalPrice();
     });
 </script>
