@@ -136,11 +136,11 @@
         });
         var service_type_price = parseInt($("#service_type_price").val());
         var total = price_plan + service_type_price;
-        var discount = parseInt($("#service_type_discount").val());
-        var final_total_remove = total * discount / 100;
-        var fianl_total = total - final_total_remove;
-        $("#servive_type_total").val(fianl_total);
-        $(".first_year_info .default_amount").text(fianl_total);
-        $("#billing_amount").val(fianl_total);
+        // var discount = parseInt($("#service_type_discount").val());
+        // var final_total_remove = total * discount / 100;
+        // var fianl_total = total - final_total_remove;
+        $("#servive_type_total").val(total);
+        $(".first_year_info .default_amount").text(total);
+        $("#billing_amount").val(total);
     });
 </script>

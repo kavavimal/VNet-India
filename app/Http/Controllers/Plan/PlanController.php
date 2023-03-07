@@ -72,7 +72,8 @@ class PlanController extends Controller
         $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
         $taxationSelected = (!empty($plan->taxation)) ? explode(',', $plan->taxation) : '';
         
-        $plan_sections_statuses = PlanSectionStatus::getPlanSectionsStatus();
+        // $plan_sections_statuses = PlanSectionStatus::getPlanSectionsStatus();
+        $plan_sections_statuses = helper::getPlanSectionsStatus();
                 
         $specifications = '';
         $bilingCycle = '';
