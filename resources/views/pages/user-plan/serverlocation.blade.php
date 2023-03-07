@@ -14,7 +14,7 @@
                 <th>Upgrade/ Downgrade</th>
             </thead>
             <tbody class="server_location_list_tbl_view">
-                @if(isset($server_locations) && count($server_locations) > 0) 
+                @if($server_locations != '') 
                     @foreach ($server_locations as $locationItem)
                         <tr id="serverlocation-{{$locationItem->id}}">
                             <td><input

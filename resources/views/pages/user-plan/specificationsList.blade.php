@@ -2,7 +2,7 @@
     <div class="card-body">
         <h4 class="mb-3 d-inline-block">Specification</h4>        
         <div class="specification_list_wrap">        
-        @if(count($specifications) > 0)
+        @if($specifications != '')
             @foreach ($specifications as $spec)
                 <div class="form-check" id="spec-{{$spec->id}}">
                     <input

@@ -17,7 +17,7 @@
                 @can('submenu-delete')
                 <a class="dropdown-item" href="{{route('submenu-delete',$list->id)}}"><i class="nav-icon i-Close-Window font-weight-bold" aria-hidden="true"> </i> Delete</a>
                 @endcan
-                <a class="dropdown-item" href="{{route('specification-edit',$list->id)}}"><i class="nav-icon i-Add font-weight-bold" aria-hidden="true"> </i> Add Specifications</a>
+                <a class="dropdown-item" href="{{route('specification-edit',$list->id)}}"><i class="nav-icon i-Add font-weight-bold" aria-hidden="true"> </i> Add Configuration</a>
             </div>
         </td>
     </tr>
