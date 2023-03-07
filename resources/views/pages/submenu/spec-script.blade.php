@@ -64,10 +64,11 @@
         $("input:checkbox[name='billing_cycle[]']:checked").each(function(){
             billing_cycle.push($(this).val());
         })
-        let taxation = [];
-        $("input:checkbox[name='taxation[]']:checked").each(function(){
-            taxation.push($(this).val());
-        })
+        // let taxation = [];
+        // $("input:checkbox[name='taxation[]']:checked").each(function(){
+        //     taxation.push($(this).val());
+        // })
+        let taxation = $("[name='taxation']").val();
         let specification = [];
         $("input:checkbox[name='specification[]']:checked").each(function(){
             specification.push($(this).val());
@@ -80,7 +81,10 @@
         $("input:checkbox[name='featuredSubCategory[]']:checked").each(function(){
             featuredSubCategory.push($(this).val());
         });
-
+        let serverlocations = [];
+        $("input:checkbox[name='serverlocations[]']:checked").each(function(){
+            serverlocations.push($(this).val());
+        });
         let planPricing = [];
         $("input:checkbox[name='plan_pricing_check_box[]']:checked").each(function(){
             planPricing.push($(this).val());
@@ -97,7 +101,8 @@
                 planName: $('#planName').val(),
                 billing_cycle: billing_cycle.join(','),
                 planPricing: planPricing.join(','),
-                taxation: taxation.join(','),
+                serverlocations: serverlocations.join(','),
+                taxation: taxation,
                 specification: specification.join(','),
                 featuredCategory: featuredCategory.join(','),
                 featuredSubCategory: featuredSubCategory.join(','),

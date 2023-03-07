@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\PlanSectionsStatus;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Models\Specification;
+use App\Models\FeaturedCategory;
+use App\Models\FeaturedSubCategory;
 
 class PlanSectionsStatusController extends Controller
 {
@@ -64,6 +67,40 @@ class PlanSectionsStatusController extends Controller
                 } else {
                     return response()->json(['error'=>$validator->getMessageBag()->toArray()]);
                 }
+            }
+        }
+    }
+
+    public function updateRecord(Request $request){
+        if($request->ajax()){
+            $validator = Validator::make($request->all(), [
+                'section_name' => 'required',
+            ],
+            $message = [
+                'section_name.required' => 'The Section Name Is Required.',
+            ]);
+            if ($validator->passes() && $request->id != "0" && $request->id != ""){
+                $id = $request->id;
+                $status = $request->status ? '1' : '0';
+                $section = $request->section_name;
+                $model = '';
+                if ($section == 'specification') {
+                    $model = new Specification();
+                } else if ($section == 'feature_category'){
+                    $model = new FeaturedCategory();
+                } else if ($section == 'featured_sub_category') {
+                    $model = new FeaturedSubCategory();
+                }
+                
+                $model->where('id',$id)->update(['show_status' => $status]);
+                return response()->json([
+                    'success' => 'Plan '.$section.' updated successfully!',
+                    'title' => $section,
+                    'type' => 'Update',
+                    'data' => $model
+                ]);
+            } else {
+                return response()->json(['error'=>$validator->getMessageBag()->toArray()]);
             }
         }
     }

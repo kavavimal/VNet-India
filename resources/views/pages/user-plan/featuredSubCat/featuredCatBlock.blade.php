@@ -5,7 +5,7 @@
             <div class="sub-category-items-wrap">
                 @if(count($items) > 0)
                     @foreach ($items as $cat)
-                        @include('pages.plan.featuredSubCat.catItemCheckbox', ['id' => $cat->id, 'name' => $cat->name, 'show_status' => $cat->show_status])
+                        @include('pages.plan.featuredSubCat.catItemCheckbox', ['id' => $cat->id, 'name' => $cat->name])
                     @endforeach
                 @endif
             </div>

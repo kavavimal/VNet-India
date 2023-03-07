@@ -90,7 +90,7 @@ class PlanController extends Controller
         $product_list = SubMenu::where('sys_state','!=','-1')->get();
         $server_locations = ServerLocation::where('sys_state','!=','-1')->get();
         $plan_pricing = PlanPricing::where('sys_state','!=','-1')->get();
-
+        $serverlocationSelected ='';
         return view('pages.plan.edit', compact(
             'plan',
             'specifications',
@@ -102,6 +102,7 @@ class PlanController extends Controller
             'specificationsSelected',
             'featuredCategorysSelected',
             'featuredSubCategorySelected',
+            'serverlocationSelected',
             'taxationSelected',
             'server_locations',
             'plan_pricing',

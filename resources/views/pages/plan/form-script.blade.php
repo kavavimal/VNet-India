@@ -34,13 +34,45 @@
             }
         });
     }
-
+    
     $(document).on('change', '.section_show_status', function () {
         let checkbox = $(this);
         let id = $(this).attr('data-id');
         let section_name = $(this).attr('name');
         let new_status = $(this).is(":checked");
         updatePlanSectionShowStatus(section_name, new_status, id, (response) => {
+            $(checkbox).attr('data-id', response.data.id);
+        });
+    });
+    
+    function updatePlanSectionRecordShowStatus(section, newStatus, id = '', cb = null) {
+        $.ajax({
+            url: "{{route('plansection-record-status-store')}}",
+            type: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                id: id,
+                section_name: section,
+                status: newStatus ? 1 : 0,
+            },
+            dataType: 'json',
+            success: function(response) {                
+                if (response.success) {
+                    if (cb && cb != null) {
+                        cb(response);
+                    }
+                } else if (response.error) {
+                }
+            }
+        });
+    }
+    $(document).on('change', '.section_record_show_status', function () {
+        let checkbox = $(this);
+        let id = $(this).attr('data-id');
+        let section_table = $(this).attr('data-section');
+        let section_name = $(this).attr('name');
+        let new_status = $(this).is(":checked");
+        updatePlanSectionRecordShowStatus(section_table, new_status, id, (response) => {
             $(checkbox).attr('data-id', response.data.id);
         });
     });
@@ -156,20 +188,30 @@
                 }
             }
         });
-    });   
-    $(document).ready(function(){
-        initCollapsible();
+    });
+    function refreshTotalPrice () {
         var price_plan = 0;
         $('input[name="plan_pricing_check_box[]"]:checked').each(function() {
             price_plan += parseInt($(this).parent().siblings('.total_price').text());
         });
         var service_type_price = parseInt($("#service_type_price").val());
         var total = price_plan + service_type_price;
-        // var discount = parseInt($("#service_type_discount").val());
-        // var final_total_remove = total * discount / 100;
-        // var fianl_total = total - final_total_remove;
         $("#servive_type_total").val(total);
         $(".first_year_info .default_amount").text(total);
         $("#billing_amount").val(total);
+
+        // Final amount after tax
+        var discount = parseInt($("#service_type_discount").val());
+        var final_total_remove = total * discount / 100;
+        var final_total = total - final_total_remove;
+
+        $('#after_tax_servive_type_total').val(final_total)
+    }
+    $(document).on('change','#service_type_price,#service_type_discount', function(){
+        refreshTotalPrice();
+    })
+    $(document).ready(function(){
+        initCollapsible();
+        refreshTotalPrice();
     });
 </script>

@@ -72,18 +72,6 @@
         // let taxPer = $('#taxation').is(':selected').attr('data-tax');
         let billing_cycle = [];
         $('.taxation_billing_list_wrap').find('table tbody').empty();
-        let billing_table_body = $('.billing_price_table');
-        let first_billing_amount = $(billing_table_body).find('.first_year_info .default_amount').html();
-        let first_itemTax = parseFloat(first_billing_amount) * taxPer / 100;
-        let first_finalAmount =  parseFloat(first_billing_amount) + parseFloat(first_itemTax);
-        let firstitem = `<tr class="first_year_info">
-                <td>1 Year</td>
-                <td class="tax_default_amount">`+first_billing_amount+`</td>
-                <td>`+first_itemTax+`</td>
-                <td>`+first_finalAmount+`</td>
-            </tr>`;
-
-        $('.taxation_billing_list_wrap').find('table tbody').append(firstitem);
         $("input:checkbox[name='billing_cycle[]']:checked").each(function(){
             let selectedid = $(this).val();
             let selectedName = $(this).attr('data-name');
@@ -133,7 +121,7 @@
                     let data = response.data;
                     if (data && data.id > 0)
                     if($('#type').val() === 'add'){
-                        $('.tax_list_wrap').find('#taxation').append(`<option data-id="`+data.id+`" data-tax="`+data.tax_percentage+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
+                        $('.tax_list_wrap').find('#taxation').append(`<option data-id="`+data.id+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
                         // $('.tax_list_wrap').append(`
                         //     <div class="form-check" id="tax-`+data.id+`">
                         //         <input class="form-check-input tax" type="checkbox" value="` + data.id + `" id="taxation-` + data.id + `" name="taxation[]">
@@ -143,7 +131,7 @@
                         //     </div>
                         // `);
                     } else {
-                        $('.tax_list_wrap').find('#taxation').find("[data-id='"+data.id+"']").replaceWith(`<option data-id="`+data.id+`" data-tax="`+data.tax_percentage+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
+                        $('.tax_list_wrap').find('#taxation').find("[data-id='"+data.id+"']").replaceWith(`<option data-id="`+data.id+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
                         // $('.tax_list_wrap').find('#tax-'+data.id).replaceWith(`
                         //     <div class="form-check" id="tax-`+data.id+`">
                         //         <input class="form-check-input tax" type="checkbox" value="` + data.id + `" id="taxation-` + data.id + `" name="taxation[]">

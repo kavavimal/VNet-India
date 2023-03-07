@@ -11,6 +11,7 @@ use App\Models\Specification;
 use App\Models\FeaturedCategory;
 use App\Models\BilingCycle;
 use App\Models\ServerLocation;
+use App\Models\SubMenSpecification;
 use App\Models\PlanPricing;
 use App\Models\Tax;
 use Illuminate\Http\Request;
@@ -73,22 +74,38 @@ class UserPlanController extends Controller
         $bilingCycle = '';
         $featuredCategory = '';
         $tax = '';        
-        if(!empty($plan)){
+        if(!empty($plan)){             
+            $menu_specificatoin = SubMenSpecification::where('id',$plan->plan_product_id)->get()->first();
             
-            $menu_id = SubMenu::where('id',$plan->plan_product_id)->where('sys_state','!=','-1')->get()->pluck('category_id')->first();
+            $plan_pricing_id = explode(",",$menu_specificatoin['plan_pricingids']);
+            $plan_pricing = PlanPricing::where('sys_state','!=','-1')->whereIn('id', $plan_pricing_id)->get();            
             
-            $specifications = Specification::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('spec_name','desc')->get();
-            $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->with('children')->orderBy('featured_cat_name','desc')->get();
-            $bilingCycle = BilingCycle::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('billing_name','desc')->get();
-            $tax = Tax::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->get();
+            $specifications_id = explode(",",$menu_specificatoin['specification']);
+            $specifications = Specification::whereIn('id',$specifications_id)->where('sys_state','!=','-1')->orderBy('spec_name','desc')->get();
+
+            $featuredCategory_id = explode(",",$menu_specificatoin['featured_category']);
+            $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->whereIn('id',$featuredCategory_id)->with('children')->orderBy('featured_cat_name','desc')->get();
+            
+            $bilingCycle_id = explode(",",$menu_specificatoin['billing_cycles']);
+            $bilingCycle = BilingCycle::where('sys_state','!=','-1')->whereIn('id',$bilingCycle_id)->orderBy('billing_name','desc')->get();
+
+            $tax_id = explode(",",$menu_specificatoin['taxation']);
+            $tax = Tax::where('sys_state','!=','-1')->whereIn('id',$tax_id)->get();
+
+            $server_locations_id = explode(",",$menu_specificatoin['server_location']);            
+            $server_locations = ServerLocation::where('sys_state','!=','-1')->whereIn('id',$server_locations_id)->get();
+                        
+            $support = $menu_specificatoin['service_type_type'];
+            $support_price = $menu_specificatoin['service_type_price'];
+
         }
-        $product_list = SubMenu::where('sys_state','!=','-1')->get();
-        $server_locations = ServerLocation::where('sys_state','!=','-1')->get();
-        $plan_pricing = PlanPricing::where('sys_state','!=','-1')->get();
+        $product_list = SubMenu::where('sys_state','!=','-1')->get();        
         $plan_sections_statuses = helper::getPlanSectionsStatus(true);
 
         return view('pages.user-plan.edit', compact(
             'plan',
+            'support_price',
+            'support',
             'specifications',
             'product_list',
             'featuredCategory',
