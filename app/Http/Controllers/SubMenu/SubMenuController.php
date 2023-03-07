@@ -251,7 +251,7 @@ class SubMenuController extends Controller
                 'featured_sub_category'=>$featuredSubCategory,
                 'negotiation_min'=>$negotiation_min,
                 'negotiation_max'=>$negotiation_max,
-                'server_location'=>$serverlocations,
+                'server_location'=> '',
                 'negotiation_status'=>$negotiation_status,
                 'service_type_type'=>$service_type_type,
                 'service_type_price'=>$service_type_price,
