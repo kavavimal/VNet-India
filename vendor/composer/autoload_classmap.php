@@ -57,6 +57,7 @@ return array(
     'App\\Models\\ServerLocation' => $baseDir . '/app/Models/ServerLocation.php',
     'App\\Models\\Settings' => $baseDir . '/app/Models/Settings.php',
     'App\\Models\\Specification' => $baseDir . '/app/Models/Specification.php',
+    'App\\Models\\SubMenSpecification' => $baseDir . '/app/Models/SubMenSpecification.php',
     'App\\Models\\SubMenu' => $baseDir . '/app/Models/SubMenu.php',
     'App\\Models\\Tax' => $baseDir . '/app/Models/Tax.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

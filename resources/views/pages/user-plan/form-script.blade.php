@@ -1,7 +1,7 @@
 <script>
-    $(document).on("click", ".erp-spec-plan-form", function() {
+    $(document).on("click", ".erp-user-plan-form", function() {
         $("#preloader").show();
-        $(".erp-spec-plan-submit").submit();
+        $(".erp-user-plan-submit").submit();
     });
 
     $(document).on('change', "input[name='negotiation_status']", function() {        
@@ -14,7 +14,8 @@
     });
 
     $(document).on('change', '.section_show_status', function () {
-        console.log('change', $(this).is(":checked"));        
+        console.log('change', $(this).is(":checked"));
+        
     });
 
 
@@ -42,7 +43,7 @@
         }
     })
 
-    $(".erp-spec-plan-submit").submit(function(e) {
+    $(".erp-user-plan-submit").submit(function(e) {
         e.preventDefault();
 
         var submit_url = $(this).attr("data-url");
@@ -92,7 +93,6 @@
             data: {
                 "_token": "{{ csrf_token() }}",
                 id: $('#plan_id').val(),
-                plan_id_update: $('#plan_id_update').val(),
                 product_id: $('#product_id').val(),
                 planName: $('#planName').val(),
                 billing_cycle: billing_cycle.join(','),
@@ -121,7 +121,8 @@
                         location.reload();
                     }
                 } else if (response.error) {
-                    $("#preloader").hide();                    
+                    $("#preloader").hide();
+                    response.error['planName'] ? $('#plan_name_error').text(response.error['planName']) : $('#plan_name_error').text('');
                     response.error['product_id'] ? $('#product_id_error').text(response.error['product_id']) : $('#product_id_error').text('');
                 }
             }

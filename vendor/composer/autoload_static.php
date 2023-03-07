@@ -640,6 +640,7 @@ class ComposerStaticInitf4212e78d4c43c0e15e4db85cc971426
         'App\\Models\\ServerLocation' => __DIR__ . '/../..' . '/app/Models/ServerLocation.php',
         'App\\Models\\Settings' => __DIR__ . '/../..' . '/app/Models/Settings.php',
         'App\\Models\\Specification' => __DIR__ . '/../..' . '/app/Models/Specification.php',
+        'App\\Models\\SubMenSpecification' => __DIR__ . '/../..' . '/app/Models/SubMenSpecification.php',
         'App\\Models\\SubMenu' => __DIR__ . '/../..' . '/app/Models/SubMenu.php',
         'App\\Models\\Tax' => __DIR__ . '/../..' . '/app/Models/Tax.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',

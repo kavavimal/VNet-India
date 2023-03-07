@@ -80,7 +80,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/submenu/delete/{id}', [SubMenuController::class, 'remove'])->name('submenu-delete');
     Route::get('/submenu/getByMenuId/{id}/{type?}', [SubMenuController::class, 'getByMenuId'])->name('getByMenuId');
     Route::get('/submenu/editspecification/{id}', [SubMenuController::class, 'editspecification'])->name('specification-edit');
-    Route::get('/submenu/storespecification', [SubMenuController::class, 'storespecification'])->name('specification-plan-store');
+    Route::post('/submenu/storespecification', [SubMenuController::class, 'storespecification'])->name('specification-plan-store');
     
     //Plan Module
     Route::get('/plan',[PlanController::class,'index'])->name('plan-index');
