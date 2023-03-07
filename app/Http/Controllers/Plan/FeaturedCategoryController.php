@@ -48,7 +48,11 @@ class FeaturedCategoryController extends Controller
                         'title' => 'Featured Category',
                         'type' => 'create',
                         'data' => $featuredCategorySave,
-                        'html' => view('pages.plan.featuredCat.catItemCheckbox', ['id' => $featuredCategorySave->id, 'featured_cat_name' => $featuredCategorySave->featured_cat_name])->render()
+                        'html' => view('pages.plan.featuredCat.catItemCheckbox', [
+                            'id' => $featuredCategorySave->id, 
+                            'featured_cat_name' => $featuredCategorySave->featured_cat_name,
+                            'show_status' => $featuredCategorySave->show_status,
+                        ])->render()
                     ], Response::HTTP_OK);
                 }
                 else{

@@ -14,7 +14,8 @@
                     @include('pages.plan.featuredCat.catItemCheckbox', [
                         'id' => $featured_cat->id, 
                         'featured_cat_name' => $featured_cat->featured_cat_name,
-                        'featuredCategorysSelected' => $featuredCategorysSelected
+                        'featuredCategorysSelected' => $featuredCategorysSelected,
+                        'show_status' => $featured_cat->show_status,
                         ])
                 @endforeach
             @endif
