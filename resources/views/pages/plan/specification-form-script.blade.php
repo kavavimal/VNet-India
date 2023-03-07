@@ -154,4 +154,33 @@
         $('#spec_id_delete').val($(this).attr('data-id'));
         $('#spec_delete_modal').modal('show');
     });
+
+    // on submenu selection
+    $(document).on("change", "#product_id",function(e) {
+        var selectedItem = e.target.value;
+        var submit_url = $(this).attr("data-url");
+        $.ajax({
+            url: submit_url,
+            type: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                id: selectedItem,
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response){
+                    for (var i = 0; i < response.length; i++) {
+                        $('.specification_list_wrap').append(`
+                            <div class="form-check" id="spec-`+response[i].id+`">
+                                <input class="form-check-input" type="checkbox" value="` + i.id + `" id="` + response[i].id + `" name="specification[]">
+                                <label class="form-check-label" for="` + response[i].id + `">`+response[i].spec_name+`</label>
+                                <button type="button" class="btn btn-outline-primary btn-sm edit-item" data-id="`+response[i].id+`" data-name="`+response[i].spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
+                                <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+response[i].id+`" data-name="`+response[i].spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
+                            </div>
+                        `);
+                    }
+                }
+            }
+        });
+    });
 </script>
