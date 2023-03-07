@@ -11,10 +11,10 @@
                     <span class="_dot _inline-dot"></span>
                 </button>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 34px, 0px);">
-                @can('user-plan-edit')
+                @can('plan-edit')
                     <a class="dropdown-item" href="{{route('user-plan-edit',$list->id)}}"><i class="nav-icon i-Pen-2 font-weight-bold" aria-hidden="true"> </i> Edit</a>
                 @endcan                                        
-                @can('user-plan-delete')
+                @can('plan-delete')
                     <a class="dropdown-item" href="{{route('user-plan-delete',$list->id)}}"><i class="nav-icon i-Close-Window font-weight-bold" aria-hidden="true"> </i> Delete</a>
                 @endcan
                 </div>
