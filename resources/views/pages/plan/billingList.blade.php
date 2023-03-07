@@ -2,7 +2,7 @@
     <div class="card-body">
         <h4 class="mb-3">Billing Cycle Price</h4>
         <div class="billing_list_wrap">
-            <table class="table table-hover">
+            <table class="table table-sm table-hover table-responsive">
                 <thead>
                     <th>#</th>
                     <th>Name</th>

@@ -74,7 +74,9 @@ class UserPlanController extends Controller
         $featuredCategory = '';
         $tax = '';        
         if(!empty($plan)){
-                        
+            
+            $menu_id = SubMenu::where('id',$plan->plan_product_id)->where('sys_state','!=','-1')->get()->pluck('category_id')->first();
+            
             $specifications = Specification::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('spec_name','desc')->get();
             $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->with('children')->orderBy('featured_cat_name','desc')->get();
             $bilingCycle = BilingCycle::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('billing_name','desc')->get();
@@ -83,7 +85,7 @@ class UserPlanController extends Controller
         $product_list = SubMenu::where('sys_state','!=','-1')->get();
         $server_locations = ServerLocation::where('sys_state','!=','-1')->get();
         $plan_pricing = PlanPricing::where('sys_state','!=','-1')->get();
-        $plan_sections_statuses = helper::getPlanSectionsStatus();
+        $plan_sections_statuses = helper::getPlanSectionsStatus(true);
 
         return view('pages.user-plan.edit', compact(
             'plan',

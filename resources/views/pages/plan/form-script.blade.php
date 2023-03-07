@@ -91,10 +91,13 @@
         $("input:checkbox[name='billing_cycle[]']:checked").each(function(){
             billing_cycle.push($(this).val());
         })
-        let taxation = [];
-        $("input:checkbox[name='taxation[]']:checked").each(function(){
-            taxation.push($(this).val());
-        })
+        // let taxation = [];
+        // $("input:checkbox[name='taxation[]']:checked").each(function(){
+        //     taxation.push($(this).val());
+        // })
+        // taxation = taxation.join(',')
+        let taxation = $("[name='taxation']").val();
+
         let specification = [];
         $("input:checkbox[name='specification[]']:checked").each(function(){
             specification.push($(this).val());
@@ -123,7 +126,7 @@
                 planName: $('#planName').val(),
                 billing_cycle: billing_cycle.join(','),
                 planPricing: planPricing.join(','),
-                taxation: taxation.join(','),
+                taxation: taxation,
                 specification: specification.join(','),
                 featuredCategory: featuredCategory.join(','),
                 featuredSubCategory: featuredSubCategory.join(','),
