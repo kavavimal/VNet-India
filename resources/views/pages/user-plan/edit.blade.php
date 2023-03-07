@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Vnet | Specifications | {{$plan->id ?? 'New'}}</title>
+    <title>Vnet | Plan | {{$plan->plan_name ?? 'New'}}</title>
 @endsection
 @section('page-css')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -28,21 +28,21 @@
 @section('main-content')
 <div class="breadcrumb">
     <div class="col-sm-12 col-md-12">
-        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('submenu-index')}}">SubMenu</a> | Specifications {{ $plan ? 'Edit: '.$plan->id : 'New'}} </a>
-        @include('pages.submenu.specButtons')
+        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('user-plan-index')}}">Plan</a> | Plan {{ $plan ? 'Edit: '.$plan->plan_name : 'New'}} </a>
+        @include('pages.user-plan.planButtons')
     </div>
 </div>
-<h4 class="heading-color">Specifications</h4>
+<h4 class="heading-color">Plan</h4>
 @if($plan)
-    <form class="erp-spec-plan-submit" data-url="{{route('specification-plan-store')}}">
-        <input type="hidden" id="plan_id_update" class="plan_id_update" name="id" value="{{ $plan->id ?? '' }}" />
+    <form class="erp-user-plan-submit" data-url="{{route('user-plan-store')}}">
+        <input type="hidden" id="plan_id" class="plan_id" name="id" value="{{ $plan->id ?? '' }}" />
         <div class="row featured-sub-cat-wrap">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card mt-4 mb-4">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="fname">Select Sub Menu</label>
-                            <select class="form-control select2"  id="product_id" name="product_id" disabled>
+                            <select class="form-control select2"  id="product_id" name="product_id">
                                 <option value="0">Select Sub Menu</option>
                                 @foreach($product_list as $value)
                                 <?php $prodSelect = ''; if ($value->id == $plan->plan_product_id) {$prodSelect = 'selected';} else {$prodSelect = '';}?>
@@ -54,21 +54,31 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="card mt-4 mb-4">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="fname">Plan Name</label>
+                            <input class="form-control" id="planName" name="planName" type="text" value="{{ $plan->plan_name ?? '' }}">
+                            <div class="error" style="color:red;" id="name_error"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-12">
-                @include('pages.plan.planPricing.planList')
-                @include('pages.submenu.specButtons')
+                @include('pages.user-plan.planPricing.planList')
+                @include('pages.user-plan.planButtons')
             </div>
             <div class="col-md-6">
-                @include('pages.plan.specificationsList')
+                @include('pages.user-plan.specificationsList')
             </div>
             <div class="col-md-6">
-                @include('pages.plan.featuredcategoryList')
-               
-            </div>
+                @include('pages.user-plan.featuredcategoryList')
+            </div>            
             @if($featuredCategorysSelected != '')
                 @foreach ($featuredCategory as $featured_cat)
                     @if (in_array($featured_cat->id, $featuredCategorysSelected))
-                        @include('pages.plan.featuredSubCat.featuredCatBlock', [
+                        @include('pages.user-plan.featuredSubCat.featuredCatBlock', [
                             'id' => $featured_cat->id,
                             'name' => $featured_cat->featured_cat_name,
                             'items' => $featured_cat->children,
@@ -76,53 +86,53 @@
                         ])
                     @endif
                 @endforeach
-            @endif            
+            @endif
+                        
         </div>
-        <div class="row"><div class="col-md-12 mt-3">@include('pages.submenu.specButtons')</div></div>
+        <div class="row"><div class="col-md-12 mt-3">@include('pages.user-plan.planButtons')</div></div>
         <div class="row">
             <div class="col-md-12 mt-4">
-                @include('pages.plan.serverlocation')
+                @include('pages.user-plan.serverlocation')
             </div>
             <div class="col-md-12 mt-3">
-                @include('pages.submenu.specButtons')
+                @include('pages.user-plan.planButtons')
             </div>
             <div class="col-md-6 mt-4">
-                @include('pages.plan.servicetype')
+                @include('pages.user-plan.servicetype')
             </div>                      
             <div class="col-md-6 mt-4">
-                @include('pages.plan.totalPrice')                
+                @include('pages.user-plan.totalPrice')                
             </div>            
             <div class="col-md-6 mt-4">
-                @include('pages.plan.billingList')
+                @include('pages.user-plan.billingList')
             </div>
             <div class="col-md-6 mt-4">
-                @include('pages.plan.tax')                
+                @include('pages.user-plan.tax')                
             </div> 
             <div class="col-md-4 mt-4">
-                @include('pages.plan.amountCalc')
+                @include('pages.user-plan.amountCalc')
             </div>  
             <div class="col-md-4 mt-4">
-                @include('pages.plan.finalTotalAfterTax')
+                @include('pages.user-plan.finalTotalAfterTax')
             </div>  
             <div class="col-md-4 mt-4">
-                @include('pages.plan.negotiation')
+                @include('pages.user-plan.negotiation')
             </div>                                                                 
         </div>
     </form>
 @else
-    <form class="erp-spec-plan-submit" data-url="{{route('specification-plan-store')}}">
-        <input type="hidden" id="plan_id" class="plan_id" name="pid" value="{{$submenuid}}" />
+    <form class="erp-user-plan-submit" data-url="{{route('user-plan-store')}}">
+        <input type="hidden" id="plan_id" class="plan_id" name="pid" value="0" />
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card mt-4 mb-4">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="fname">Select Sub Menu</label>
-                            <select class="form-control select2"  id="product_id" name="product_id" disabled>
+                            <select class="form-control select2"  id="product_id" name="product_id">
                                 <option value="0">Select Sub Menu</option>
                                 @foreach($product_list as $value)
-                                <?php $prodSelect = ''; if ($value->id == $submenuid) {$prodSelect = 'selected';} else {$prodSelect = '';}?>
-                                <option value="{{$value->id}}" {{$prodSelect}}>
+                                <option value="{{$value->id}}">
                                     {{ $value->submenu_name }}
                                 </option>
                                 @endforeach
@@ -132,21 +142,26 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="card mt-4 mb-4">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="fname">Plan Name</label>
+                            <input class="form-control" id="planName" name="planName" type="text">
+                            <div class="error" style="color:red;" id="plan_name_error"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 @endif
-@include('pages.submenu.specButtons')
+@include('pages.user-plan.planButtons')
 @endsection
 @section('page-js')
 <script src="{{asset('assets/js/carousel.script.js')}}"></script>
 @endsection
 @section('bottom-js')
-    @include('pages.submenu.spec-script')
-    @include('pages.plan.specification-form-script')
-    @include('pages.plan.featuredCategory-form-script')
-    @include('pages.plan.featuredSubCat.featuredSubCategory-script')
-    @include('pages.plan.billing-form-script')
-    @include('pages.plan.planPricing.plan-form-script')
-    @include('pages.plan.server-location-form-script')
-    @include('pages.plan.tax-form-script')    
+    @include('pages.user-plan.form-script')  
+    @include('pages.user-plan.tax-form-script')  
 @endsection

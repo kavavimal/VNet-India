@@ -1,7 +1,7 @@
 <script>
-    $(document).on("click", ".erp-spec-plan-form", function() {
+    $(document).on("click", ".erp-user-plan-form", function() {
         $("#preloader").show();
-        $(".erp-spec-plan-submit").submit();
+        $(".erp-user-plan-submit").submit();
     });
 
     $(document).on('change', "input[name='negotiation_status']", function() {        
@@ -14,7 +14,8 @@
     });
 
     $(document).on('change', '.section_show_status', function () {
-        console.log('change', $(this).is(":checked"));        
+        console.log('change', $(this).is(":checked"));
+        
     });
 
 
@@ -42,7 +43,7 @@
         }
     })
 
-    $(".erp-spec-plan-submit").submit(function(e) {
+    $(".erp-user-plan-submit").submit(function(e) {
         e.preventDefault();
 
         var submit_url = $(this).attr("data-url");
@@ -64,10 +65,6 @@
         $("input:checkbox[name='billing_cycle[]']:checked").each(function(){
             billing_cycle.push($(this).val());
         })
-        // let taxation = [];
-        // $("input:checkbox[name='taxation[]']:checked").each(function(){
-        //     taxation.push($(this).val());
-        // })
         let taxation = $("[name='taxation']").val();
         let specification = [];
         $("input:checkbox[name='specification[]']:checked").each(function(){
@@ -81,10 +78,7 @@
         $("input:checkbox[name='featuredSubCategory[]']:checked").each(function(){
             featuredSubCategory.push($(this).val());
         });
-        let serverlocations = [];
-        $("input:checkbox[name='serverlocations[]']:checked").each(function(){
-            serverlocations.push($(this).val());
-        });
+
         let planPricing = [];
         $("input:checkbox[name='plan_pricing_check_box[]']:checked").each(function(){
             planPricing.push($(this).val());
@@ -96,12 +90,10 @@
             data: {
                 "_token": "{{ csrf_token() }}",
                 id: $('#plan_id').val(),
-                plan_id_update: $('#plan_id_update').val(),
                 product_id: $('#product_id').val(),
                 planName: $('#planName').val(),
                 billing_cycle: billing_cycle.join(','),
                 planPricing: planPricing.join(','),
-                serverlocations: serverlocations.join(','),
                 taxation: taxation,
                 specification: specification.join(','),
                 featuredCategory: featuredCategory.join(','),
@@ -126,7 +118,8 @@
                         location.reload();
                     }
                 } else if (response.error) {
-                    $("#preloader").hide();                    
+                    $("#preloader").hide();
+                    response.error['planName'] ? $('#plan_name_error').text(response.error['planName']) : $('#plan_name_error').text('');
                     response.error['product_id'] ? $('#product_id_error').text(response.error['product_id']) : $('#product_id_error').text('');
                 }
             }

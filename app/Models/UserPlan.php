@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubMenSpecification extends Model
+class UserPlan extends Model
 {
     use HasFactory;
 
-    protected $table = "menu_specifications_tbl";
+    protected $table = "user_plan_tbl";
 
     protected $fillable = [     
-        'id',
+        'plan_name',
         'plan_product_id',
         'billing_cycles',
         'specification',
@@ -20,7 +20,6 @@ class SubMenSpecification extends Model
         'featured_sub_category',
         'plan_pricing',
         'taxation',
-        'server_location',
         'negotiation_min',
         'negotiation_max',
         'negotiation_status',
@@ -38,5 +37,4 @@ class SubMenSpecification extends Model
     public function submenu(){
         return $this->hasOne(SubMenu::class,'id','plan_product_id');
     }
-
 }

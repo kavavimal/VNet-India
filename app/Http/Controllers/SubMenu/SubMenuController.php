@@ -153,8 +153,8 @@ class SubMenuController extends Controller
         $featuredCategorysSelected = (!empty($plan->featured_category)) ? explode(',', $plan->featured_category) : '';
         $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
         $taxationSelected = (!empty($plan->taxation)) ? explode(',', $plan->taxation) : '';
-               
-        $plan_sections_statuses = helper::getPlanSectionsStatus();
+        $serverlocationSelected = (!empty($plan->server_location)) ? explode(',', $plan->server_location) : '';
+        $plan_sections_statuses = helper::getPlanSectionsStatus(true);
                 
         $specifications = '';
         $bilingCycle = '';
@@ -185,6 +185,7 @@ class SubMenuController extends Controller
             'featuredCategorysSelected',
             'featuredSubCategorySelected',
             'taxationSelected',
+            'serverlocationSelected',
             'server_locations',
             'plan_pricing',
             'planPricingSelected',
@@ -193,50 +194,79 @@ class SubMenuController extends Controller
     }
 
     public function storespecification(Request $request){
-               
-        $planName = $request->planName;
-        $product_id = $request->product_id;
-        
+        $planid = $request->id;
+        $product_id = $request->product_id;        
         $billingCycle = $request->billing_cycle;
         $planPricing = $request->planPricing;
         $taxation = $request->taxation;
         $specification = $request->specification;
         $featuredCategory = $request->featuredCategory;
         $featuredSubCategory = $request->featuredSubCategory;
-        $negotiation_min = $request->negotiation_min;
-        $negotiation_max = $request->negotiation_max;
-        $negotiation_status = $request->negotiation_status;
+        $serverlocations = $request->serverlocations;
+        $negotiation_min = 0;
+        $negotiation_max = 0;
+        $negotiation_status = 0;
         $service_type_type = $request->service_type_type;
         $service_type_price = $request->service_type_price;
         $servive_type_currency = $request->servive_type_currency;
         $service_type_renewal_price = $request->service_type_renewal_price;
         $service_type_discount = $request->service_type_discount;
 
-        $save_plan = SubMenSpecification::create([        
-            'plan_name'=>$planName,
-            'plan_product_id'=>$product_id,
-            'billing_cycles'=>$billingCycle,
-            'plan_pricingids'=>$planPricing,
-            'taxation'=>$taxation,
-            'specification'=>$specification,
-            'featured_category'=>$featuredCategory,
-            'featured_sub_category'=>$featuredSubCategory,
-            'negotiation_min'=>$negotiation_min,
-            'negotiation_max'=>$negotiation_max,
-            'negotiation_status'=>$negotiation_status,
-            'service_type_type'=>$service_type_type,
-            'service_type_price'=>$service_type_price,
-            'servive_type_currency'=>$servive_type_currency,
-            'service_type_renewal_price'=>$service_type_renewal_price,
-            'service_type_discount'=>$service_type_discount,
-        ]);
-        
-        session()->flash('success', 'Plan Updated successfully!');
-        return response()->json([
-            'success' => 'Plan updated successfully!',
-            'title' => 'Plan',
-            'type' => 'Update',
-        ]);
+        if($request->plan_id_update){
+            $plan = SubMenSpecification::find($request->plan_id_update);
+            $plan->update([                
+                'plan_product_id'=>$product_id,
+                'billing_cycles'=>$billingCycle,
+                'plan_pricingids'=>$planPricing,
+                'taxation'=>$taxation,
+                'specification'=>$specification,
+                'featured_category'=>$featuredCategory,
+                'featured_sub_category'=>$featuredSubCategory,
+                'negotiation_min'=>$negotiation_min,
+                'negotiation_max'=>$negotiation_max,
+                'server_location'=>$serverlocations,
+                'negotiation_status'=>$negotiation_status,
+                'service_type_type'=>$service_type_type,
+                'service_type_price'=>$service_type_price,
+                'servive_type_currency'=>$servive_type_currency,
+                'service_type_renewal_price'=>$service_type_renewal_price,
+                'service_type_discount'=>$service_type_discount,
+            ]);
+            session()->flash('success', 'Plan Specifications Update successfully!');
+            return response()->json([
+                'success' => 'Plan Specifications Update successfully!',
+                'title' => 'Plan',
+                'type' => 'Update',
+            ]);
+        }
+        else{            
+            $save_plan = SubMenSpecification::create([        
+                'id'=>$planid,
+                'plan_product_id'=>$product_id,
+                'billing_cycles'=>$billingCycle,
+                'plan_pricingids'=>$planPricing,
+                'taxation'=>$taxation,
+                'specification'=>$specification,
+                'featured_category'=>$featuredCategory,
+                'featured_sub_category'=>$featuredSubCategory,
+                'negotiation_min'=>$negotiation_min,
+                'negotiation_max'=>$negotiation_max,
+                'server_location'=>$serverlocations,
+                'negotiation_status'=>$negotiation_status,
+                'service_type_type'=>$service_type_type,
+                'service_type_price'=>$service_type_price,
+                'servive_type_currency'=>$servive_type_currency,
+                'service_type_renewal_price'=>$service_type_renewal_price,
+                'service_type_discount'=>$service_type_discount,
+            ]);
+            
+            session()->flash('success', 'Plan Specifications Saved successfully!');
+            return response()->json([
+                'success' => 'Plan Specifications Saved successfully!',
+                'title' => 'Plan',
+                'type' => 'Update',
+            ]);
+        }
     }
 
     public function remove($id)
