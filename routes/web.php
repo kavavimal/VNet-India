@@ -79,7 +79,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/submenu/edit/{id}', [SubMenuController::class, 'edit'])->name('submenu-edit');
     Route::get('/submenu/delete/{id}', [SubMenuController::class, 'remove'])->name('submenu-delete');
     Route::get('/submenu/getByMenuId/{id}/{type?}', [SubMenuController::class, 'getByMenuId'])->name('getByMenuId');
-    Route::get('/submenu/storespecification/{id}', [SubMenuController::class, 'storespecification'])->name('specification-edit');
+    Route::get('/submenu/editspecification/{id}', [SubMenuController::class, 'editspecification'])->name('specification-edit');
+    Route::get('/submenu/storespecification', [SubMenuController::class, 'storespecification'])->name('specification-plan-store');
     
     //Plan Module
     Route::get('/plan',[PlanController::class,'index'])->name('plan-index');

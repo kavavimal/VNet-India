@@ -6,8 +6,15 @@ use App\helper\helper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Category;
-use App\Models\SubMenu;
+use App\Models\Plan;
+use App\Models\Specification;
+use App\Models\FeaturedCategory;
+use App\Models\BilingCycle;
+use App\Models\ServerLocation;
+use App\Models\PlanPricing;
 use App\Models\SubMenSpecification;
+use App\Models\PlanSectionsStatus;
+use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Spatie\Permission\Models\Role;
 use DB;
 use Illuminate\Support\Arr;
+use App\Models\SubMenu;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -133,6 +141,55 @@ class SubMenuController extends Controller
                 }
             }
         }
+    }
+
+    public function editspecification($id)
+    {
+        $submenuid = $id;
+        $plan = SubMenSpecification::where('id',$id)->first();        
+        $billingCycleSelected = (!empty($plan->billing_cycles)) ? explode(',', $plan->billing_cycles) : '';
+        $planPricingSelected = (!empty($plan->plan_pricingids)) ? explode(',', $plan->plan_pricingids) : '';
+        $specificationsSelected = (!empty($plan->specification)) ? explode(',', $plan->specification) : '';
+        $featuredCategorysSelected = (!empty($plan->featured_category)) ? explode(',', $plan->featured_category) : '';
+        $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
+        $taxationSelected = (!empty($plan->taxation)) ? explode(',', $plan->taxation) : '';
+               
+        $plan_sections_statuses = helper::getPlanSectionsStatus();
+                
+        $specifications = '';
+        $bilingCycle = '';
+        $featuredCategory = '';
+        $tax = '';        
+        if(!empty($plan)){
+            $menu_id = SubMenu::where('id',$plan->plan_product_id)->where('sys_state','!=','-1')->get()->pluck('category_id')->first();
+            
+            $specifications = Specification::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('spec_name','desc')->get();
+            $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->with('children')->orderBy('featured_cat_name','desc')->get();
+            $bilingCycle = BilingCycle::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('billing_name','desc')->get();
+            $tax = Tax::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->get();
+        }
+        $product_list = SubMenu::where('sys_state','!=','-1')->get();
+        $server_locations = ServerLocation::where('sys_state','!=','-1')->get();
+        $plan_pricing = PlanPricing::where('sys_state','!=','-1')->get();
+
+        return view('pages.submenu.editspec', compact(
+            'submenuid',
+            'plan',
+            'specifications',
+            'product_list',
+            'featuredCategory',
+            'bilingCycle',
+            'tax',
+            'billingCycleSelected',
+            'specificationsSelected',
+            'featuredCategorysSelected',
+            'featuredSubCategorySelected',
+            'taxationSelected',
+            'server_locations',
+            'plan_pricing',
+            'planPricingSelected',
+            'plan_sections_statuses'
+        ));
     }
 
     public function storespecification(Request $request){
