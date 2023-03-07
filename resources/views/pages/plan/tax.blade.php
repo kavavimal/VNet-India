@@ -2,7 +2,11 @@
     <div class="card-body">
         <h4 class="mb-3 d-inline-block">Taxation</h4>
         <div class="float-right">
-            @include('pages.common.plan-section-switch', array("switch_name"=> 'show_taxation_status', "switch_id" => "show_taxation_status", "status" => 0))
+            @include('pages.common.plan-section-switch', array(
+                "switch_id_rec" => $plan_sections_statuses['section_taxation']->id,
+                "switch_name"=> 'section_taxation', 
+                "switch_id" => "section_taxation", 
+                "status" => $plan_sections_statuses['section_taxation']->status))
         </div>
         <div class="tax_list_wrap">
             @if(count($tax) > 0)

@@ -32,12 +32,12 @@ class helper
     {
         return PlanPlanBillingCycle::all();
     }
-    public static function getPlanSectionsStatus()
+    public static function getPlanSectionsStatus($fullRec = false)
     {
         $sections = PlanSectionsStatus::where('sys_state','!=','-1')->get();
         $data = [];
         foreach ($sections as $section) {
-            $data[$section->section_name] = $section->status;
+            $data[$section->section_name] = $fullRec ? $section : $section->status;
         }
         return $data;
     }

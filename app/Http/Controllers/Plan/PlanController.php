@@ -72,9 +72,9 @@ class PlanController extends Controller
         $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
         $taxationSelected = (!empty($plan->taxation)) ? explode(',', $plan->taxation) : '';
         
-        // $plan_sections_statuses = PlanSectionStatus::getPlanSectionsStatus();
-        $plan_sections_statuses = helper::getPlanSectionsStatus();
-                
+        // $plan_sections_statuses = PlanSectionsStatus::where('sys_state','!=','-1')->get();
+        $plan_sections_statuses = helper::getPlanSectionsStatus(true);
+        
         $specifications = '';
         $bilingCycle = '';
         $featuredCategory = '';
@@ -109,15 +109,6 @@ class PlanController extends Controller
             'plan_sections_statuses'
         ));
     }
-
-    // public function getPlanSectionsStatus(){
-    //     $sections = PlanSectionsStatus::get();
-    //     $data = [];
-    //     foreach ($sections as $section) {
-    //         $data[$section->section_name] = $section->status;
-    //     }
-    //     return $data;
-    // }
 
     public function store(Request $request){
         if($request->ajax()){

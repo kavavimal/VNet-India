@@ -18,6 +18,11 @@
     <div class="col-sm-12 col-md-6">
         <h4><a href="{{route('dashboard')}}">Vnet</a> | User Plan </h4>
     </div>
+    @can('user-plan-create')
+        <div class="col-sm-12 col-md-6">
+            <a href="{{route('user-plan-edit','new')}}" class="btn btn-primary btn-sm" style="float: right !important;">Create Plan</a>
+        </div>                                
+    @endcan
 </div>
 <div class="separator-breadcrumb border-top"></div>
 <div class="row mb-4">
@@ -47,10 +52,7 @@
                     </div>
                     <div class="col-md-4 form-group mt-3">
                         <div class="d-flex">
-                            <button class="btn btn-primary btn-sm mr-4" type="button" id="apply_plan_filter">Filter</button>
-                            @can('user-plan-create')
-                                <a href="{{route('plan-edit','new')}}" class="btn btn-primary btn-sm" style="float: right !important;">Create Plan</a>
-                            @endcan
+                            <button class="btn btn-primary btn-sm mr-4" type="button" id="apply_plan_filter">Filter</button>                           
                         </div>                        
                     </div>              
                 </div>
@@ -59,7 +61,7 @@
         </div>
         <div class="card text-left">
             <div class="card-body">
-                <h4 class="card-title mb-3">Plan    </h4>
+                <h4 class="card-title mb-3">User Plan</h4>
                 <div class="table-responsive">
                     <table id="plan_table" class="display table table-striped table-bordered" style="width:100%">
                         <thead>
