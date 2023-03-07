@@ -143,6 +143,7 @@
 
     // edit billing
     $(document).on("click", ".billing_list_wrap .edit-item-billing", function() {
+        $(this).closest('tr').find('input.billing_cycle').prop('checked', false).trigger('change');
         let id = $(this).attr('data-id');
         let name = $(this).attr('data-name');
         let amount = $(this).attr('data-amount');
@@ -185,7 +186,8 @@
         });
     });
     
-    $(document).on("click", ".billing_list_wrap .delete-item-billing", function() {        
+    $(document).on("click", ".billing_list_wrap .delete-item-billing", function() {
+        $(this).closest('tr').find('input.billing_cycle').prop('checked', false).trigger('change');
         $('#billing_name_show').text($(this).attr('data-name'));
         $('#billing_id_delete').val($(this).attr('data-id'));
         $('#billing_delete_modal').modal('show');

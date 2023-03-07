@@ -6,6 +6,8 @@
             value="{{$list->id}}"
             id="billing-cycle-{{$list->id}}"
             name="billing_cycle[]" 
+            data-name="{{$list->billing_name}}"
+            data-amount="{{$list->billing_amount}}"
             @if($billingCycleSelected != ''){{ in_array($list->id,$billingCycleSelected) ? 'checked="checked"' : '' }}@endif 
         />
     </td>
