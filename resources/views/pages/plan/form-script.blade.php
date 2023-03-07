@@ -13,11 +13,37 @@
         }
     });
 
-    $(document).on('change', '.section_show_status', function () {
-        console.log('change', $(this).is(":checked"));
-        
-    });
+    function updatePlanSectionShowStatus(section, newStatus, id = '', cb = null) {
+        $.ajax({
+            url: "{{route('plansection-status-store')}}",
+            type: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                id: id,
+                section_name: section,
+                status: newStatus ? 1 : 0,
+            },
+            dataType: 'json',
+            success: function(response) {                
+                if (response.success) {
+                    if (cb && cb != null) {
+                        cb(response);
+                    }
+                } else if (response.error) {
+                }
+            }
+        });
+    }
 
+    $(document).on('change', '.section_show_status', function () {
+        let checkbox = $(this);
+        let id = $(this).attr('data-id');
+        let section_name = $(this).attr('name');
+        let new_status = $(this).is(":checked");
+        updatePlanSectionShowStatus(section_name, new_status, id, (response) => {
+            $(checkbox).attr('data-id', response.data.id);
+        });
+    });
 
     function initCollapsible() {
         let tablewrap = $('.table_wrap');

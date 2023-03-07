@@ -2,7 +2,11 @@
     <div class="card-body table_wrap">
         <h4 class="mb-3 d-inline-block">Server Location</h4>
         <div class="float-right">
-            @include('pages.common.plan-section-switch', array("switch_name"=> 'show_server_location_status', "switch_id" => "show_server_location_status", "status" => 0))
+        @include('pages.common.plan-section-switch', array(
+                "switch_id_rec" => $plan_sections_statuses['section_server_location']->id,
+                "switch_name"=> 'section_server_location', 
+                "switch_id" => "section_server_location", 
+                "status" => $plan_sections_statuses['section_server_location']->status))
         </div>
         <div class="server_location_list_wrap">
         <table class="table table-hover collapsible">

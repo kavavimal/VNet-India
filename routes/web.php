@@ -23,6 +23,7 @@ use App\Http\Controllers\Invoice\InvoiceController;
 use App\Http\Controllers\Plan\FeaturedSubCategoryController;
 use App\Http\Controllers\UserPlan\UserPlanController;
 use App\Http\Controllers\Settings\SettingsController;
+use App\Http\Controllers\PlanSectionsStatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,5 +127,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/userPlan/edit/{id}', [UserPlanController::class, 'edit'])->name('user-plan-edit');
     Route::get('/userPlan/delete/{id}', [UserPlanController::class, 'remove'])->name('user-plan-delete');
     Route::get('/userPlan/getByCategoryId/{id}', [UserPlanController::class, 'getByCategoryId'])->name('user-plan-getByCategoryId');
+    
+    Route::post('/plansectionstatus/store',[PlanSectionsStatusController::class,'store'])->name('plansection-status-store');
 
 });
