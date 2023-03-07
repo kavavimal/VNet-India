@@ -129,5 +129,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/userPlan/getByCategoryId/{id}', [UserPlanController::class, 'getByCategoryId'])->name('user-plan-getByCategoryId');
     
     Route::post('/plansectionstatus/store',[PlanSectionsStatusController::class,'store'])->name('plansection-status-store');
+    Route::post('/plansectionstatus/updateRecord',[PlanSectionsStatusController::class,'updateRecord'])->name('plansection-record-status-store');
 
 });

@@ -58,7 +58,8 @@ class FeaturedSubCategoryController extends Controller
                         'data' => $CategorySave,
                         'html' => view('pages.plan.featuredSubCat.catItemCheckbox', [
                             'id' => $CategorySave->id,
-                            'name' => $CategorySave->name
+                            'name' => $CategorySave->name,
+                            'show_status' => $CategorySave->show_status,
                             ])->render()
                     ], Response::HTTP_OK);
                 } else {
