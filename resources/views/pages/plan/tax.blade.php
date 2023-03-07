@@ -9,28 +9,45 @@
                 "status" => $plan_sections_statuses['section_taxation']->status))
         </div>
         <div class="tax_list_wrap">
-            @if(count($tax) > 0)
-                @foreach ($tax as $list)
-                    <div class="form-check" id="tax-{{$list->id}}">
-                        <input 
-                            class="form-check-input tax"
-                            type="checkbox"
-                            value="{{$list->id}}"
-                            id="taxation-{{$list->id}}"
-                            name="taxation[]" 
-                            @if($taxationSelected != ''){{ in_array($list->id,$taxationSelected) ? 'checked="checked"' : '' }}@endif 
-                            />
-                        <label class="form-check-label mr-4 mb-2" for="taxation-{{$list->id}}">{{$list->tax_name.' - '.$list->tax_percentage.' %'}}</label>
-                        <button type="button" class="btn btn-outline-primary btn-sm edit-item-tax mr-1" data-id="{{$list->id}}" data-name="{{$list->tax_name}}" data-percentage="{{$list->tax_percentage}}" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                        <button type="button" class="btn btn-outline-primary btn-sm delete-item-tax" data-id="{{$list->id}}" data-name="{{$list->tax_name}}" data-percentage="{{$list->tax_percentage}}" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
+            <div class="form-group">
+                <div class="input-group">
+                    <select class="form-control" id="taxation" name="taxation">
+                        <option value="0">Select Tax</option>
+                        @foreach($tax as $tax_item)
+                            <option data-id="{{$tax_item->id}}" data-tax="{{$tax_item->tax_percentage}}" value="{{$tax_item->id}}" @if($taxationSelected != ''){{ in_array($tax_item->id,$taxationSelected) ? 'selected="selected"' : '' }}@endif >{{$tax_item->tax_name}} - {{$tax_item->tax_percentage}} %</option>
+                        @endforeach
+                    </select>
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary edit-item" title="Add" data-toggle="modal" data-target=".bd-example-modal-sm-tax"><i class="nav-icon i-add"></i></button>
                     </div>
-                @endforeach
-            @endif
+                </div>
+                <div class="error" style="color:red;" id="taxation_error"></div>
+            </div>
         </div>
-        <div class="text-right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm-tax">
-            <i class="nav-icon i-add"></i> Add
-        </button>
+        <div class="taxation_billing_list_wrap">
+            <table class="table table-sm table-hover ">
+                <thead>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Tax</th>
+                    <th>Final Amount</th>
+                </thead>
+                <tbody class="billing_price_table">
+                <tr class="first_year_info">
+                    <td>1 Year</td>
+                    <td class="default_amount"></td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <?php $taxTable = true; ?>
+                    @if(count($bilingCycle) > 0)
+                        @foreach ($bilingCycle as $list)
+                            @include('pages.plan.billingCycle.taxationBillingCycleItem')
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+                
         </div>
     </div>
 </div>

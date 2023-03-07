@@ -64,6 +64,40 @@
     $(document).on("click", ".erp-plan-tax-form", function() {
         $(".plan-tax-submit").submit();
     });
+
+    function refreshTaxationTableRows() {
+        let tax = $('#taxation').val();
+        let taxPer = $('#taxation').find(':selected').attr('data-tax');
+
+        // let taxPer = $('#taxation').is(':selected').attr('data-tax');
+        let billing_cycle = [];
+        $('.taxation_billing_list_wrap').find('table tbody').empty();
+        $("input:checkbox[name='billing_cycle[]']:checked").each(function(){
+            let selectedid = $(this).val();
+            let selectedName = $(this).attr('data-name');
+            let selectedAmount = $(this).attr('data-amount');
+            billing_cycle.push($(this).val());
+
+            let itemTax = selectedAmount * taxPer / 100;
+            let finalAmount =  parseFloat(selectedAmount) + parseFloat(itemTax);
+            let item = `<tr id="taxation-billingPrice-`+selectedid+`">
+            <td>`+selectedName+`</td>
+            <td>`+selectedAmount+`</td>    
+            <td>`+itemTax+`</td>
+            <td>`+finalAmount+`</td>
+            </tr>`
+            $('.taxation_billing_list_wrap').find('table tbody').append(item);
+        })
+    }
+    $(document).ready(function(){
+        refreshTaxationTableRows();
+    });
+    $(document).on('change', "input:checkbox[name='billing_cycle[]']", function () {
+        refreshTaxationTableRows();
+    });
+    $(document).on('change', "#taxation", function () {
+        refreshTaxationTableRows();
+    });
     // save tax
     $(".plan-tax-submit").submit(function(e) {
         e.preventDefault();
@@ -87,23 +121,25 @@
                     let data = response.data;
                     if (data && data.id > 0)
                     if($('#type').val() === 'add'){
-                        $('.tax_list_wrap').append(`
-                            <div class="form-check" id="tax-`+data.id+`">
-                                <input class="form-check-input tax" type="checkbox" value="` + data.id + `" id="taxation-` + data.id + `" name="taxation[]">
-                                <label class="form-check-label mr-4 mb-2" for="taxation-` + data.id + `">`+data.tax_name+ ' - ' +data.tax_percentage+` %</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm edit-item-tax mr-1" data-id="`+data.id+`" data-name="`+data.tax_name+`" data-percentage=`+data.tax_percentage+` data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-sm delete-item-tax" data-id="`+data.id+`" data-name="`+data.tax_name+`" data-percentage=`+data.tax_percentage+` data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                            </div>
-                        `);
+                        $('.tax_list_wrap').find('#taxation').append(`<option data-id="`+data.id+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
+                        // $('.tax_list_wrap').append(`
+                        //     <div class="form-check" id="tax-`+data.id+`">
+                        //         <input class="form-check-input tax" type="checkbox" value="` + data.id + `" id="taxation-` + data.id + `" name="taxation[]">
+                        //         <label class="form-check-label mr-4 mb-2" for="taxation-` + data.id + `">`+data.tax_name+ ' - ' +data.tax_percentage+` %</label>
+                        //         <button type="button" class="btn btn-outline-primary btn-sm edit-item-tax mr-1" data-id="`+data.id+`" data-name="`+data.tax_name+`" data-percentage=`+data.tax_percentage+` data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
+                        //         <button type="button" class="btn btn-outline-primary btn-sm delete-item-tax" data-id="`+data.id+`" data-name="`+data.tax_name+`" data-percentage=`+data.tax_percentage+` data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
+                        //     </div>
+                        // `);
                     } else {
-                        $('.tax_list_wrap').find('#tax-'+data.id).replaceWith(`
-                            <div class="form-check" id="tax-`+data.id+`">
-                                <input class="form-check-input tax" type="checkbox" value="` + data.id + `" id="taxation-` + data.id + `" name="taxation[]">
-                                <label class="form-check-label mr-4 mb-2" for="taxation-` + data.id + `">`+data.tax_name+ ' - ' +data.tax_percentage+` %</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm edit-item-tax mr-1" data-id="`+data.id+`" data-name="`+data.tax_name+`" data-percentage=`+data.tax_percentage+` data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-sm delete-item-tax" data-id="`+data.id+`" data-name="`+data.tax_name+`" data-percentage=`+data.tax_percentage+` data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                            </div>
-                        `);
+                        $('.tax_list_wrap').find('#taxation').find("[data-id='"+data.id+"']").replaceWith(`<option data-id="`+data.id+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
+                        // $('.tax_list_wrap').find('#tax-'+data.id).replaceWith(`
+                        //     <div class="form-check" id="tax-`+data.id+`">
+                        //         <input class="form-check-input tax" type="checkbox" value="` + data.id + `" id="taxation-` + data.id + `" name="taxation[]">
+                        //         <label class="form-check-label mr-4 mb-2" for="taxation-` + data.id + `">`+data.tax_name+ ' - ' +data.tax_percentage+` %</label>
+                        //         <button type="button" class="btn btn-outline-primary btn-sm edit-item-tax mr-1" data-id="`+data.id+`" data-name="`+data.tax_name+`" data-percentage=`+data.tax_percentage+` data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
+                        //         <button type="button" class="btn btn-outline-primary btn-sm delete-item-tax" data-id="`+data.id+`" data-name="`+data.tax_name+`" data-percentage=`+data.tax_percentage+` data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
+                        //     </div>
+                        // `);
                     }
                     $('#type').val('add');
                     $('#tax-id').val('');
