@@ -6,9 +6,11 @@
                 <div class="input-group">
                     <select class="form-control" id="taxation" name="taxation">
                         <option value="0">Select Tax</option>
-                        @foreach($tax as $tax_item)
-                            <option data-id="{{$tax_item->id}}" data-tax="{{$tax_item->tax_percentage}}" value="{{$tax_item->id}}" @if($taxationSelected != ''){{ in_array($tax_item->id,$taxationSelected) ? 'selected="selected"' : '' }}@endif >{{$tax_item->tax_name}} - {{$tax_item->tax_percentage}} %</option>
-                        @endforeach
+                        @if($tax != '')
+                            @foreach($tax as $tax_item)
+                                <option data-id="{{$tax_item->id}}" data-tax="{{$tax_item->tax_percentage}}" value="{{$tax_item->id}}" @if($taxationSelected != ''){{ in_array($tax_item->id,$taxationSelected) ? 'selected="selected"' : '' }}@endif >{{$tax_item->tax_name}} - {{$tax_item->tax_percentage}} %</option>
+                            @endforeach
+                        @endif
                     </select>                    
                 </div>
                 <div class="error" style="color:red;" id="taxation_error"></div>
@@ -30,7 +32,7 @@
                     <td>-</td>
                 </tr>
                 <?php $taxTable = true; ?>
-                    @if(count($bilingCycle) > 0)
+                    @if($bilingCycle != '')
                         @foreach ($bilingCycle as $list)
                             @include('pages.plan.billingCycle.taxationBillingCycleItem')
                         @endforeach
