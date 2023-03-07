@@ -12,6 +12,7 @@ class SubMenSpecification extends Model
     protected $table = "menu_specifications_tbl";
 
     protected $fillable = [     
+        'id',
         'plan_product_id',
         'billing_cycles',
         'specification',

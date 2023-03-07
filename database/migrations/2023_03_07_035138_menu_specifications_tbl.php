@@ -14,7 +14,7 @@ class MenuSpecificationsTbl extends Migration
     public function up()
     {
         Schema::create('menu_specifications_tbl', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigInteger('id')->nullable();
             $table->bigInteger('plan_product_id')->nullable();       
             $table->string('billing_cycles',100)->nullable();     
             $table->string('specification',100)->nullable();     
@@ -34,6 +34,7 @@ class MenuSpecificationsTbl extends Migration
             $table->enum('sys_state',[0,1,-1])->comment('0 = active, 1 = inactive, -1 = deleted');
             $table->timestamps();
         });
+        
     }
 
     /**
