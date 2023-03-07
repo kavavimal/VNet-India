@@ -2,7 +2,11 @@
     <div class="card-body">
         <h4 class="mb-3 d-inline-block">Negotiation</h4>
         <div class="float-right">
-            @include('pages.common.plan-section-switch', array("switch_name"=> 'show_negotiation_status', "switch_id" => "show_negotiation_status", "status" => 1))
+            @include('pages.common.plan-section-switch', array(
+                "switch_id_rec" => $plan_sections_statuses['section_nagotiation']->id,
+                "switch_name"=> 'section_nagotiation', 
+                "switch_id" => "section_nagotiation", 
+                "status" => $plan_sections_statuses['section_nagotiation']->status))
         </div>
         <div class="negotiation_list_wrap">
             <div class="row">

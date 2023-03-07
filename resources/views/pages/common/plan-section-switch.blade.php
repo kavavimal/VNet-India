@@ -2,7 +2,7 @@
     <span>Enable/Disable</span>
     <?php $checked='checked'; ?>
     <input
-        data-id={{isset($switch_rec_id) ? $switch_rec_id : ''}} 
+        data-id="{{isset($switch_id_rec) ? $switch_id_rec : ''}}" 
         class="section_show_status" 
         type="checkbox" 
         name="{{$switch_name}}" 

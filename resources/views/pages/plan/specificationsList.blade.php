@@ -1,10 +1,12 @@
 <div class="card">
     <div class="card-body">
         <h4 class="mb-3 d-inline-block">Specification</h4>
-        <div class="float-right">            
+        <div class="float-right">
             @include('pages.common.plan-section-switch', array(
-                "switch_id_rec" => $plan,
-                "switch_name"=> 'show_specification_status', "switch_id" => "show_specification_status", "status" => $plan_sections_statuses['section_specification']))
+                "switch_id_rec" => $plan_sections_statuses['section_specification']->id,
+                "switch_name"=> 'section_specification', 
+                "switch_id" => "section_specification", 
+                "status" => $plan_sections_statuses['section_specification']->status))
         </div>
         <div class="specification_list_wrap">
         <!-- <div class="form-check">

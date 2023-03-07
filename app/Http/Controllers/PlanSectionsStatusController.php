@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\PlanSectionsStatus;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class PlanSectionsStatusController extends Controller
@@ -14,27 +14,24 @@ class PlanSectionsStatusController extends Controller
     
     public function store(Request $request){
         if($request->ajax()){
-            if($request->id == "0"){
+            if($request->id == "0" || $request->id == ""){
                 $validator = Validator::make($request->all(), [
-                    'planName' => 'required',
-                    'product_id' => 'required|not_in:0'
+                    'section_name' => 'required',
+                    'status' => 'required'
                 ],
                 $message = [
-                    'planName.required' => 'The Plan Name Is Required.',
-                    'product_id.required' => 'Please Select Product.',
-                    'product_id.not_in' => 'Please Select Product.'
+                    'section_name.required' => 'The Section Name Is Required.',
+                    'status.required' => 'Please Select Status.',
                 ]);
                 if ($validator->passes()){
-                    $planName = $request->planName;
-                    $product_id = $request->product_id;
+                    $section_name = $request->section_name;
+                    $status = $request->status ? '1' : '0';
 
-                    $save_plan = Plan::create(['plan_name'=>$planName , 'plan_product_id'=>$product_id]);
+                    $save_plan_section_status = PlanSectionsStatus::create(['section_name'=>$section_name , 'status'=>$status]);
                    
-                    session()->flash('success', 'Plan created successfully!');
-
                     return response()->json([
-                        'success' => 'plan updated successfully!',
-                        'data' => $save_plan
+                        'success' => 'section Status updated successfully!',
+                        'data' => $save_plan_section_status
                     ]);
                 }
                 else{
@@ -42,58 +39,27 @@ class PlanSectionsStatusController extends Controller
                 }
             }else{                
                 $validator = Validator::make($request->all(), [
-                    'planName' => 'required',
-                    'product_id' => 'required|not_in:0'
+                    'section_name' => 'required',
+                    'status' => 'required'
                 ],
                 $message = [
-                    'planName.required' => 'The Plan Name Is Required.',
-                    'product_id.required' => 'Please Select Product.',
-                    'product_id.not_in' => 'Please Select Product.'
-                ]);                
-                if ($validator->passes()){                   
-                    $plan = Plan::find($request->id);
-                    $planName = $request->planName;
-                    $product_id = $request->product_id;
+                    'section_name.required' => 'The Section Name Is Required.',
+                    'status.required' => 'Please Select Status.',
+                ]);              
+                if ($validator->passes()){
+                    $plan_section = PlanSectionsStatus::find($request->id);
+                    $section_name = $request->section_name;
+                    $status = $request->status ? '1' : '0';
                     
-                    $billingCycle = $request->billing_cycle;
-                    $planPricing = $request->planPricing;
-                    $taxation = $request->taxation;
-                    $specification = $request->specification;
-                    $featuredCategory = $request->featuredCategory;
-                    $featuredSubCategory = $request->featuredSubCategory;
-                    $negotiation_min = $request->negotiation_min;
-                    $negotiation_max = $request->negotiation_max;
-                    $negotiation_status = $request->negotiation_status;
-                    $service_type_type = $request->service_type_type;
-                    $service_type_price = $request->service_type_price;
-                    $servive_type_currency = $request->servive_type_currency;
-                    $service_type_renewal_price = $request->service_type_renewal_price;
-                    $service_type_discount = $request->service_type_discount;
-
-                    $plan->update([
-                        'plan_name'=>$planName,
-                        'plan_product_id'=>$product_id,
-                        'billing_cycles'=>$billingCycle,
-                        'plan_pricingids'=>$planPricing,
-                        'taxation'=>$taxation,
-                        'specification'=>$specification,
-                        'featured_category'=>$featuredCategory,
-                        'featured_sub_category'=>$featuredSubCategory,
-                        'negotiation_min'=>$negotiation_min,
-                        'negotiation_max'=>$negotiation_max,
-                        'negotiation_status'=>$negotiation_status,
-                        'service_type_type'=>$service_type_type,
-                        'service_type_price'=>$service_type_price,
-                        'servive_type_currency'=>$servive_type_currency,
-                        'service_type_renewal_price'=>$service_type_renewal_price,
-                        'service_type_discount'=>$service_type_discount,
+                    $plan_section->update([
+                        'status'=>$status,
                     ]);
                     
-                    session()->flash('success', 'Plan Updated successfully!');
                     return response()->json([
-                        'success' => 'Plan updated successfully!',
-                        'title' => 'Plan',
+                        'success' => 'Plan Section Status updated successfully!',
+                        'title' => 'Plan Section',
                         'type' => 'Update',
+                        'data' => $plan_section
                     ]);
                 } else {
                     return response()->json(['error'=>$validator->getMessageBag()->toArray()]);
