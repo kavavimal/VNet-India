@@ -41,17 +41,8 @@
             <input class="form-check-input" type="checkbox" value="" id="24_7_365_support">
             <label class="form-check-label" for="24_7_365_support">24*7*365 Support</label>
         </div> -->
-        <div class="my-3">
-            <label for="fname">Select Sub Menu</label>
-            <select class="form-control select2" data-url="{{route('getspecificationdata')}}" id="product_id" name="product_id">
-                <option value="0">Select Sub Menu</option>
-                @foreach($product_list as $value)
-                <?php $prodSelect = ''; if ($value->id == $plan->plan_product_id) {$prodSelect = 'selected';} else {$prodSelect = '';}?>
-                <option value="{{$value->id}}" {{$prodSelect}}>{{ $value->submenu_name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <!-- @if(count($specifications) > 0)
+        
+        @if(count($specifications) > 0)
             @foreach ($specifications as $spec)
                 <div class="form-check" id="spec-{{$spec->id}}">
                     <input
@@ -73,7 +64,7 @@
                         "status" => $spec->show_status))
                 </div>
             @endforeach
-        @endif -->
+        @endif
         </div>
         <div class="text-right">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">
