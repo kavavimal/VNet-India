@@ -91,6 +91,14 @@ class PlanController extends Controller
         $server_locations = ServerLocation::where('sys_state','!=','-1')->get();
         $plan_pricing = PlanPricing::where('sys_state','!=','-1')->get();
         $serverlocationSelected ='';
+        
+        $selectedTaxItem = '';
+        foreach($tax as $taxItem) {
+            if($taxationSelected != '' && in_array($taxItem->id,$taxationSelected)) {
+                $selectedTaxItem = $taxItem;
+            }
+            // echo '<pre>';print_r($taxationSelected);exit;
+        }
         return view('pages.plan.edit', compact(
             'plan',
             'specifications',
@@ -107,7 +115,8 @@ class PlanController extends Controller
             'server_locations',
             'plan_pricing',
             'planPricingSelected',
-            'plan_sections_statuses'
+            'plan_sections_statuses',
+            'selectedTaxItem'
         ));
     }
 
