@@ -120,7 +120,7 @@
             </div>  
             <div class="col-md-4 mt-4">
                 @include('pages.plan.negotiation')
-            </div>                                                                 
+            </div>
         </div>
     </form>
 @else

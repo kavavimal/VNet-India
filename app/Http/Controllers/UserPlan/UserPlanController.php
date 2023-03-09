@@ -252,4 +252,24 @@ class UserPlanController extends Controller
                 ]);
         }
     }
+
+    public function preview($id) {
+        $plan = UserPlan::where('id', $id)->with('submenu')->first();
+        $plan_billingcycle = BilingCycle::where('id', $plan->billing_cycles)->get();
+        $plan_specification = Specification::where('id', $plan->specification)->get();
+        $plan_featured_category = FeaturedCategory::where('id', $plan->featured_category)->get();
+        $plan_featured_sub_category = FeaturedCategory::where('id', $plan->featured_sub_category)->get();
+        $plan_pricing = PlanPricing::where('id', $plan->pricing)->get();
+        $plan_taxation = Tax::where('id', $plan->taxation)->get();
+
+        return view('pages.user-plan.preview', compact(
+            'plan',
+            'plan_billingcycle',
+            'plan_specification',
+            'plan_featured_category',
+            'plan_featured_sub_category',
+            'plan_pricing',
+            'plan_taxation',
+        ));
+    }
 }
