@@ -11,7 +11,7 @@
             @if($billingCycleSelected != ''){{ in_array($list->id,$billingCycleSelected) ? 'checked="checked"' : '' }}@endif 
         />
     </td>
-    <td>{{$list->billing_name}}</td>
+    <td>{{$list->billing_name}} Years</td>
     <td>{{$list->billing_amount}}</td>    
     <td>{{$list->billing_percentage}}</td>
     <td>{{$list->billing_upgrade_downgrade}}</td>    

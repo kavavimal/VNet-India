@@ -118,34 +118,17 @@
         $('#amount').val('');
         $('#currency').val('');
         $('#server_location_country').val('').trigger('change');
-        $('#percentage').val('');
-        $('.upgrade_downgrade').val('');
+        $('#percentage').val('');        
         $('#final_amount').html('');
         $('#serverLocation_modal').modal('show');
     });
-    function calculate_percentage() {
-        let amount = $('#amount').val();
-        let percent = $('#percentage').val();
-        let upgrade_downgrade = $('select[name="upgrade_downgrade"]').val();
-        if (amount && percent && upgrade_downgrade) {
-            let final_amount = amount * percent / 100;
-            if (upgrade_downgrade === 'upgrade') {
-                let am = parseInt(amount) + parseInt(final_amount)
-                $('#final_amount').html('Allocate Country Amount: ' + am);
-            } else if (upgrade_downgrade === 'downgrade') {
-                let am = parseInt(amount) - parseInt(final_amount)
-                $('#final_amount').html('Allocate Country Amount: ' + am);
-            }else if(upgrade_downgrade === 'none'){
-                $('#final_amount').html('');
-            }
-        }
-    }
-
-    $(document).on('change', '#amount', function() {
-        $('#percentage').val('');
-        $('select[name=upgrade_downgrade]').val('');
-        $('#final_amount').html('');
-    })
+    
+    $(document).on('keydown', '#amount', function() {              
+        calculate_percentage();
+    });
+    $(document).on('keyup', '#percentage', function() {                
+        calculate_percentage();
+    });
     $(document).on('change', 'select[name="upgrade_downgrade"]', function() {
         calculate_percentage();
     })
@@ -325,4 +308,22 @@
     $('#base_country').select2({
         dropdownParent: $('#serverLocation_modal')
     });
+    function calculate_percentage() {
+        let amount = $('#amount').val();        
+        let percent = $('#percentage').val();        
+        let upgrade_downgrade = $('#upgrade_downgrade').val();        
+        alert(upgrade_downgrade);
+        if (amount && percent && upgrade_downgrade) {
+            let final_amount = amount * percent / 100;
+            if (upgrade_downgrade === 'upgrade') {                
+                let am = parseInt(amount) + parseInt(final_amount)
+                $('#final_amount').html('Allocate Country Amount: ' + am);
+            } else if (upgrade_downgrade === 'downgrade') {
+                let am = parseInt(amount) - parseInt(final_amount)
+                $('#final_amount').html('Allocate Country Amount: ' + am);
+            }else if(upgrade_downgrade === 'none'){
+                $('#final_amount').html('');
+            }
+        }
+    }    
 </script>

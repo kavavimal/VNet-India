@@ -35,7 +35,7 @@
                             /> </td>
                             <td>{{$locationItem->base_country}}</td>                            
                             <td>{{$locationItem->amount}}</td>
-                            <td>@if($locationItem->upgrade_downgrade != '' && $locationItem->percentage != '')
+                            <td class="server_price">@if($locationItem->upgrade_downgrade != '' && $locationItem->percentage != '')
                                     @if($locationItem->upgrade_downgrade == 'upgrade' )
                                         {{($locationItem->amount + ($locationItem->amount * $locationItem->percentage / 100))}}
                                         @elseif ($locationItem->upgrade_downgrade == 'downgrade')

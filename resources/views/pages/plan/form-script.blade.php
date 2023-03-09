@@ -194,8 +194,12 @@
         $('input[name="plan_pricing_check_box[]"]:checked').each(function() {
             price_plan += parseInt($(this).parent().siblings('.total_price').text());
         });
+        var server_plan = 0;
+        $('input[name="serverlocations[]"]:checked').each(function() {
+            server_plan += parseInt($(this).parent().siblings('.server_price').text());
+        });        
         var service_type_price = parseInt($("#service_type_price").val());
-        var total = price_plan + service_type_price;
+        var total = price_plan + service_type_price + server_plan;
         $("#servive_type_total").val(total);
         $(".first_year_info .default_amount").text(total);
         $("#billing_amount").val(total);
@@ -207,9 +211,16 @@
 
         $('#after_tax_servive_type_total').val(final_total)
     }
-    $(document).on('change','#service_type_price,#service_type_discount', function(){
+    $(document).on('change','#service_type_price', function(){
         refreshTotalPrice();
     })
+    $(document).on('keydown','#service_type_price', function(){
+        refreshTotalPrice();
+    })
+    $(document).on('change', "input[name='serverlocations[]'],input[name='plan_pricing_check_box[]']", function() {        
+        refreshTotalPrice();
+    });
+
     $(document).ready(function(){
         initCollapsible();
         refreshTotalPrice();
