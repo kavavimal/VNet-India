@@ -103,17 +103,20 @@
             <div class="col-md-6 mt-4">
                 @include('pages.plan.totalPrice')                
             </div>            
-            <div class="col-md-8 mt-4">
+            <div class="col-md-12 mt-4">
                 @include('pages.plan.billingList')
-            </div>
+            </div>            
             <div class="col-md-4 mt-4">
                 @include('pages.plan.tax')                
+            </div>
+            <div class="col-md-8 mt-4">
+                @include('pages.plan.calAmountTax')
             </div> 
             <div class="col-md-4 mt-4">
                 @include('pages.plan.amountCalc')
             </div>  
-            <div class="col-md-4 mt-4">
-                @include('pages.plan.finalTotalAfterTax')
+            <div class="col-md-8 mt-4">
+            @include('pages.plan.calamountafterdiscount')
             </div>  
             <div class="col-md-4 mt-4">
                 @include('pages.plan.negotiation')
@@ -170,4 +173,5 @@
     @include('pages.plan.planPricing.plan-form-script')
     @include('pages.plan.server-location-form-script')
     @include('pages.plan.tax-form-script')    
+    @include('pages.plan.final-cal-script')    
 @endsection

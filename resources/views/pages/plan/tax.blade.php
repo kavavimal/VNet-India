@@ -18,7 +18,7 @@
                         value={{isset($selectedTaxItem->id) ? $selectedTaxItem->id : ''}} 
                         data-tax={{isset($selectedTaxItem->id) ? $selectedTaxItem->tax_percentage : ''}} 
                         />
-                    <input id ="taxation-selected-label" disabled value="{{isset($selectedTaxItem->id) ? $selectedTaxItem->tax_name .'-' . $selectedTaxItem->tax_percentage : ''}}" />
+                    <input id ="taxation-selected-label" disabled value="{{isset($selectedTaxItem->id) ? $selectedTaxItem->tax_name .'-' . $selectedTaxItem->tax_percentage : ''}}" style="width:90% !important;" />
 
                     <!-- <select class="form-control" id="taxation" name="taxation">
                         <option value="0">Select Tax</option>
@@ -27,7 +27,7 @@
                         @endforeach
                     </select> -->
                     <div class="input-group-append">
-                    @if(isset($selectedTaxItem) && $selectedTaxItem != '')
+                    @if(isset($selectedTaxItem->id) && $selectedTaxItem != '')
                         <button 
                             type="button" 
                             id="taxation-edit" 
@@ -45,31 +45,6 @@
                 </div>
                 <div class="error" style="color:red;" id="taxation_error"></div>
             </div>
-        </div>
-        <div class="taxation_billing_list_wrap">
-            <table class="table table-sm table-hover ">
-                <thead>
-                    <th>Name</th>
-                    <th>Amount</th>
-                    <th>Tax</th>
-                    <th>Final Amount</th>
-                </thead>
-                <tbody class="billing_price_table">
-                <tr class="first_year_info">
-                    <td>1 Year</td>
-                    <td class="default_amount"></td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <?php $taxTable = true; ?>
-                    @if(count($bilingCycle) > 0)
-                        @foreach ($bilingCycle as $list)
-                            @include('pages.plan.billingCycle.taxationBillingCycleItem')
-                        @endforeach
-                    @endif
-                </tbody>
-            </table>
-                
-        </div>
+        </div>        
     </div>
 </div>
