@@ -27,7 +27,7 @@
                         @endforeach
                     </select> -->
                     <div class="input-group-append">
-                    @if($selectedTaxItem != '')
+                    @if(isset($selectedTaxItem) && $selectedTaxItem != '')
                         <button 
                             type="button" 
                             id="taxation-edit" 
