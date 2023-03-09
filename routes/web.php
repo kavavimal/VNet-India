@@ -82,7 +82,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/submenu/getByMenuId/{id}/{type?}', [SubMenuController::class, 'getByMenuId'])->name('getByMenuId');
     Route::get('/submenu/editspecification/{id}', [SubMenuController::class, 'editspecification'])->name('specification-edit');
     Route::post('/submenu/storespecification', [SubMenuController::class, 'storespecification'])->name('specification-plan-store');
-    Route::post('/submenu/specificationbysubmenu', [SpecificationController::class, 'getsubmenus'])->name('getspecificationdata');
     
     //Plan Module
     Route::get('/plan',[PlanController::class,'index'])->name('plan-index');
@@ -90,10 +89,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/plan/edit/{id}', [PlanController::class, 'edit'])->name('plan-edit');
     Route::get('/plan/delete/{id}', [PlanController::class, 'remove'])->name('plan-delete');
     Route::get('/plan/getByCategoryId/{id}', [PlanController::class, 'getByCategoryId'])->name('plan-getByCategoryId');
-
+    
     //Specification Module
     Route::post('/spacification/store',[SpecificationController::class,'store'])->name('specification-store');
     Route::post('/spacification/delete',[SpecificationController::class,'remove'])->name('specification-delete');
+    Route::post('/submenu/specificationbysubmenu', [SpecificationController::class, 'getsubmenus'])->name('getspecificationdata');
+    Route::post('/specification/addSpecifications', [SpecificationController::class, 'addSpecifications'])->name('addSpecifications');
 
     // Featured Category Module
     Route::post('/featuredCategory/store',[FeaturedCategoryController::class,'store'])->name('featured-category-store');

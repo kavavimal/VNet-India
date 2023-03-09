@@ -196,7 +196,7 @@
         var final_price = $('#final_price');
         var server = $('input[type=radio][name=planPricingServer]:checked').val();        
         var percent = $('.window_server_percentage').val();
-        var amount = storage*storage_price;
+        var amount = storage_price;
         
         if(server == 'linux'){
             final_price.val(amount);

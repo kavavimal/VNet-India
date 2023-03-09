@@ -5,7 +5,7 @@
             <table class="table table-sm table-hover">
                 <thead>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>No Of Years</th>
                     <th>Amount</th>
                     <th>Percentage</th>
                     <th>Upgrade / Downgrade</th>

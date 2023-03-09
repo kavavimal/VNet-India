@@ -14,13 +14,14 @@
                     <input type="hidden" id="sub_menu_id" name="sub_menu_id" value="{{$plan->plan_product_id ?? ''}}">
                     <div class="row">
                         <div class="col-sm-12 col-md-6 form-group">
-                            <label for="billing_name">Name</label>
-                            {!! Form::text('billing_name', null, array('placeholder' => 'Enter Name','class' => 'form-control' , 'id' => 'billing_name')) !!}
+                            <label for="billing_name">No. of Years</label>
+                            {!! Form::number('billing_name', null, array('placeholder' => 'Enter Name','class' => 'form-control' , 'id' => 'billing_name')) !!}
                             <div class="error" style="color:red;" id="billing_name_error"></div>
                         </div>                     
                         <div class="col-sm-12 col-md-6 form-group">
-                            <label for="billing_amount">Amount</label>
+                            <label for="billing_amount">Base Amount</label>
                             {!! Form::text('billing_amount', null, array('placeholder' => 'Enter Amount','class' => 'form-control' , 'id' => 'billing_amount')) !!}
+                            <input type="hidden" name="billing_final_amount" id="billing_final_amount" >
                             <div class="error" style="color:red;" id="billing_amount_error"></div>
                         </div>
                         <div class="col-sm-12 col-md-6 form-group">
@@ -38,10 +39,11 @@
                             <div class="error" style="color:red;" id="billing_upgrade_downgrade_error"></div>
                         </div>
                     </div>
+                    <p class="m-0">Final Amount: <span id="billing_final_calculations"></span></p>                     
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer">                                                                   
                     <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary erp-plan-billing-form">Save changes</button>
+                    <button type="button" class="btn btn-primary erp-plan-billing-form">Save changes</button>                                        
                 </div>
             </form>
         </div>
@@ -87,7 +89,7 @@
                 "_token": "{{ csrf_token() }}",
                 id: $('#billing-id').val(),
                 billing_name: $('#billing_name').val(),
-                billing_amount: $('#billing_amount').val(),
+                billing_amount: $('#billing_final_amount').val(),
                 billing_percentage: $('#billing_percentage').val(),
                 billing_upgrade_downgrade: $('#billing_upgrade_downgrade').val(),
                 sub_menu_id: $('#sub_menu_id').val(),
@@ -106,8 +108,8 @@
                                     id='billing-cycle-`+data.id+`'
                                     name='billing_cycle[]'
                                 /></td><td>` +
-                                data.billing_name + "</td><td>" +
-                                data.billing_amount + "</td><td>" +
+                                data.billing_name + " Years</td><td>" +
+                                data.billing_amount + " </td><td>" +
                                 data.billing_percentage + "</td><td>" +
                                 data.billing_upgrade_downgrade + "</td><td>" +                                
                                 "<button type='button' class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1' data-id='` + data.id + `'data-storage='` + data.storage + `'data-storage_price='` + data.storage_price + `'data-billing_cycle='` + data.billing_cycle + `'data-server='` + data.server + `'data-window_server='` +data.window_server + `'data-upgrade_downgrade='` +data.upgrade_downgrade + `'data-price='` + data.price + `'data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `'data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
@@ -120,8 +122,8 @@
                                     id='billing-cycle-`+data.id+`'
                                     name='billing_cycle[]'
                                 /></td><td>` +
-                                data.billing_name + "</td><td>" +
-                                data.billing_amount + "</td><td>" +
+                                data.billing_name + " Years</td><td>" +
+                                data.billing_amount + " </td><td>" +
                                 data.billing_percentage + "</td><td>" +
                                 data.billing_upgrade_downgrade + "</td><td>" +                                
                                 "<button type='button' class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1' data-id='` + data.id + `'data-storage='` + data.storage + `'data-storage_price='` + data.storage_price + `'data-billing_cycle='` + data.billing_cycle + `'data-server='` + data.server + `'data-window_server='` +data.window_server + `'data-upgrade_downgrade='` +data.upgrade_downgrade + `'data-price='` + data.price + `'data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `'data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
@@ -153,7 +155,7 @@
         $('#billing-id').val(id);
         $('#type').val('edit');
         $('#billing_name').val(name);
-        $('#billing_amount').val(amount),
+        $('#billing_final_amount').val(amount),
         $('#billing_percentage').val(percentage),
         $('#billing_upgrade_downgrade').val(type),
         $('#billing_modal').modal('show');
@@ -193,29 +195,35 @@
         $('#billing_delete_modal').modal('show');
     });
 
-    function calculate_amounts(){
-        let old_value = $(".first_year_info .default_amount").text();
-        let amount = $('#billing_amount').val();
-        let billling_percentage = $('#billing_percentage').val();   
-        let final_price = $('#billing_amount');
+    function calculate_amounts(){        
+        let billing_amount = $('#billing_amount').val();
+        let billing_year = $('#billing_name').val();
+        let billling_percentage = $('#billing_percentage').val();
+        let final_price = $('#billing_final_calculations');
         let upgrade_downgrade = $('select[name="billing_upgrade_downgrade"]').val();        
-        let final_amount = amount * billling_percentage / 100;
+        let billing_final_amount = $("#billing_final_amount");
+
+        let amss = parseInt(billing_amount) * parseInt(billing_year);
+        final_price.text(amss);
+        billing_final_amount.val(amss);
+        let final_amount = amss * billling_percentage / 100;
+       
         if (upgrade_downgrade === 'upgrade') {            
-            let am = parseInt(amount) + parseInt(final_amount)            
-            final_price.val(am);
+            let am = parseInt(amss) + parseInt(final_amount)            
+            final_price.text(am);
+            billing_final_amount.val(am);
         } else if (upgrade_downgrade === 'downgrade') {
-            let am = parseInt(amount) - parseInt(final_amount)
-            final_price.val(am);
+            let am = parseInt(amss) - parseInt(final_amount)
+            final_price.text(am);
+            billing_final_amount.val(am);
         }else if(upgrade_downgrade === 'none'){
-            final_price.val(old_value);
+            final_price.text(amss);
+            billing_final_amount.val(am);
         }      
     }
-    $('body').on('keyup', '#billing_amount', function() {   
+    $('body').on('keyup', '#billing_amount,#billing_percentage,#billing_name', function() {   
         calculate_amounts();
-    });
-    $('body').on('keyup', '#billing_percentage', function() {   
-        calculate_amounts();
-    });
+    });    
     $(document).on('change', 'select[name="billing_upgrade_downgrade"]', function() {   
         calculate_amounts();
     });

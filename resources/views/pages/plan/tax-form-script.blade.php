@@ -67,7 +67,8 @@
 
     function refreshTaxationTableRows() {
         let tax = $('#taxation').val();
-        let taxPer = $('#taxation').find(':selected').attr('data-tax');
+        // let taxPer = $('#taxation').find(':selected').attr('data-tax');
+        let taxPer = $('#taxation').attr('data-tax');
 
         // let taxPer = $('#taxation').is(':selected').attr('data-tax');
         let billing_cycle = [];
@@ -124,7 +125,7 @@
                 id: $('#tax-id').val(),
                 tax_type: $('#tax_type').val(),
                 tax_percentage: $('#tax_percentage').val(),
-                sub_menu_id: $('#sub_menu_id').val(),
+                sub_menu_id: $('#product_id').val(),
             },
             dataType: 'json',
             success: function(response) {
@@ -133,7 +134,12 @@
                     let data = response.data;
                     if (data && data.id > 0)
                     if($('#type').val() === 'add'){
-                        $('.tax_list_wrap').find('#taxation').append(`<option data-id="`+data.id+`" data-tax="`+data.tax_percentage+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
+                        $('#taxation').val(data.id);
+                        $('#taxation').attr('data-tax',data.tax_percentage);
+                        $('#taxation-selected-label').val(data.tax_name+` - `+data.tax_percentage+` % `);
+                        refreshTaxationTableRows();
+                       
+                        // $('.tax_list_wrap').find('#taxation').append(`<option data-id="`+data.id+`" data-tax="`+data.tax_percentage+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
                         // $('.tax_list_wrap').append(`
                         //     <div class="form-check" id="tax-`+data.id+`">
                         //         <input class="form-check-input tax" type="checkbox" value="` + data.id + `" id="taxation-` + data.id + `" name="taxation[]">
@@ -143,7 +149,12 @@
                         //     </div>
                         // `);
                     } else {
-                        $('.tax_list_wrap').find('#taxation').find("[data-id='"+data.id+"']").replaceWith(`<option data-id="`+data.id+`" data-tax="`+data.tax_percentage+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
+                        $('#taxation').val(data.id);
+                        $('#taxation').attr('data-tax',data.tax_percentage);
+                        $('#taxation-selected-label').val(data.tax_name+` - `+data.tax_percentage+` % `);
+                        refreshTaxationTableRows();
+
+                        // $('.tax_list_wrap').find('#taxation').find("[data-id='"+data.id+"']").replaceWith(`<option data-id="`+data.id+`" data-tax="`+data.tax_percentage+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
                         // $('.tax_list_wrap').find('#tax-'+data.id).replaceWith(`
                         //     <div class="form-check" id="tax-`+data.id+`">
                         //         <input class="form-check-input tax" type="checkbox" value="` + data.id + `" id="taxation-` + data.id + `" name="taxation[]">
