@@ -112,8 +112,8 @@ class SpecificationController extends Controller
     public function getsubmenus(Request $request)
     {
         if($request->ajax() && $request->plan_id != '') {
-            $plan = Plan::where('id', $request->plan_id)->get();
-            $specificationsSelected = (!empty($plan->specification)) ? explode(',', $plan->specification) : '';
+            $plan = Plan::where('id',$request->plan_id)->first();
+            $specificationsSelected = (isset($plan->specification)) ? explode(',', $plan->specification) : '';
             $speciDataBysubmenu = Specification::where('sub_menu_id', $request->id)->get();
             $html = '';
             if ($request->view == 'html') {
