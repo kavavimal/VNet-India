@@ -60,6 +60,11 @@
     $(document).on("click", ".erp-plan-specification-form", function() {
         $(".plan-specification-submit").submit();
     });
+    $(document).on("click", "#add_specification_modal_button", function () {
+        const subMenuId = $('#specification_sub_menu_select').val();
+        $('.plan-specification-submit #sub_menu_id').val(subMenuId);
+        $('#spec_modal').modal('show');
+    });
     // save specification
     $(".plan-specification-submit").submit(function(e) {
         e.preventDefault();
@@ -82,23 +87,31 @@
                     let data = response.data;
                     if (data && data.id > 0)
                     if($('#type').val() === 'add'){
-                        $('.specification_list_wrap').append(`
-                            <div class="form-check" id="spec-`+data.id+`">
-                                <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `" name="specification[]">
-                                <label class="form-check-label" for="` + data.id + `">`+data.spec_name+`</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm edit-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                            </div>
-                        `);
+                        if (response.dataHtml) {
+                            $('.specification_list_wrap').append(response.dataHtml);
+                        } else {
+                            $('.specification_list_wrap').append(`
+                                <div class="form-check" id="spec-`+data.id+`">
+                                    <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `" name="specification[]">
+                                    <label class="form-check-label" for="` + data.id + `">`+data.spec_name+`</label>
+                                    <button type="button" class="btn btn-outline-primary btn-sm edit-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
+                                    <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
+                                </div>
+                            `);
+                        }
                     } else {
-                        $('.specification_list_wrap').find('#spec-'+data.id).replaceWith(`
-                            <div class="form-check" id="spec-`+data.id+`">
-                                <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `" name="specification[]">
-                                <label class="form-check-label" for="` + data.id + `">`+data.spec_name+`</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm edit-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                            </div>
-                        `);
+                        if (response.dataHtml) {
+                            $('.specification_list_wrap').find('#spec-'+data.id).replaceWith(response.dataHtml);
+                        } else {
+                            $('.specification_list_wrap').find('#spec-'+data.id).replaceWith(`
+                                <div class="form-check" id="spec-`+data.id+`">
+                                    <input class="form-check-input" type="checkbox" value="` + data.id + `" id="` + data.id + `" name="specification[]">
+                                    <label class="form-check-label" for="` + data.id + `">`+data.spec_name+`</label>
+                                    <button type="button" class="btn btn-outline-primary btn-sm edit-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
+                                    <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+data.id+`" data-name="`+data.spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
+                                </div>
+                            `);
+                        }
                     }
                     $('#type').val('add');
                     $('#spec-id').val('');
@@ -115,10 +128,12 @@
     $(document).on("click", ".specification_list_wrap .edit-item", function() {
         let id = $(this).attr('data-id');
         let name = $(this).attr('data-name');
+        const subMenuId = $('#specification_sub_menu_select').val();
         $('.plan-specification-submit').attr('data-id',id).attr('data-name',name);
         $('#spec-id').val(id);
         $('#type').val('edit');
         $('#spec_name').val(name);
+        $('.plan-specification-submit #sub_menu_id').val(subMenuId);
         $('#spec_modal').modal('show');
     });
 
@@ -155,32 +170,52 @@
         $('#spec_delete_modal').modal('show');
     });
 
-    // on submenu selection
-    $(document).on("change", "#product_id",function(e) {
-        var selectedItem = e.target.value;
-        var submit_url = $(this).attr("data-url");
-        $.ajax({
-            url: submit_url,
-            type: "POST",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                id: selectedItem,
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response){
-                    for (var i = 0; i < response.length; i++) {
-                        $('.specification_list_wrap').append(`
-                            <div class="form-check" id="spec-`+response[i].id+`">
-                                <input class="form-check-input" type="checkbox" value="` + i.id + `" id="` + response[i].id + `" name="specification[]">
-                                <label class="form-check-label" for="` + response[i].id + `">`+response[i].spec_name+`</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm edit-item" data-id="`+response[i].id+`" data-name="`+response[i].spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+response[i].id+`" data-name="`+response[i].spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                            </div>
-                        `);
+     // on submenu selection
+     function set_specification_list() {
+        const selectbox = $('#specification_sub_menu_select');
+        const selectedItem = $(selectbox).val();
+        const submit_url = $(selectbox).attr('data-url');
+        const plan_id = $('#plan_id').val();
+        if (selectedItem === '') {
+            $('.specification_list_wrap').empty();
+        } else {
+            $.ajax({
+                url: submit_url,
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    id: selectedItem,
+                    plan_id: plan_id,
+                    view: 'html',
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response){
+                        $('.specification_list_wrap').empty();
+                        if (response.dataHtml) {
+                            $('.specification_list_wrap').html(response.dataHtml);
+                        }else {
+                            for (var i = 0; i < response.length; i++) {
+                                $('.specification_list_wrap').append(`
+                                    <div class="form-check" id="spec-`+response[i].id+`">
+                                        <input class="form-check-input" type="checkbox" value="` + i.id + `" id="` + response[i].id + `" name="specification[]">
+                                        <label class="form-check-label" for="` + response[i].id + `">`+response[i].spec_name+`</label>
+                                        <button type="button" class="btn btn-outline-primary btn-sm edit-item" data-id="`+response[i].id+`" data-name="`+response[i].spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+response[i].id+`" data-name="`+response[i].spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
+                                    </div>
+                                `);
+                            }
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+     }
+     $(document).on("change", "#specification_sub_menu_select",function(e) {
+        set_specification_list();
     });
+
+    $(document).ready(function () {
+        set_specification_list();
+    })
 </script>
