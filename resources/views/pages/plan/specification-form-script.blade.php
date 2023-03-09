@@ -61,7 +61,7 @@
         $(".plan-specification-submit").submit();
     });
     $(document).on("click", "#add_specification_modal_button", function () {
-        const subMenuId = $('#specification_sub_menu_select').val();
+        const subMenuId = $('#product_id').val();
         $('.plan-specification-submit #sub_menu_id').val(subMenuId);
         $('#spec_modal').modal('show');
     });
@@ -177,7 +177,7 @@
         const submit_url = $(selectbox).attr('data-url');
         const plan_id = $('#plan_id').val();
         if (selectedItem === '') {
-            $('.specification_list_wrap').empty();
+            $('.second_specification_list_wrap').empty();
         } else {
             $.ajax({
                 url: submit_url,
@@ -191,20 +191,12 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response){
-                        $('.specification_list_wrap').empty();
+                        $('.second_specification_list_wrap').empty();
                         if (response.dataHtml) {
-                            $('.specification_list_wrap').html(response.dataHtml);
-                        }else {
-                            for (var i = 0; i < response.length; i++) {
-                                $('.specification_list_wrap').append(`
-                                    <div class="form-check" id="spec-`+response[i].id+`">
-                                        <input class="form-check-input" type="checkbox" value="` + i.id + `" id="` + response[i].id + `" name="specification[]">
-                                        <label class="form-check-label" for="` + response[i].id + `">`+response[i].spec_name+`</label>
-                                        <button type="button" class="btn btn-outline-primary btn-sm edit-item" data-id="`+response[i].id+`" data-name="`+response[i].spec_name+`" data-toggle="modal" title="Edit"><i class="nav-icon i-pen-4"></i></button>
-                                        <button type="button" class="btn btn-outline-primary btn-sm delete-item" data-id="`+response[i].id+`" data-name="`+response[i].spec_name+`" data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
-                                    </div>
-                                `);
-                            }
+                            $('.second_specification_list_wrap').html(response.dataHtml);
+                            $('#second_specification_button').removeClass('d-none');
+                        } else {
+                            $('#second_specification_button').addClass('d-none');
                         }
                     }
                 }
@@ -215,6 +207,46 @@
         set_specification_list();
     });
 
+    $(document).on("click","#second_specification_button", function (e) {
+        $('#second_specification_status_label').text('');
+        const submit_url = $(this).attr('data-url');
+        const sub_menu_id = $('#product_id').val();
+        let specification = [];
+        $(".second_specification_list_wrap input:checkbox[name='specification[]']:checked").each(function(){
+            specification.push($(this).val());
+        });
+        if (specification.length > 0){
+            let data = [];
+            specification.forEach(function(item){
+                const name = $('.selectedSpecification#spec-'+item).attr('data-name');
+                data.push({spec_name: name, sub_menu_id: sub_menu_id });
+            })
+            // selectedSpecification
+            $.ajax({
+                url: submit_url,
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    data: data,
+                    view: 'html',
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response){
+                        if (response.dataHtml) {
+                            $(".second_specification_list_wrap input:checkbox[name='specification[]']:checked").each(function(){
+                                $(this).prop('checked', false);
+                            });
+                            $('.specification_list_wrap').append(response.dataHtml);
+                        }
+                    }
+                }
+            });
+            console.log("data here", data);
+        } else {
+            $('#second_specification_status_label').text('Select Atleast One item to get.');
+        }
+    });
     $(document).ready(function () {
         set_specification_list();
     })
