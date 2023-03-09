@@ -119,7 +119,7 @@ class SpecificationController extends Controller
             if ($request->view == 'html') {
                 foreach($speciDataBysubmenu as $item) {
                     $data = ['spec'=> $item, 'specificationsSelected' => $specificationsSelected ];
-                    $html .= view('pages.plan.specification.specificationItem', $data)->render();
+                    $html .= view('pages.plan.specification.specificationItemV2', $data)->render();
                 }
             }
             return response()->json([
@@ -134,6 +134,45 @@ class SpecificationController extends Controller
                 'error' => 'Invalid Request call!',
                 'title' => 'Specification',
             ], Response::HTTP_OK);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addSpecifications(Request $request)
+    {
+        if($request->ajax()){
+            if(isset($request->data) && $request->data != '' && $request->data != "0"){
+                $data = $request->data; // [['spec_name'=>$spec_name,'sub_menu_id'=>$sub_menu_id]]
+                $addedData = []; // [['spec_name'=>$spec_name,'sub_menu_id'=>$sub_menu_id]]
+                $html = '';
+                if (count($data) > 0) {
+                    foreach($data as $specification) {
+                        $spec = Specification::create($specification);
+                        $addedData[] = $spec;
+                        $dataItem = ['spec'=> $spec, 'specificationsSelected' => [] ];
+                        $html .= view('pages.plan.specification.specificationItem', $dataItem)->render();
+                    }
+                }
+
+                return response()->json([
+                    'success' => 'Specification created successfully!',
+                    'title' => 'Specification',
+                    'type' => 'create',
+                    'data' => $addedData,
+                    'dataHtml' => $html,
+                ], Response::HTTP_OK);
+            } else {
+                return response()->json([
+                    'error' => 'Sub Menu id not valid',
+                    'title' => 'Specification',
+                    'type' => 'create',
+                ], Response::HTTP_OK);
+            }
         }
     }
 }
