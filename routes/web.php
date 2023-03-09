@@ -122,13 +122,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/planpricing/delete',[PlanPricingController::class,'remove'])->name('planpricing-delete');
     Route::post('/planpricing/planBillingStore',[PlanPricingController::class,'planBillingStore'])->name('plan-billing-store');    
 
-
     // User Plan Module
     Route::get('/userPlan',[UserPlanController::class,'index'])->name('user-plan-index');
     Route::post('/userPlan/store',[UserPlanController::class,'store'])->name('user-plan-store');
     Route::get('/userPlan/edit/{id}', [UserPlanController::class, 'edit'])->name('user-plan-edit');
     Route::get('/userPlan/delete/{id}', [UserPlanController::class, 'remove'])->name('user-plan-delete');
     Route::get('/userPlan/getByCategoryId/{id}', [UserPlanController::class, 'getByCategoryId'])->name('user-plan-getByCategoryId');
+    Route::get('/userPlan/preview/{id}', [UserPlanController::class, 'preview'])->name('preview-user-plan-byId');
     
     Route::post('/plansectionstatus/store',[PlanSectionsStatusController::class,'store'])->name('plansection-status-store');
     Route::post('/plansectionstatus/updateRecord',[PlanSectionsStatusController::class,'updateRecord'])->name('plansection-record-status-store');

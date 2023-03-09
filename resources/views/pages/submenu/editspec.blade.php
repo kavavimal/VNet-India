@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Vnet | Specifications | {{$plan->id ?? 'New'}}</title>
+    <title>Vnet | Configuration | {{$plan->id ?? 'New'}}</title>
 @endsection
 @section('page-css')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -28,11 +28,11 @@
 @section('main-content')
 <div class="breadcrumb">
     <div class="col-sm-12 col-md-12">
-        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('submenu-index')}}">SubMenu</a> | Specifications {{ $plan ? 'Edit: '.$plan->id : 'New'}} </a>
+        <h4> <a href="{{route('dashboard')}}">Vnet</a> | <a href="{{route('submenu-index')}}">SubMenu</a> | Configuration {{ $plan ? 'Edit: '.$plan->id : 'New'}} </a>
         @include('pages.submenu.specButtons')
     </div>
 </div>
-<h4 class="heading-color">Specifications</h4>
+<h4 class="heading-color">Configuration</h4>
 @if($plan)
     <form class="erp-spec-plan-submit" data-url="{{route('specification-plan-store')}}">
         <input type="hidden" id="plan_id_update" class="plan_id_update" name="id" value="{{ $plan->id ?? '' }}" />
