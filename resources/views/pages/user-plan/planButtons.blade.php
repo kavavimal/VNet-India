@@ -6,6 +6,13 @@
         Save
     </button>
 </div>
+@if($plan)
 <a href="{{route('preview-user-plan-byId', $plan->id)}}" class="btn btn-outline-primary mr-2 float-right">
     Preview
 </a>
+@endif
+@if($plan)
+<a href="{{route('user-plan-export-pdf', $plan->id)}}" class="btn btn-outline-primary mr-2 float-right" target="_blank">
+    Export to PDF
+</a>
+@endif

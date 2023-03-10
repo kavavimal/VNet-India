@@ -312,6 +312,7 @@
         let amount = $('#amount').val();        
         let percent = $('#percentage').val();        
         let upgrade_downgrade = $('#upgrade_downgrade').val();        
+        alert(upgrade_downgrade);
         if (amount && percent && upgrade_downgrade) {
             let final_amount = amount * percent / 100;
             if (upgrade_downgrade === 'upgrade') {                

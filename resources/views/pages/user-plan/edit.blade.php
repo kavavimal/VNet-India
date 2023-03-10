@@ -10,10 +10,7 @@
     }
     .select2-container {
        width: 150px;
-    }
-    .dropdown-menu.show{
-        left: -100% !important;
-    }
+    }  
     textarea{
         height: 100px !important;
     }
@@ -69,12 +66,12 @@
                 @include('pages.user-plan.planPricing.planList')
                 @include('pages.user-plan.planButtons')
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7 px-2">
                 @include('pages.user-plan.specificationsList')
             </div>
-            <div class="col-md-6">
-                @include('pages.user-plan.featuredcategoryList')
-            </div>            
+            <div class="col-md-5 px-2">
+                @include('pages.user-plan.featuredcategoryList')               
+            </div>
             @if($featuredCategorysSelected != '')
                 @foreach ($featuredCategory as $featured_cat)
                     @if (in_array($featured_cat->id, $featuredCategorysSelected))
@@ -103,17 +100,20 @@
             <div class="col-md-6 mt-4">
                 @include('pages.user-plan.totalPrice')                
             </div>            
-            <div class="col-md-6 mt-4">
+            <div class="col-md-12 mt-4">
                 @include('pages.user-plan.billingList')
+            </div>            
+            <div class="col-md-4 mt-4">
+                @include('pages.user-plan.tax')
             </div>
-            <div class="col-md-6 mt-4">
-                @include('pages.user-plan.tax')                
+            <div class="col-md-8 mt-4">
+                @include('pages.user-plan.calAmountTax')
             </div> 
             <div class="col-md-4 mt-4">
                 @include('pages.user-plan.amountCalc')
             </div>  
-            <div class="col-md-4 mt-4">
-                @include('pages.user-plan.finalTotalAfterTax')
+            <div class="col-md-8 mt-4">
+            @include('pages.user-plan.calamountafterdiscount')
             </div>  
             <div class="col-md-4 mt-4">
                 @include('pages.user-plan.negotiation')
@@ -162,6 +162,13 @@
 <script src="{{asset('assets/js/carousel.script.js')}}"></script>
 @endsection
 @section('bottom-js')
-    @include('pages.user-plan.form-script')  
-    @include('pages.user-plan.tax-form-script')  
+@include('pages.user-plan.form-script')
+    @include('pages.user-plan.specification-form-script')
+    @include('pages.user-plan.featuredCategory-form-script')
+    @include('pages.user-plan.featuredSubCat.featuredSubCategory-script')
+    @include('pages.user-plan.billing-form-script')
+    @include('pages.user-plan.planPricing.plan-form-script')
+    @include('pages.user-plan.server-location-form-script')
+    @include('pages.user-plan.tax-form-script')    
+    @include('pages.user-plan.final-cal-script')    
 @endsection
