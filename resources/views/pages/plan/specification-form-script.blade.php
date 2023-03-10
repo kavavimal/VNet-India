@@ -211,8 +211,7 @@
     $(document).on("click","#second_specification_button", function (e) {
         $('#second_specification_status_label').text('');
         const submit_url = $(this).attr('data-url');
-        const sub_menu_id = $('#sub_menu_id_new').val();
-        alert(sub_menu_id);
+        const sub_menu_id = $('#sub_menu_id_new').val();        
         let specification = [];
         $(".second_specification_list_wrap input:checkbox[name='specification[]']:checked").each(function(){
             specification.push($(this).val());
