@@ -6,20 +6,20 @@
                 <thead>
                     <th>#</th>
                     <th>No Of Years</th>
-                    <th>Amount</th>
+                    <th>Base Amount</th>
                     <th>Percentage</th>
                     <th>Upgrade / Downgrade</th>
                     <th>Action</th>
                 </thead>
                 <tbody class="billing_price_table">
-                <tr class="first_year_info">
-                    <td>#</td>
-                    <td>1 Year</td>
-                    <td class="default_amount"></td>
-                    <td>-</td>
-                    <td>-</td>                    
-                    <td>-</td>
-                </tr>
+                    <tr class="first_year_info">
+                        <td>#</td>
+                        <td>1 Year</td>
+                        <td class="default_amount"></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
                     @if(count($bilingCycle) > 0)
                         @foreach ($bilingCycle as $list)
                             @include('pages.plan.billingCycle.billingCycleItem')

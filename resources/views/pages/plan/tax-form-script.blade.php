@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle-1">Add Taxation</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle-1">Add/Edit Taxation</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -67,9 +67,9 @@
 
     function refreshTaxationTableRows() {
         let tax = $('#taxation').val();
-        // let taxPer = $('#taxation').find(':selected').attr('data-tax');
-        let taxPer = $('#taxation').attr('data-tax');
-
+        let taxPer = $('#taxation').find(':selected').attr('data-tax');
+        // let taxPer = $('#taxation').attr('data-tax');
+        
         // let taxPer = $('#taxation').is(':selected').attr('data-tax');
         let billing_cycle = [];
         $('.taxation_billing_list_wrap').find('table tbody').empty();
@@ -109,6 +109,19 @@
         refreshTaxationTableRows();
     });
     $(document).on('change', "#taxation", function () {
+        let taxoptions = $('#taxation').find(':selected');
+        let taxId = $(taxoptions).attr('data-id');
+        let taxName = $(taxoptions).attr('data-name');
+        let taxPer = $(taxoptions).attr('data-tax');
+
+        if(taxPer==="0"){
+            $('#taxation-edit').hide();
+        }else {
+            $('#taxation-edit').attr('data-id',taxId);
+            $('#taxation-edit').attr('data-name',taxName);
+            $('#taxation-edit').attr('data-percentage',taxPer);
+            $('#taxation-edit').show();
+        }
         refreshTaxationTableRows();
     });
     // save tax
@@ -137,9 +150,8 @@
                         $('#taxation').val(data.id);
                         $('#taxation').attr('data-tax',data.tax_percentage);
                         $('#taxation-selected-label').val(data.tax_name+` - `+data.tax_percentage+` % `);
-                        refreshTaxationTableRows();
-                       
-                        // $('.tax_list_wrap').find('#taxation').append(`<option data-id="`+data.id+`" data-tax="`+data.tax_percentage+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
+                        
+                        $('.tax_list_wrap').find('#taxation').append(`<option data-id="`+data.id+`" data-tax="`+data.tax_percentage+`" data-name="`+data.tax_name+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
                         // $('.tax_list_wrap').append(`
                         //     <div class="form-check" id="tax-`+data.id+`">
                         //         <input class="form-check-input tax" type="checkbox" value="` + data.id + `" id="taxation-` + data.id + `" name="taxation[]">
@@ -148,13 +160,16 @@
                         //         <button type="button" class="btn btn-outline-primary btn-sm delete-item-tax" data-id="`+data.id+`" data-name="`+data.tax_name+`" data-percentage=`+data.tax_percentage+` data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
                         //     </div>
                         // `);
+                        refreshTaxationTableRows();
                     } else {
                         $('#taxation').val(data.id);
                         $('#taxation').attr('data-tax',data.tax_percentage);
                         $('#taxation-selected-label').val(data.tax_name+` - `+data.tax_percentage+` % `);
-                        refreshTaxationTableRows();
+                        
+                        $('#taxation-edit').attr('data-name', data.tax_name);
+                        $('#taxation-edit').attr('data-percentage', data.tax_percentage);
 
-                        // $('.tax_list_wrap').find('#taxation').find("[data-id='"+data.id+"']").replaceWith(`<option data-id="`+data.id+`" data-tax="`+data.tax_percentage+`" value="`+data.id+`">`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
+                        $('.tax_list_wrap').find('#taxation').find("[data-id='"+data.id+"']").replaceWith(`<option data-id="`+data.id+`" data-tax="`+data.tax_percentage+`" data-name="`+data.tax_name+`" value="`+data.id+`" selected>`+data.tax_name+` - `+data.tax_percentage+` % </option>`)
                         // $('.tax_list_wrap').find('#tax-'+data.id).replaceWith(`
                         //     <div class="form-check" id="tax-`+data.id+`">
                         //         <input class="form-check-input tax" type="checkbox" value="` + data.id + `" id="taxation-` + data.id + `" name="taxation[]">
@@ -163,6 +178,7 @@
                         //         <button type="button" class="btn btn-outline-primary btn-sm delete-item-tax" data-id="`+data.id+`" data-name="`+data.tax_name+`" data-percentage=`+data.tax_percentage+` data-toggle="modal" title="Delete"><i class="nav-icon i-remove"></i></button>
                         //     </div>
                         // `);
+                        refreshTaxationTableRows();
                     }
                     $('#type').val('add');
                     $('#tax-id').val('');

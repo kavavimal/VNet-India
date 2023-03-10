@@ -127,7 +127,7 @@
                                 data.billing_percentage + "</td><td>" +
                                 data.billing_upgrade_downgrade + "</td><td>" +                                
                                 "<button type='button' class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1' data-id='` + data.id + `'data-storage='` + data.storage + `'data-storage_price='` + data.storage_price + `'data-billing_cycle='` + data.billing_cycle + `'data-server='` + data.server + `'data-window_server='` +data.window_server + `'data-upgrade_downgrade='` +data.upgrade_downgrade + `'data-price='` + data.price + `'data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `'data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
-                            $('.billing_price_table').find('#planPricing-' + data.id).replaceWith(rows2);
+                            $('.billing_price_table').find('#billingPrice-' + data.id).replaceWith(rows2);
                     }
                     $('#type').val('add');
                     $('#billing-id').val('');
@@ -154,7 +154,7 @@
         $('.plan-billing-submit').attr('data-id',id).attr('data-name',name);
         $('#billing-id').val(id);
         $('#type').val('edit');
-        $('#billing_name').val(name);
+        $('.plan-billing-submit #billing_name').val(name);
         $('#billing_final_amount').val(amount),
         $('#billing_percentage').val(percentage),
         $('#billing_upgrade_downgrade').val(type),
@@ -217,6 +217,7 @@
             final_price.text(am);
             billing_final_amount.val(am);
         }else if(upgrade_downgrade === 'none'){
+            let am=0;
             final_price.text(amss);
             billing_final_amount.val(am);
         }      
