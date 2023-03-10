@@ -37,4 +37,5 @@ class UserPlan extends Model
     public function submenu(){
         return $this->hasOne(SubMenu::class,'id','plan_product_id');
     }
+    
 }

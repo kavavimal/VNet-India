@@ -13,6 +13,7 @@ use App\Models\BilingCycle;
 use App\Models\ServerLocation;
 use App\Models\SubMenSpecification;
 use App\Models\PlanPricing;
+use App\Exports\UsersPlanExport;
 use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 use Spatie\Permission\Models\Role;
 use DB;
+use PDF;
 use Illuminate\Support\Arr;
 use App\Models\SubMenu;
 use Illuminate\Support\Str;
@@ -42,6 +44,22 @@ class UserPlanController extends Controller
         $category_list = Category::where('sys_state','!=','-1')->get();
         $submenu = [];
         return view('pages.user-plan.index', compact('plan','category_list','submenu'));
+    }
+
+    public function userPlanExport()
+    {
+        return \Excel::download(new UsersPlanExport, 'Plans.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function userPlanExportPDF()
+    {
+        $data1 = [
+            'header_image' => asset('storage/Logo_Settings/V_logo_new.png'),        
+        ];        
+        $pdf = PDF::loadView('pages.user-plan.exportsPlanPDF', $data1,[],[
+            'margin_top' => 100,            
+        ]);
+        return $pdf->stream('Plans.pdf');
     }
 
     public function getByCategoryId($id){
