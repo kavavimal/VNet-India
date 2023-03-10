@@ -129,6 +129,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/userPlan/delete/{id}', [UserPlanController::class, 'remove'])->name('user-plan-delete');
     Route::get('/userPlan/getByCategoryId/{id}', [UserPlanController::class, 'getByCategoryId'])->name('user-plan-getByCategoryId');
     Route::get('/userPlan/preview/{id}', [UserPlanController::class, 'preview'])->name('preview-user-plan-byId');
+    Route::get('/userPlan/userPlanExport', [UserPlanController::class, 'userPlanExport'])->name('user-plan-export');
+    Route::get('/userPlan/userPlanExportPDF', [UserPlanController::class, 'userPlanExportPDF'])->name('user-plan-export-pdf');
     
     Route::post('/plansectionstatus/store',[PlanSectionsStatusController::class,'store'])->name('plansection-status-store');
     Route::post('/plansectionstatus/updateRecord',[PlanSectionsStatusController::class,'updateRecord'])->name('plansection-record-status-store');
