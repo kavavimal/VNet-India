@@ -138,6 +138,10 @@
         $("input:checkbox[name='featuredCategory[]']:checked").each(function(){
             featuredCategory.push($(this).val());
         });
+        let serverlocations = [];
+        $("input:checkbox[name='serverlocations[]']:checked").each(function(){
+            serverlocations.push($(this).val());
+        });
         let featuredSubCategory = [];
         $("input:checkbox[name='featuredSubCategory[]']:checked").each(function(){
             featuredSubCategory.push($(this).val());
@@ -161,6 +165,7 @@
                 taxation: taxation,
                 specification: specification.join(','),
                 featuredCategory: featuredCategory.join(','),
+                serverlocations: serverlocations.join(','),
                 featuredSubCategory: featuredSubCategory.join(','),
                 negotiation_min: negotiation_min,
                 negotiation_max: negotiation_max,

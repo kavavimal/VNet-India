@@ -71,6 +71,7 @@ class PlanController extends Controller
         $featuredCategorysSelected = (!empty($plan->featured_category)) ? explode(',', $plan->featured_category) : '';
         $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
         $taxationSelected = (!empty($plan->taxation)) ? explode(',', $plan->taxation) : '';
+        $serverlocationSelected = (!empty($plan->server_location)) ? explode(',', $plan->server_location) : '';
         
         // $plan_sections_statuses = PlanSectionsStatus::where('sys_state','!=','-1')->get();
         $plan_sections_statuses = helper::getPlanSectionsStatus(true);
@@ -79,26 +80,24 @@ class PlanController extends Controller
         $bilingCycle = '';
         $featuredCategory = '';
         $tax = '';        
+        $selectedTaxItem = '';
         if(!empty($plan)){
-            $menu_id = SubMenu::where('id',$plan->plan_product_id)->where('sys_state','!=','-1')->get()->pluck('category_id')->first();
-            
+            $menu_id = $plan->plan_product_id;
             $specifications = Specification::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('spec_name','desc')->get();
             $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->with('children')->orderBy('featured_cat_name','desc')->get();
             $bilingCycle = BilingCycle::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('billing_name','desc')->get();
             $tax = Tax::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->get();
+            
+            foreach($tax as $taxItem) {
+                if($taxationSelected != '' && in_array($taxItem->id,$taxationSelected)) {
+                    $selectedTaxItem = $taxItem;
+                }                
+            }
         }
         $product_list = SubMenu::where('sys_state','!=','-1')->get();
         $server_locations = ServerLocation::where('sys_state','!=','-1')->get();
-        $plan_pricing = PlanPricing::where('sys_state','!=','-1')->get();
-        $serverlocationSelected ='';
+        $plan_pricing = PlanPricing::where('sys_state','!=','-1')->get();    
         
-        $selectedTaxItem = '';
-        foreach($tax as $taxItem) {
-            if($taxationSelected != '' && in_array($taxItem->id,$taxationSelected)) {
-                $selectedTaxItem = $taxItem;
-            }
-            // echo '<pre>';print_r($taxationSelected);exit;
-        }
         return view('pages.plan.edit', compact(
             'plan',
             'specifications',
@@ -120,7 +119,7 @@ class PlanController extends Controller
         ));
     }
 
-    public function store(Request $request){
+    public function store(Request $request){        
         if($request->ajax()){
             if($request->id == "0"){
                 $validator = Validator::make($request->all(), [
@@ -177,6 +176,7 @@ class PlanController extends Controller
                     $servive_type_currency = $request->servive_type_currency;
                     $service_type_renewal_price = $request->service_type_renewal_price;
                     $service_type_discount = $request->service_type_discount;
+                    $serverlocations = $request->serverlocations;
 
                     $plan->update([
                         'plan_name'=>$planName,
@@ -193,6 +193,7 @@ class PlanController extends Controller
                         'service_type_type'=>$service_type_type,
                         'service_type_price'=>$service_type_price,
                         'servive_type_currency'=>$servive_type_currency,
+                        'server_location'=>$serverlocations,
                         'service_type_renewal_price'=>$service_type_renewal_price,
                         'service_type_discount'=>$service_type_discount,
                     ]);

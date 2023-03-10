@@ -51,10 +51,11 @@ class UserPlanController extends Controller
         return \Excel::download(new UsersPlanExport, 'Plans.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
-    public function userPlanExportPDF()
+    public function userPlanExportPDF($id)
     {
         $data1 = [
-            'header_image' => asset('storage/Logo_Settings/V_logo_new.png'),        
+            'header_image' => asset('storage/Logo_Settings/V_logo_new.png'),      
+            'id'  => $id
         ];        
         $pdf = PDF::loadView('pages.user-plan.exportsPlanPDF', $data1,[],[
             'margin_top' => 100,            

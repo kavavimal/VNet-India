@@ -17,7 +17,7 @@
             <tr>
                 <th><img src="{{ $header_image }}" style="margin:0 auto; max-height:150px;"/></th>
             </tr>
-            <tr><th>Plans PDF</th></tr>
+            <tr><th>Plans PDF</th></tr>            
         </tbody>
     </table>
 </htmlpageheader>

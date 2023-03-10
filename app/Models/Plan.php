@@ -20,6 +20,7 @@ class Plan extends Model
         'specification',
         'featured_category',
         'featured_sub_category',
+        'server_location',
         'negotiation_min',
         'negotiation_max',
         'negotiation_status',
