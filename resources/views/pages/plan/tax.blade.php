@@ -15,9 +15,11 @@
 
                     <select class="form-control" id="taxation" name="taxation">
                         <option value="0" data-tax="0">Select Tax</option>
+                        @if($tax != '')
                         @foreach($tax as $tax_item)
                             <option data-id="{{$tax_item->id}}" data-tax="{{$tax_item->tax_percentage}}" data-name="{{$tax_item->tax_name}}" value="{{$tax_item->id}}" @if($taxationSelected != ''){{ in_array($tax_item->id,$taxationSelected) ? 'selected="selected"' : '' }}@endif >{{$tax_item->tax_name}} - {{$tax_item->tax_percentage}} %</option>
                         @endforeach
+                        @endif
                     </select>
                     <div class="input-group-append">
                         @if(isset($selectedTaxItem) && $selectedTaxItem != '')
