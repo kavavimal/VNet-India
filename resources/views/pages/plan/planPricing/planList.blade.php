@@ -13,7 +13,7 @@
                 <th>Price</th>
             </thead>                 
             <tbody class="plan_price_list_tbl_view">
-                @if(isset($plan_pricing) && count($plan_pricing) > 0) 
+                @if($plan_pricing != '' && isset($plan_pricing) && count($plan_pricing) > 0) 
                     @foreach ($plan_pricing as $item)
                         <tr id="planPricing-{{$item->id}}">
                             <td>
