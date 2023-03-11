@@ -5,9 +5,14 @@
             <div class="sub-category-items-wrap">
                 @if(count($items) > 0)
                     @foreach ($items as $cat)
-                        @include('pages.plan.featuredSubCat.catItemCheckbox', ['id' => $cat->id, 'name' => $cat->name, 'show_status' => $cat->show_status])
+                        @include('pages.submenu.configuration.catItemCheckbox', ['id' => $cat->id, 'name' => $cat->name, 'show_status' => $cat->show_status])
                     @endforeach
                 @endif
+            </div>
+            <div class="text-right">
+                <button type="button" class="btn btn-primary sub-cat-block-additembutton">
+                    <i class="nav-icon i-add"></i> Add
+                </button>
             </div>
         </div>
     </div>

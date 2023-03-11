@@ -1,6 +1,13 @@
 <div class="card">
     <div class="card-body table_wrap">
         <h4 class="mb-3 d-inline-block">Server Location</h4>
+        <div class="float-right">
+        @include('pages.common.plan-section-switch', array(
+                "switch_id_rec" => $plan_sections_statuses['section_server_location']->id,
+                "switch_name"=> 'section_server_location', 
+                "switch_id" => "section_server_location", 
+                "status" => $plan_sections_statuses['section_server_location']->status))
+        </div>
         <div class="server_location_list_wrap">
         <table class="table table-hover collapsible">
             <thead>
@@ -12,6 +19,7 @@
                 <th>Server Location Country</th>
                 <th>Percentage</th>
                 <th>Upgrade/ Downgrade</th>
+                <th>Action</th>
             </thead>
             <tbody class="server_location_list_tbl_view">
                 @if(isset($server_locations) && count($server_locations) > 0) 
@@ -39,6 +47,27 @@
                             <td>{{$locationItem->server_location_country}}</td>
                             <td>{{$locationItem->percentage}}</td>
                             <td>{{$locationItem->upgrade_downgrade}}</td>
+                            <td>
+                                <button type='button'
+                                class='btn btn-outline-primary btn-sm edit-item-serverlocation mr-1'
+                                data-id='{{$locationItem->id}}'
+                                data-basecountry='{{$locationItem->base_country}}'
+                                data-amount='{{$locationItem->amount}}'
+                                data-currency='{{$locationItem->currency}}'
+                                data-server-location-country='{{$locationItem->server_location_country}}'
+                                data-percentage='{{$locationItem->percentage}}'
+                                data-upgrade-downgrade='{{$locationItem->upgrade_downgrade}}'
+                                data-toggle='modal' title='Edit'>
+                                <i class='nav-icon i-pen-4'></i>
+                            </button>
+                                <button type='button'
+                                class='btn btn-outline-primary btn-sm delete-item-serverlocation'
+                                data-id='{{$locationItem->id}}'
+                                data-name='{{$locationItem->base_country}}'
+                                data-toggle='modal' title='Delete'>
+                                <i class='nav-icon i-remove'></i>
+                            </button>
+                            </td>
                         </tr>
                     @endforeach
                 @endif
@@ -46,5 +75,10 @@
         </table>
         </div>
         <button class="expand_collapse_table btn btn-primary">Expand List</button>
+        <div class="text-right">
+            <button type="button" class="btn btn-primary" id="serverlocation-add">
+                <i class="nav-icon i-add"></i> Add
+            </button>
+        </div>
     </div>
 </div>

@@ -111,7 +111,7 @@ class UserPlanController extends Controller
             
             if(!empty($menu_specificatoin['featured_category'])){
                 $featuredCategory_id = explode(",",$menu_specificatoin['featured_category']);
-                $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->whereIn('id',$featuredCategory_id)->with('children')->orderBy('featured_cat_name','desc')->get();
+                $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->whereIn('id',$featuredCategory_id)->where('show_status','1')->with('children')->orderBy('featured_cat_name','desc')->get();
             }
 
             if(!empty($menu_specificatoin['billing_cycles'])){

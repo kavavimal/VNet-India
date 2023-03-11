@@ -26,6 +26,15 @@
                     <div class="triangle"></div>
                 </li>
             @endcan
+            @can('plan-create')
+                <li class="nav-item {{ request()->is('plan/edit*') ? 'active' : '' }}">
+                    <a class="nav-item-hold" href="{{ route('plan-edit','new') }}">
+                        <i class="nav-icon i-Add-Cart"></i>
+                        <span class="nav-text">Create New Plan</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+            @endcan
             @can('plan-tab-show')
                 <li class="nav-item {{ request()->is('plan*') ? 'active' : '' }}">
                     <a class="nav-item-hold" href="{{ route('plan-index') }}">
@@ -62,6 +71,15 @@
                     <div class="triangle"></div>
                 </li>
             @endcan           
+            @can('user-plan-create')
+                <li class="nav-item {{ request()->is('userPlan/edit*') ? 'active' : '' }}">
+                    <a class="nav-item-hold" href="{{ route('user-plan-edit','new') }}">
+                        <i class="nav-icon i-Add-Cart"></i>
+                        <span class="nav-text">Create New Plan</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+            @endcan
         </ul>
     </div>
 
