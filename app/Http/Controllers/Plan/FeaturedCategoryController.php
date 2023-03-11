@@ -49,7 +49,7 @@ class FeaturedCategoryController extends Controller
                         'title' => 'Featured Category',
                         'type' => 'create',
                         'data' => $featuredCategorySave,
-                        'html' => view('pages.plan.featuredCat.catItemCheckbox', [
+                        'html' => view('pages.submenu.configuration.catItemCheckbox', [
                             'id' => $featuredCategorySave->id, 
                             'featured_cat_name' => $featuredCategorySave->featured_cat_name,
                             'show_status' => $featuredCategorySave->show_status,
@@ -116,8 +116,8 @@ class FeaturedCategoryController extends Controller
             $html = '';
             if ($request->view == 'html') {
                 foreach($featuredDataBysubmenu as $item) {
-                    $data = ['cat'=> $item, 'featuredCategorysSelected' => $featuredCategorysSelected ];
-                    $html .= view('pages.plan.featuredCat.featuredCategoryItemV2', $data)->render();
+                    $data = ['cat'=> $item,  'featuredCategorysSelected' => $featuredCategorysSelected ];
+                    $html .= view('pages.submenu.configuration.featuredCategoryItemV2', $data)->render();
                 }
             }
             return response()->json([
@@ -153,7 +153,7 @@ class FeaturedCategoryController extends Controller
                         $cat = FeaturedCategory::create($featuredCategory);
                         $addedData[] = $cat;
                         $dataItem = ['id'=> $cat->id,  'featured_cat_name' => $cat->featured_cat_name , 'show_status' => $cat->show_status  , 'featuredCategorysSelected' => [] ];
-                        $html .= view('pages.plan.featuredCat.catItemCheckbox', $dataItem)->render();
+                        $html .= view('pages.submenu.configuration.catItemCheckbox', $dataItem)->render();
                     }
                 }
 

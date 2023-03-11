@@ -66,10 +66,10 @@
                 @include('pages.user-plan.planPricing.planList')
                 @include('pages.user-plan.planButtons')
             </div>
-            <div class="col-md-7 px-2">
+            <div class="col-md-6 px-2">
                 @include('pages.user-plan.specificationsList')
             </div>
-            <div class="col-md-5 px-2">
+            <div class="col-md-6 px-2">
                 @include('pages.user-plan.featuredcategoryList')               
             </div>
             @if($featuredCategorysSelected != '')
