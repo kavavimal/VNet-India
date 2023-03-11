@@ -17,7 +17,7 @@
                     <td>-</td>
                 </tr>
                 <?php $taxTable = true; ?>
-                    @if($bilingCycle != '' && count($bilingCycle) > 0)
+                    @if($bilingCycle != '')
                         @foreach ($bilingCycle as $list)
                             @include('pages.plan.billingCycle.taxationBillingCycleItem')
                         @endforeach
