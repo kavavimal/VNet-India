@@ -18,7 +18,7 @@
                         <td>-</td>
                         <td>-</td>
                     </tr>
-                    @if(count($bilingCycle) > 0)
+                    @if($bilingCycle != '' && count($bilingCycle) > 0)
                         @foreach ($bilingCycle as $list)
                             @include('pages.plan.billingCycle.billingCycleItem')
                         @endforeach
