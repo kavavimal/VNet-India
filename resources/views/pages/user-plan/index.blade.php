@@ -75,7 +75,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        @include('pages.plan.planTableBody')
+                        @include('pages.user-plan.planTableBody')
                         <tfoot>
                             <tr>
                                 <th>#</th>

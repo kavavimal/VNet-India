@@ -4,6 +4,11 @@
         $(".erp-user-plan-submit").submit();
     });
 
+    $(document).on("click", ".erp-user-preview", function() {
+        $("#preloader").show();
+        $(".erp-user-plan-submit").submit();
+    });
+
     $(document).on('change', "input[name='negotiation_status']", function() {        
         if($(this).is(':checked')){
             $(this).val('0');
