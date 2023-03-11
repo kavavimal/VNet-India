@@ -160,13 +160,20 @@ class SubMenuController extends Controller
         $bilingCycle = '';
         $featuredCategory = '';
         $tax = '';        
-        if(!empty($plan)){
-            $menu_id = SubMenu::where('id',$plan->plan_product_id)->where('sys_state','!=','-1')->get()->pluck('category_id')->first();
-            
+        $selectedTaxItem = '';
+
+       if(!empty($plan)){
+            $menu_id = $plan->plan_product_id;
             $specifications = Specification::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('spec_name','desc')->get();
             $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->with('children')->orderBy('featured_cat_name','desc')->get();
             $bilingCycle = BilingCycle::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->orderBy('billing_name','desc')->get();
             $tax = Tax::where('sys_state','!=','-1')->where('sub_menu_id','=',$menu_id)->get();
+            
+            foreach($tax as $taxItem) {
+                if($taxationSelected != '' && in_array($taxItem->id,$taxationSelected)) {
+                    $selectedTaxItem = $taxItem;
+                }                
+            }
         }
         $product_list = SubMenu::where('sys_state','!=','-1')->get();
         $server_locations = ServerLocation::where('sys_state','!=','-1')->get();
@@ -184,16 +191,17 @@ class SubMenuController extends Controller
             'specificationsSelected',
             'featuredCategorysSelected',
             'featuredSubCategorySelected',
-            'taxationSelected',
             'serverlocationSelected',
+            'taxationSelected',
             'server_locations',
             'plan_pricing',
             'planPricingSelected',
-            'plan_sections_statuses'
+            'plan_sections_statuses',
+            'selectedTaxItem'
         ));
     }
 
-    public function storespecification(Request $request){
+    public function storespecification(Request $request){        
         $planid = $request->id;
         $product_id = $request->product_id;        
         $billingCycle = $request->billing_cycle;

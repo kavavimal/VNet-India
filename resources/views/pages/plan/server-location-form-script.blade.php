@@ -122,16 +122,6 @@
         $('#final_amount').html('');
         $('#serverLocation_modal').modal('show');
     });
-    
-    $(document).on('keydown', '#amount', function() {              
-        calculate_percentage();
-    });
-    $(document).on('keyup', '#percentage', function() {                
-        calculate_percentage();
-    });
-    $(document).on('change', 'select[name="upgrade_downgrade"]', function() {
-        calculate_percentage();
-    })
 
     // save server location data
     $(".plan-server-location-submit").submit(function(e) {
@@ -294,15 +284,7 @@
         $('#server_location_country').val(server_location_country).trigger('change');;
         $('#percentage').val(percentage);
         $('select[name=upgrade_downgrade]').val(upgrade_downgrade);
-        calculate_percentage();
-        // if(upgrade_downgrade==='upgrade'){
-        //     $('#upgrade').attr('checked', 'checked');
-        // }else if(upgrade_downgrade==='downgrade'){
-        //     $('#downgrade').attr('checked', 'checked');
-        // }else{
-        //     $('.upgrade_downgrade').removeAttr('checked');
-        // }
-        
+        calculate_percentage();            
         $('#serverLocation_modal').modal('show');
     })
     $('#base_country').select2({
@@ -311,18 +293,24 @@
     function calculate_percentage() {
         let amount = $('#amount').val();        
         let percent = $('#percentage').val();        
-        let upgrade_downgrade = $('#upgrade_downgrade').val();        
-        if (amount && percent && upgrade_downgrade) {
+        let upgrade_downgradesss = $('.plan-server-location-submit select[name=upgrade_downgrade]').val();      
+        if (amount && percent && upgrade_downgradesss) {
             let final_amount = amount * percent / 100;
-            if (upgrade_downgrade === 'upgrade') {                
+            if (upgrade_downgradesss === 'upgrade') {                
                 let am = parseInt(amount) + parseInt(final_amount)
                 $('#final_amount').html('Allocate Country Amount: ' + am);
-            } else if (upgrade_downgrade === 'downgrade') {
+            } else if (upgrade_downgradesss === 'downgrade') {
                 let am = parseInt(amount) - parseInt(final_amount)
                 $('#final_amount').html('Allocate Country Amount: ' + am);
-            }else if(upgrade_downgrade === 'none'){
-                $('#final_amount').html('');
+            }else if(upgrade_downgradesss === 'none'){
+                $('#final_amount').html('Allocate Country Amount: ' + amount);
             }
         }
-    }    
+    }            
+    $(document).on('change', '.plan-server-location-submit select[name=upgrade_downgrade]', function() {        
+        calculate_percentage();
+    });
+    $(document).on('keyup', '#amount , #percentage' , function() {              
+        calculate_percentage();
+    });
 </script>

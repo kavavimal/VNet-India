@@ -1,15 +1,15 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="mb-3 d-inline-block">Specification</h4>
-        <div class="float-right">
-            @include('pages.common.plan-section-switch', array(
-                "switch_id_rec" => $plan_sections_statuses['section_specification']->id,
-                "switch_name"=> 'section_specification', 
-                "switch_id" => "section_specification", 
-                "status" => $plan_sections_statuses['section_specification']->status))
-        </div>
         <div class="row">
-            <div class="col-sm-8 px-1">
+            <div class="col-sm-8 px-1 border-right">
+                <h4 class="mb-3 d-inline-block">Specification</h4>
+                <div class="float-right">
+                    @include('pages.common.plan-section-switch', array(
+                        "switch_id_rec" => $plan_sections_statuses['section_specification']->id,
+                        "switch_name"=> 'section_specification', 
+                        "switch_id" => "section_specification", 
+                        "status" => $plan_sections_statuses['section_specification']->status))
+                </div>
                 <div class="specification_list_wrap">
                     @if(count($specifications) > 0)
                         @foreach ($specifications as $spec)
@@ -41,7 +41,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-sm-4 px-2 py-1 border">
+            <div class="col-sm-4 px-1">
                 <label for="specification_sub_menu_select">Grab from other Sub Menu</label>
                 <select class=" form-control select2" data-url="{{route('getspecificationdata')}}" id="specification_sub_menu_select" name="specification_sub_menu_select">
                     <option value="0">Select Sub Menu</option>
@@ -54,10 +54,9 @@
                 </select>
                 <div class="second_specification_list_wrap">
                 </div>
-                <small class="error" id="second_specification_status_label"></small>
+                <small class="error d-block" id="second_specification_status_label"></small>
                 <button type="button" id="second_specification_button" data-url="{{route('addSpecifications')}}" class="btn btn-sm btn-primary d-none"><i class="nav-icon i-left"></i> Add Selected</button>
             </div>
         </div>
-        
     </div>
 </div>

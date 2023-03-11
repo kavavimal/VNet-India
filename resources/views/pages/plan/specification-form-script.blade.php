@@ -171,8 +171,8 @@
         $('#spec_delete_modal').modal('show');
     });
 
-     // on submenu selection
-     function set_specification_list() {
+    // on submenu selection
+    function set_specification_list() {
         const selectbox = $('#specification_sub_menu_select');
         const selectedItem = $(selectbox).val();
         const submit_url = $(selectbox).attr('data-url');
