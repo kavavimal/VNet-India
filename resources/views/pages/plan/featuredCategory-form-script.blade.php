@@ -109,7 +109,7 @@
         });
     });
 
-    // edit specification
+    // edit featured category
     $(document).on("click", ".featuredCategory_list_wrap .edit-item", function() {
         let curr_item = $(this).closest('.featured_category_item');
         let id = $(curr_item).attr('data-id');
@@ -121,7 +121,7 @@
         $('#featured_cat_model').modal('show');
     });
 
-    // remove specification
+    // remove featured category
     $(document).on("click", "#featured_category_delete_modal .confirm-delete-item", function(e) {
         e.preventDefault();
         var submit_url = $(document).find("#featured_cat_remove_url").val();
@@ -159,4 +159,85 @@
         $('#featured_cat_id_delete').val($(curr_item).attr('data-id'));
         $('#featured_category_delete_modal').modal('show');
     });
+
+    // on submenu selection
+    function set_featuredCategory_list() {
+        const selectbox = $('#featuredCategory_sub_menu_select');
+        const selectedItem = $(selectbox).val();
+        const submit_url = $(selectbox).attr('data-url');
+        const plan_id = $('#plan_id').val();
+        if (selectedItem === '') {
+            $('.second_featuredCategory_list_wrap').empty();
+        } else {
+            $.ajax({
+                url: submit_url,
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    id: selectedItem,
+                    plan_id: plan_id,
+                    view: 'html',
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response){
+                        $('.second_featuredCategory_list_wrap').empty();
+                        if (response.dataHtml) {
+                            $('.second_featuredCategory_list_wrap').html(response.dataHtml);
+                            $('#second_featuredCategory_button').removeClass('d-none');
+                        } else {
+                            $('#second_featuredCategory_button').addClass('d-none');
+                        }
+                    }
+                }
+            });
+        }
+     }
+     $(document).on("change", "#featuredCategory_sub_menu_select",function(e) {
+        set_featuredCategory_list();
+    });
+
+    $(document).on("click","#second_featuredCategory_button", function (e) {
+        $('#second_featuredCategory_status_label').text('');
+        const submit_url = $(this).attr('data-url');
+        const sub_menu_id = $('#sub_menu_id_new').val();        
+        let featuredCAtegory = [];
+        $(".second_featuredCategory_list_wrap input:checkbox[name='featuredCategory[]']:checked").each(function(){
+            featuredCAtegory.push($(this).val());
+        });
+        if (featuredCAtegory.length > 0){
+            let data = [];
+            featuredCAtegory.forEach(function(item){
+                const name = $('.featured_category_item#featured-cat-'+item).attr('data-name');
+                data.push({featured_cat_name: name, sub_menu_id: sub_menu_id });
+            })
+            // selectedSpecification
+            $.ajax({
+                url: submit_url,
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    data: data,
+                    view: 'html',
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response){
+                        if (response.dataHtml) {
+                            $(".second_featuredCategory_list_wrap input:checkbox[name='featuredCategory[]']:checked").each(function(){
+                                $(this).prop('checked', false);
+                            });
+                            $('.featuredCategory_list_wrap').append(response.dataHtml);
+                        }
+                    }
+                }
+            });
+            console.log("data here", data);
+        } else {
+            $('#second_featuredCategory_status_label').text('Select Atleast One item to get.');
+        }
+    });
+    $(document).ready(function () {
+        set_featuredCategory_list();
+    })
 </script>

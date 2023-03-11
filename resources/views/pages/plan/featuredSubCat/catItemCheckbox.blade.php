@@ -19,5 +19,5 @@
         "switch_id_rec" => $id,
         "switch_name"=> "featured_sub_category_{{$id}}", 
         "switch_id" => "featured_sub_category_{{$id}}", 
-        "status" => 1))
+        "status" => $show_status))
 </div>

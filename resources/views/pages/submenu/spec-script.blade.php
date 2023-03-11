@@ -3,45 +3,6 @@
         $("#preloader").show();
         $(".erp-spec-plan-submit").submit();
     });
-
-    $(document).on('change', "input[name='negotiation_status']", function() {        
-        if($(this).is(':checked')){
-            $(this).val('0');
-        }
-        else if($(this).not(':checked')){           
-            $(this).val('1');
-        }
-    });
-
-    $(document).on('change', '.section_show_status', function () {
-        console.log('change', $(this).is(":checked"));        
-    });
-
-
-    function initCollapsible() {
-        let tablewrap = $('.table_wrap');
-        let table = $('.table_wrap table');
-        if ($(table).hasClass('collapsible')){
-            $(table).addClass('collapsed');
-            $(table).find('tbody').addClass('d-none');
-        }
-    }
-    
-    $(document).on('click', ".expand_collapse_table", function(e) {
-        e.preventDefault();
-        let table = $(this).closest('.table_wrap').find('table');
-        if($(table).hasClass('collapsed')){
-            $(table).removeClass('collapsed');
-            $(table).find('tbody').removeClass('d-none');
-            $(this).text('Collapse Table');
-        } else {
-            $(table).addClass('collapsed');
-            $(table).find('tbody').addClass('d-none');
-            $(this).text('Expand Table');
-
-        }
-    })
-
     $(".erp-spec-plan-submit").submit(function(e) {
         e.preventDefault();
 
@@ -132,6 +93,43 @@
             }
         });
     });   
+    $(document).on('change', "input[name='negotiation_status']", function() {        
+        if($(this).is(':checked')){
+            $(this).val('0');
+        }
+        else if($(this).not(':checked')){           
+            $(this).val('1');
+        }
+    });
+
+    $(document).on('change', '.section_show_status', function () {
+        console.log('change', $(this).is(":checked"));        
+    });
+
+
+    function initCollapsible() {
+        let tablewrap = $('.table_wrap');
+        let table = $('.table_wrap table');
+        if ($(table).hasClass('collapsible')){
+            $(table).addClass('collapsed');
+            $(table).find('tbody').addClass('d-none');
+        }
+    }
+    
+    $(document).on('click', ".expand_collapse_table", function(e) {
+        e.preventDefault();
+        let table = $(this).closest('.table_wrap').find('table');
+        if($(table).hasClass('collapsed')){
+            $(table).removeClass('collapsed');
+            $(table).find('tbody').removeClass('d-none');
+            $(this).text('Collapse Table');
+        } else {
+            $(table).addClass('collapsed');
+            $(table).find('tbody').addClass('d-none');
+            $(this).text('Expand Table');
+
+        }
+    });
     function refreshTotalPrice () {
         var price_plan = 0;
         $('input[name="plan_pricing_check_box[]"]:checked').each(function() {
@@ -157,7 +155,7 @@
     $(document).on('change','#service_type_price', function(){
         refreshTotalPrice();
     })
-    $(document).on('keydown','#service_type_price', function(){
+    $(document).on('keyup','#service_type_price', function(){
         refreshTotalPrice();
     })
     $(document).on('change', "input[name='serverlocations[]'],input[name='plan_pricing_check_box[]']", function() {        
@@ -167,5 +165,68 @@
     $(document).ready(function(){
         initCollapsible();
         refreshTotalPrice();
+    });
+    function updatePlanSectionShowStatus(section, newStatus, id = '', cb = null) {
+        $.ajax({
+            url: "{{route('plansection-status-store')}}",
+            type: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                id: id,
+                section_name: section,
+                status: newStatus ? 1 : 0,
+            },
+            dataType: 'json',
+            success: function(response) {                
+                if (response.success) {
+                    if (cb && cb != null) {
+                        cb(response);
+                    }
+                } else if (response.error) {
+                }
+            }
+        });
+    }
+    
+    $(document).on('change', '.section_show_status', function () {
+        let checkbox = $(this);
+        let id = $(this).attr('data-id');
+        let section_name = $(this).attr('name');
+        let new_status = $(this).is(":checked");
+        updatePlanSectionShowStatus(section_name, new_status, id, (response) => {
+            $(checkbox).attr('data-id', response.data.id);
+        });
+    });
+    
+    function updatePlanSectionRecordShowStatus(section, newStatus, id = '', cb = null) {
+        $.ajax({
+            url: "{{route('plansection-record-status-store')}}",
+            type: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                id: id,
+                section_name: section,
+                status: newStatus ? 1 : 0,
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    if (cb && cb != null) {
+                        cb(response);
+                    }
+                } else if (response.error) {
+                }
+            }
+        });
+    }
+    $(document).on('change', '.section_record_show_status', function () {
+        let checkbox = $(this);
+        let id = $(this).attr('data-id');
+        let section_table = $(this).attr('data-section');
+        let section_name = $(this).attr('name');
+        let new_status = $(this).is(":checked");
+        updatePlanSectionRecordShowStatus(section_table, new_status, id, (response) => {
+            $(checkbox).attr('data-id', response.data.id);
+        });
     });
 </script>

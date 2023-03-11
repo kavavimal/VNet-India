@@ -1,8 +1,8 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="mb-3">Fianl Total After Discount</h4>
+        <h4 class="mb-3">Final Total After Discount</h4>
         <div class="final_cal_billing_list_wrap">
-            <table class="table table-sm table-hover ">
+            <table class="table table-hover ">
                 <thead>
                     <th>Name</th>
                     <th>Amount</th>

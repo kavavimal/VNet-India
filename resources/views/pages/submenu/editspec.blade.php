@@ -36,6 +36,7 @@
 @if($plan)
     <form class="erp-spec-plan-submit" data-url="{{route('specification-plan-store')}}">
         <input type="hidden" id="plan_id_update" class="plan_id_update" name="id" value="{{ $plan->id ?? '' }}" />
+        <input type="hidden" id="plan_id" class="plan_id" name="id" value="{{ $plan->id ?? '' }}" />
         <div class="row featured-sub-cat-wrap">
             <div class="col-md-12">
                 <div class="card mt-4 mb-4">
@@ -62,8 +63,7 @@
                 @include('pages.plan.specificationsList')
             </div>
             <div class="col-md-6">
-                @include('pages.plan.featuredcategoryList')
-               
+                @include('pages.plan.featuredcategoryList')                
             </div>
             @if($featuredCategorysSelected != '')
                 @foreach ($featuredCategory as $featured_cat)

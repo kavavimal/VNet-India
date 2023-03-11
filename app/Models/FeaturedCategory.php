@@ -13,6 +13,7 @@ class FeaturedCategory extends Model
 
     protected $fillable = [
         'featured_cat_name',
+        'show_status',
         'featured_cat_desc',
         'sub_menu_id',
         'sys_state',
