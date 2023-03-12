@@ -119,7 +119,7 @@ class SpecificationController extends Controller
             if ($request->view == 'html') {
                 foreach($speciDataBysubmenu as $item) {
                     $data = ['spec'=> $item, 'specificationsSelected' => $specificationsSelected ];
-                    $hts= view('pages.submenu.configuration.specificationItemV2', $data)->render();
+                    $html .= view('pages.submenu.configuration.specificationItemV2', $data)->render();
                 }
             }
             return response()->json([

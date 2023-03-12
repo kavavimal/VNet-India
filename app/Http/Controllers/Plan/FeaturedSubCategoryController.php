@@ -56,7 +56,7 @@ class FeaturedSubCategoryController extends Controller
                         'title' => 'Featured Sub Category',
                         'type' => 'create',
                         'data' => $CategorySave,
-                        'html' => view('pages.submenu.configuration.catItemCheckbox', [
+                        'html' => view('pages.submenu.configuration.catItemCheckboxSub', [
                             'id' => $CategorySave->id,
                             'name' => $CategorySave->name,
                             'show_status' => $CategorySave->show_status,
