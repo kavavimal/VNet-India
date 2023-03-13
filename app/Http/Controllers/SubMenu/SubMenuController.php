@@ -156,6 +156,8 @@ class SubMenuController extends Controller
         $serverlocationSelected = (!empty($plan->server_location)) ? explode(',', $plan->server_location) : '';
         $plan_sections_statuses = helper::getPlanSectionsStatus(true);
                 
+        $service_type_type = (!empty($plan->service_type_type)) ? explode(',', $plan->service_type_type) : [];
+        
         $specifications = '';
         $bilingCycle = '';
         $featuredCategory = '';
@@ -197,7 +199,8 @@ class SubMenuController extends Controller
             'plan_pricing',
             'planPricingSelected',
             'plan_sections_statuses',
-            'selectedTaxItem'
+            'selectedTaxItem',
+            'service_type_type'
         ));
     }
 

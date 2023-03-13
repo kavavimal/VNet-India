@@ -81,6 +81,7 @@
                 <td>`+first_itemTax+`</td>
                 <td>`+first_finalAmount+`</td>
             </tr>`;
+        $('.taxation_billing_list_wrap').find('table tbody').append(firstitem);
             
         $("input:checkbox[name='billing_cycle[]']:checked").each(function(){
             let selectedid = $(this).val();
