@@ -34,14 +34,5 @@ class UsersPlanExport implements FromView, WithEvents
             'plans' => $data,
         ]);
     }
-
-    public function registerEvents(): array
-    {
-        return [
-            AfterSheet::class => function(AfterSheet $event) {
-                $event->sheet->mergeCells('A4:A5');
-            },
-        ];
-    }
     
 }
