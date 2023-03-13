@@ -20,9 +20,10 @@
                             <td><input
                                 class="server-location-checkbox"
                                 type="checkbox"
-                                value="0"
+                                value="{{$locationItem->id}}"
                                 id="serverlocations-{{$locationItem->id}}"
                                 name="serverlocations[]"
+                                @if($serverlocationSelected != ''){{in_array($locationItem->id,$serverlocationSelected) ? 'checked="checked"' : ''}}@endif
                             /> </td>
                             <td>{{$locationItem->base_country}}</td>                            
                             <td>{{$locationItem->amount}}</td>

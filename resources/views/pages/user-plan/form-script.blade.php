@@ -89,6 +89,11 @@
             planPricing.push($(this).val());
         });
 
+        let serverlocations = [];
+        $("input:checkbox[name='serverlocations[]']:checked").each(function(){
+            serverlocations.push($(this).val());
+        });
+
         $.ajax({
             url: submit_url,
             type: "POST",
@@ -111,6 +116,7 @@
                 servive_type_currency: servive_type_currency,
                 service_type_renewal_price: service_type_renewal_price,
                 service_type_discount: service_type_discount,
+                serverlocations: serverlocations.join(','),
             },
             dataType: 'json',
             success: function(response) {                

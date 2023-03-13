@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\UserPlan;
+use App\Models\Plan;
 use App\Models\Specification;
 use App\Models\FeaturedCategory;
 use App\Models\BilingCycle;
@@ -41,7 +42,7 @@ class UserPlanController extends Controller
     }
     public function index()
     {
-        $plan = UserPlan::where('sys_state','!=','-1')->orderBy('id','desc')->get();
+        $plan = Plan::where('sys_state','!=','-1')->orderBy('id','desc')->get();
         $category_list = Category::where('sys_state','!=','-1')->get();
         $submenu = [];
         return view('pages.user-plan.index', compact('plan','category_list','submenu'));
@@ -84,13 +85,14 @@ class UserPlanController extends Controller
 
     public function edit($id)
     {
-        $plan = UserPlan::where('id',$id)->first();
+        $plan = Plan::where('id',$id)->first();
         $billingCycleSelected = (!empty($plan->billing_cycles)) ? explode(',', $plan->billing_cycles) : '';
         $planPricingSelected = (!empty($plan->plan_pricingids)) ? explode(',', $plan->plan_pricingids) : '';
         $specificationsSelected = (!empty($plan->specification)) ? explode(',', $plan->specification) : '';
         $featuredCategorysSelected = (!empty($plan->featured_category)) ? explode(',', $plan->featured_category) : '';
         $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
         $taxationSelected = (!empty($plan->taxation)) ? explode(',', $plan->taxation) : '';
+        $serverlocationSelected = (!empty($plan->server_location)) ? explode(',', $plan->server_location) : '';
         $specifications = '';
         $bilingCycle = '';
         $featuredCategory = '';
@@ -168,11 +170,13 @@ class UserPlanController extends Controller
             'planPricingSelected',
             'plan_sections_statuses',
             'service_type_types',
+            'serverlocationSelected'
         ));
     }
 
     public function store(Request $request){
         if($request->ajax()){
+            $user = auth()->user();
             if($request->id == "0"){
                 $validator = Validator::make($request->all(), [
                     'planName' => 'required',
@@ -187,7 +191,7 @@ class UserPlanController extends Controller
                     $planName = $request->planName;
                     $product_id = $request->product_id;
 
-                    $save_plan = UserPlan::create(['plan_name'=>$planName , 'plan_product_id'=>$product_id]);
+                    $save_plan = Plan::create(['plan_name'=>$planName , 'plan_product_id'=>$product_id, 'created_by' => $user['id']]);
                    
                     session()->flash('success', 'Plan created successfully!');
 
@@ -210,7 +214,7 @@ class UserPlanController extends Controller
                     'product_id.not_in' => 'Please Select Product.'
                 ]);                
                 if ($validator->passes()){                   
-                    $plan = UserPlan::find($request->id);
+                    $plan = Plan::find($request->id);
                     $planName = $request->planName;
                     $product_id = $request->product_id;
                     
@@ -228,8 +232,10 @@ class UserPlanController extends Controller
                     $servive_type_currency = $request->servive_type_currency;
                     $service_type_renewal_price = $request->service_type_renewal_price;
                     $service_type_discount = $request->service_type_discount;
+                    $serverlocations = $request->serverlocations;
 
                     $plan->update([
+                        'created_by' => $user['id'],
                         'plan_name'=>$planName,
                         'plan_product_id'=>$product_id,
                         'billing_cycles'=>$billingCycle,
@@ -246,6 +252,7 @@ class UserPlanController extends Controller
                         'servive_type_currency'=>$servive_type_currency,
                         'service_type_renewal_price'=>$service_type_renewal_price,
                         'service_type_discount'=>$service_type_discount,
+                        'server_location'=> $serverlocations,
                     ]);
                     
                     session()->flash('success', 'Plan Updated successfully!');
@@ -253,6 +260,7 @@ class UserPlanController extends Controller
                         'success' => 'Plan updated successfully!',
                         'title' => 'Plan',
                         'type' => 'Update',
+                        'data' => $plan,
                     ]);
                 } else {
                     return response()->json(['error'=>$validator->getMessageBag()->toArray()]);
@@ -264,7 +272,7 @@ class UserPlanController extends Controller
     public function remove($id)
     {
         try{
-            $model = new UserPlan();
+            $model = new Plan();
             helper::sysDelete($model,$id);
             return redirect()->back()
                 ->with([
@@ -281,7 +289,7 @@ class UserPlanController extends Controller
     }
 
     public function preview($id) {
-        $plan = UserPlan::where('id', $id)->with('submenu')->first();
+        $plan = Plan::where('id', $id)->with('submenu')->first();
         $plan_billingcycle = BilingCycle::where('id', $plan->billing_cycles)->get();
         $plan_specification = Specification::where('id', $plan->specification)->get();
         $plan_featured_category = FeaturedCategory::where('id', $plan->featured_category)->get();
