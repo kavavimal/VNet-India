@@ -205,6 +205,7 @@
         });        
         var service_type_price = parseInt($("#service_type_price").val());
         var total = price_plan + service_type_price + server_plan;
+        total = parseInt(total) > 0 ? total : 0; 
         $("#servive_type_total").val(total);
         $(".first_year_info .default_amount").text(total);
         $("#billing_amount").val(total);

@@ -137,10 +137,13 @@
         });
         var server_plan = 0;
         $('input[name="serverlocations[]"]:checked').each(function() {
-            server_plan += parseInt($(this).parent().siblings('.server_price').text());
+            let serverlocationprice = parseInt($(this).parent().siblings('.server_price').text());
+            server_plan += serverlocationprice > 0 ? serverlocationprice : 0
         });        
         var service_type_price = parseInt($("#service_type_price").val());
+        service_type_price = parseInt(service_type_price) > 0 ? service_type_price : 0; 
         var total = price_plan + service_type_price + server_plan;
+        total = parseInt(total) > 0 ? total : 0; 
         $("#servive_type_total").val(total);
         $(".first_year_info .default_amount").text(total);
         $("#billing_amount").val(total);
@@ -229,4 +232,10 @@
             $(checkbox).attr('data-id', response.data.id);
         });
     });
+
+    $(document).on('change', '#product_id', function () {
+        $("#preloader").show();
+        $(".erp-spec-plan-submit").submit();     
+    });
+
 </script>

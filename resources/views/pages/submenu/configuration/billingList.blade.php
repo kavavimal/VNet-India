@@ -30,7 +30,7 @@
                 
         </div>
         <div class="text-right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm-billing">
+        <button type="button" class="btn btn-primary" id="add_billing_cycle_item">
             <i class="nav-icon i-add"></i> Add
         </button>
         </div>

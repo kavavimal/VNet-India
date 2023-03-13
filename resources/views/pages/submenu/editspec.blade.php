@@ -43,7 +43,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="fname">Select Sub Menu</label>
-                            <select class="form-control select2"  id="product_id" name="product_id" disabled>
+                            <select class="form-control select2"  id="product_id" name="product_id">
                                 <option value="0">Select Sub Menu</option>
                                 @foreach($product_list as $value)
                                 <?php $prodSelect = ''; if ($value->id == $plan->plan_product_id) {$prodSelect = 'selected';} else {$prodSelect = '';}?>

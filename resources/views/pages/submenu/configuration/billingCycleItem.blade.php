@@ -1,7 +1,7 @@
 <tr id="billingPrice-{{$list->id}}">
     <td>
         <input 
-            class=" billing_cycle"
+            class="billing_cycle"
             type="checkbox"
             value="{{$list->id}}"
             id="billing-cycle-{{$list->id}}"
