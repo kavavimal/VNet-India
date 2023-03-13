@@ -26,7 +26,7 @@
             let itemTax = selectedAmount * taxPer / 100;
             let finalAmount =  parseFloat(selectedAmount) - parseFloat(itemTax);
             let item = `<tr id="taxation-billingPrice-`+selectedid+`">
-            <td>`+selectedName+`</td>
+            <td>`+selectedName+` Years</td>
             <td>`+selectedAmount+`</td>    
             <td>`+itemTax+`</td>
             <td>`+finalAmount+`</td>

@@ -232,4 +232,10 @@
             $(checkbox).attr('data-id', response.data.id);
         });
     });
+
+    $(document).on('change', '#product_id', function () {
+        $("#preloader").show();
+        $(".erp-spec-plan-submit").submit();     
+    });
+
 </script>
