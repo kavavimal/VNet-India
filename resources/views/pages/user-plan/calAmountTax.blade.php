@@ -4,7 +4,7 @@
         <div class="taxation_billing_list_wrap">
             <table class="table table-hover ">
                 <thead>
-                    <th>Name</th>
+                    <th>No Of Years</th>
                     <th>Amount</th>
                     <th>Tax</th>
                     <th>Final Amount</th>
