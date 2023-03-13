@@ -49,6 +49,7 @@ class UserPlanController extends Controller
     public function userPlanExport()
     {
         return \Excel::download(new UsersPlanExport, 'Plans.csv', \Maatwebsite\Excel\Excel::CSV);
+        // return \Excel::download(new UsersPlanExport, 'invoices.pdf', \Maatwebsite\Excel\Excel::MPDF);
     }
 
     public function userPlanExportPDF($id)
@@ -256,7 +257,7 @@ class UserPlanController extends Controller
     public function remove($id)
     {
         try{
-            $model = new Plan();
+            $model = new UserPlan();
             helper::sysDelete($model,$id);
             return redirect()->back()
                 ->with([
