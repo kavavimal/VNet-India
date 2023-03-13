@@ -134,13 +134,16 @@
         initCollapsible();
         var price_plan = 0;
         $('input[name="plan_pricing_check_box[]"]:checked').each(function() {
-            price_plan += parseInt($(this).parent().siblings('.total_price').text());
+            let price = parseInt($(this).parent().siblings('.total_price').text());
+            price_plan += price > 0 ? price : 0;
         });
         var service_type_price = parseInt($("#service_type_price").val());
+        service_type_price = service_type_price > 0 ? service_type_price : 0; 
         var total = price_plan + service_type_price;
         // var discount = parseInt($("#service_type_discount").val());
         // var final_total_remove = total * discount / 100;
         // var fianl_total = total - final_total_remove;
+        total = parseInt(total) > 0 ? total : 0; 
         $("#servive_type_total").val(total);
         $(".first_year_info .default_amount").text(total);
         $("#billing_amount").val(total);

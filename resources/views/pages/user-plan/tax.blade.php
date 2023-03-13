@@ -16,6 +16,7 @@
                 <div class="error" style="color:red;" id="taxation_error"></div>
             </div>
         </div>
+        <?php /*?>
         <div class="taxation_billing_list_wrap">
             <table class="table table-sm table-hover ">
                 <thead>
@@ -41,5 +42,6 @@
             </table>
                 
         </div>
+        <?php */ ?>
     </div>
 </div>

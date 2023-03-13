@@ -76,6 +76,16 @@
     $(document).on("click", ".erp-plan-billing-form", function() {
         $(".plan-billing-submit").submit();
     });
+
+    $(document).on("click", "#add_billing_cycle_item", function() {
+        $('#type').val('add');
+        $('.plan-billing-submit #billing-id').val('');
+        $('.plan-billing-submit #billing_name').val('');
+        $('.plan-billing-submit #billing_amount').val(''),
+        $('.plan-billing-submit #billing_percentage').val(''),
+        $('.plan-billing-submit #billing_upgrade_downgrade').val(''),
+        $('#billing_modal').modal('show');
+    });
     // save billing
     $(".plan-billing-submit").submit(function(e) {
         e.preventDefault();
@@ -107,8 +117,12 @@
                                     value='`+data.id+`'
                                     id='billing-cycle-`+data.id+`'
                                     name='billing_cycle[]'
+                                    data-name="`+data.billing_name+`"
+                                    data-amount="`+data.billing_amount+`"
+                                    data-percentage="`+data.billing_percentage+`"
+                                    data-type="`+data.billing_upgrade_downgrade+`"
                                 /></td><td>` +
-                                data.billing_name + " Years</td><td>" +
+                                data.billing_name + " Year</td><td>" +
                                 data.billing_amount + " </td><td>" +
                                 data.billing_percentage + "</td><td>" +
                                 data.billing_upgrade_downgrade + "</td><td>" +                                
@@ -121,6 +135,10 @@
                                     value='`+data.id+`'
                                     id='billing-cycle-`+data.id+`'
                                     name='billing_cycle[]'
+                                    data-name="`+data.billing_name+`"
+                                    data-amount="`+data.billing_amount+`"
+                                    data-percentage="`+data.billing_percentage+`"
+                                    data-type="`+data.billing_upgrade_downgrade+`"
                                 /></td><td>` +
                                 data.billing_name + " Years</td><td>" +
                                 data.billing_amount + " </td><td>" +
@@ -155,7 +173,7 @@
         $('#billing-id').val(id);
         $('#type').val('edit');
         $('.plan-billing-submit #billing_name').val(name);
-        $('#billing_final_amount').val(amount),
+        $('#billing_amount').val(amount),
         $('#billing_percentage').val(percentage),
         $('#billing_upgrade_downgrade').val(type),
         $('#billing_modal').modal('show');
