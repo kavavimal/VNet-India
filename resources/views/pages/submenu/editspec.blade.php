@@ -36,6 +36,7 @@
 @if($plan)
     <form class="erp-spec-plan-submit" data-url="{{route('specification-plan-store')}}">
         <input type="hidden" id="plan_id_update" class="plan_id_update" name="id" value="{{ $plan->id ?? '' }}" />
+        <input type="hidden" id="plan_id" class="plan_id" name="id" value="{{ $plan->id ?? '' }}" />
         <div class="row featured-sub-cat-wrap">
             <div class="col-md-12">
                 <div class="card mt-4 mb-4">
@@ -55,20 +56,19 @@
                 </div>
             </div>
             <div class="col-md-12">
-                @include('pages.plan.planPricing.planList')
+                @include('pages.submenu.configuration.planList')
                 @include('pages.submenu.specButtons')
             </div>
             <div class="col-md-6">
-                @include('pages.plan.specificationsList')
+                @include('pages.submenu.configuration.specificationsList')
             </div>
             <div class="col-md-6">
-                @include('pages.plan.featuredcategoryList')
-               
+                @include('pages.submenu.configuration.featuredcategoryList')                
             </div>
             @if($featuredCategorysSelected != '')
                 @foreach ($featuredCategory as $featured_cat)
                     @if (in_array($featured_cat->id, $featuredCategorysSelected))
-                        @include('pages.plan.featuredSubCat.featuredCatBlock', [
+                        @include('pages.submenu.configuration.featuredCatBlock', [
                             'id' => $featured_cat->id,
                             'name' => $featured_cat->featured_cat_name,
                             'items' => $featured_cat->children,
@@ -81,32 +81,35 @@
         <div class="row"><div class="col-md-12 mt-3">@include('pages.submenu.specButtons')</div></div>
         <div class="row">
             <div class="col-md-12 mt-4">
-                @include('pages.plan.serverlocation')
+                @include('pages.submenu.configuration.serverlocation')
             </div>
             <div class="col-md-12 mt-3">
                 @include('pages.submenu.specButtons')
             </div>
             <div class="col-md-6 mt-4">
-                @include('pages.plan.servicetype')
+                @include('pages.submenu.configuration.servicetype')
             </div>                      
             <div class="col-md-6 mt-4">
-                @include('pages.plan.totalPrice')                
+                @include('pages.submenu.configuration.totalPrice')                
             </div>            
-            <div class="col-md-6 mt-4">
-                @include('pages.plan.billingList')
+            <div class="col-md-12 mt-4">
+                @include('pages.submenu.configuration.billingList')
+            </div>            
+            <div class="col-md-4 mt-4">
+                @include('pages.submenu.configuration.tax')                
             </div>
-            <div class="col-md-6 mt-4">
-                @include('pages.plan.tax')                
+            <div class="col-md-8 mt-4">
+                @include('pages.submenu.configuration.calAmountTax')
             </div> 
             <div class="col-md-4 mt-4">
-                @include('pages.plan.amountCalc')
+                @include('pages.submenu.configuration.amountCalc')
+            </div>  
+            <div class="col-md-8 mt-4">
+            @include('pages.submenu.configuration.calamountafterdiscount')
             </div>  
             <div class="col-md-4 mt-4">
-                @include('pages.plan.finalTotalAfterTax')
-            </div>  
-            <div class="col-md-4 mt-4">
-                @include('pages.plan.negotiation')
-            </div>                                                                 
+                @include('pages.submenu.configuration.negotiation')
+            </div>
         </div>
     </form>
 @else
@@ -142,11 +145,12 @@
 @endsection
 @section('bottom-js')
     @include('pages.submenu.spec-script')
-    @include('pages.plan.specification-form-script')
-    @include('pages.plan.featuredCategory-form-script')
-    @include('pages.plan.featuredSubCat.featuredSubCategory-script')
-    @include('pages.plan.billing-form-script')
-    @include('pages.plan.planPricing.plan-form-script')
-    @include('pages.plan.server-location-form-script')
-    @include('pages.plan.tax-form-script')    
+    @include('pages.submenu.configuration.specification-form-script')
+    @include('pages.submenu.configuration.featuredCategory-form-script')
+    @include('pages.submenu.configuration.featuredSubCategory-script')
+    @include('pages.submenu.configuration.billing-form-script')
+    @include('pages.submenu.configuration.plan-form-script')
+    @include('pages.submenu.configuration.server-location-form-script')
+    @include('pages.submenu.configuration.tax-form-script')    
+    @include('pages.submenu.configuration.final-cal-script')    
 @endsection

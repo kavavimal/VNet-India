@@ -9,11 +9,6 @@
                     @endforeach
                 @endif
             </div>
-            <div class="text-right">
-                <button type="button" class="btn btn-primary sub-cat-block-additembutton">
-                    <i class="nav-icon i-add"></i> Add
-                </button>
-            </div>
         </div>
     </div>
 </div>

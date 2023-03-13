@@ -99,6 +99,8 @@ Route::middleware(['auth'])->group(function () {
     // Featured Category Module
     Route::post('/featuredCategory/store',[FeaturedCategoryController::class,'store'])->name('featured-category-store');
     Route::post('/featuredCategory/delete',[FeaturedCategoryController::class,'remove'])->name('featured-category-delete');
+    Route::post('/submenu/featuredcategorybysubmenu', [FeaturedCategoryController::class, 'getsubmenus'])->name('getfeaturedcategorydata');
+    Route::post('/featuredCategory/addfeaturedCategory', [FeaturedCategoryController::class, 'addfeaturedCategory'])->name('addfeaturedCategory');
 
     //Featured Sub Category Module
     Route::post('/featuredSubCategory/subcatblock',[FeaturedSubCategoryController::class,'getblock'])->name('sub-category-block');
@@ -130,7 +132,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/userPlan/getByCategoryId/{id}', [UserPlanController::class, 'getByCategoryId'])->name('user-plan-getByCategoryId');
     Route::get('/userPlan/preview/{id}', [UserPlanController::class, 'preview'])->name('preview-user-plan-byId');
     Route::get('/userPlan/userPlanExport', [UserPlanController::class, 'userPlanExport'])->name('user-plan-export');
-    Route::get('/userPlan/userPlanExportPDF', [UserPlanController::class, 'userPlanExportPDF'])->name('user-plan-export-pdf');
+    Route::get('/userPlan/userPlanExportPDF/{id}', [UserPlanController::class, 'userPlanExportPDF'])->name('user-plan-export-pdf');
     
     Route::post('/plansectionstatus/store',[PlanSectionsStatusController::class,'store'])->name('plansection-status-store');
     Route::post('/plansectionstatus/updateRecord',[PlanSectionsStatusController::class,'updateRecord'])->name('plansection-record-status-store');

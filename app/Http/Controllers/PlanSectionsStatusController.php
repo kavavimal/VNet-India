@@ -91,7 +91,6 @@ class PlanSectionsStatusController extends Controller
                 } else if ($section == 'featured_sub_category') {
                     $model = new FeaturedSubCategory();
                 }
-                
                 $model->where('id',$id)->update(['show_status' => $status]);
                 return response()->json([
                     'success' => 'Plan '.$section.' updated successfully!',

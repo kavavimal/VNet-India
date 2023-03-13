@@ -56,7 +56,7 @@ class FeaturedSubCategoryController extends Controller
                         'title' => 'Featured Sub Category',
                         'type' => 'create',
                         'data' => $CategorySave,
-                        'html' => view('pages.plan.featuredSubCat.catItemCheckbox', [
+                        'html' => view('pages.submenu.configuration.catItemCheckboxSub', [
                             'id' => $CategorySave->id,
                             'name' => $CategorySave->name,
                             'show_status' => $CategorySave->show_status,
@@ -129,9 +129,9 @@ class FeaturedSubCategoryController extends Controller
                 'featuredSubCategorysSelected' => $planSubCat,
             ];
             if ($request->ajax()) {
-                return view('pages.plan.featuredSubCat.featuredCatBlock', $data)->render();
+                return view('pages.submenu.configuration.featuredCatBlock', $data)->render();
             } else {
-                return view('pages.plan.featuredSubCat.featuredCatBlock', $data);
+                return view('pages.submenu.configuration.featuredCatBlock', $data);
             }
         }
     }

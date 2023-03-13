@@ -2,14 +2,13 @@
     <div class="card-body">
         <h4 class="mb-3">Billing Cycle Price</h4>
         <div class="billing_list_wrap">
-            <table class="table table-sm table-hover">
+            <table class="table table-hover">
                 <thead>
                     <th>#</th>
                     <th>No Of Years</th>
                     <th>Base Amount</th>
                     <th>Percentage</th>
                     <th>Upgrade / Downgrade</th>
-                    <th>Action</th>
                 </thead>
                 <tbody class="billing_price_table">
                     <tr class="first_year_info">
@@ -18,9 +17,8 @@
                         <td class="default_amount"></td>
                         <td>-</td>
                         <td>-</td>
-                        <td>-</td>
                     </tr>
-                    @if(count($bilingCycle) > 0)
+                    @if($bilingCycle != '' && count($bilingCycle) > 0)
                         @foreach ($bilingCycle as $list)
                             @include('pages.plan.billingCycle.billingCycleItem')
                         @endforeach
@@ -28,11 +26,6 @@
                 </tbody>
             </table>
                 
-        </div>
-        <div class="text-right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm-billing">
-            <i class="nav-icon i-add"></i> Add
-        </button>
         </div>
     </div>
 </div>

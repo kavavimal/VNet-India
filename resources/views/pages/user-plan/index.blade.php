@@ -65,9 +65,6 @@
                 <a href="{{route('user-plan-export')}}" class="btn btn-sm btn-primary float-right" target="_blank">
                     Export To Excel
                 </a>
-                <a href="{{route('user-plan-export-pdf')}}" class="btn btn-sm btn-primary mr-4 float-right" target="_blank">
-                    Export To PDF
-                </a>
                 <div class="table-responsive">
                     <table id="plan_table" class="display table table-striped table-bordered" style="width:100%">
                         <thead>
@@ -78,7 +75,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        @include('pages.plan.planTableBody')
+                        @include('pages.user-plan.planTableBody')
                         <tfoot>
                             <tr>
                                 <th>#</th>

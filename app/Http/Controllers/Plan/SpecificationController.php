@@ -47,7 +47,7 @@ class SpecificationController extends Controller
                     $save_spec = Specification::create(['spec_name'=>$spec_name,'sub_menu_id'=>$sub_menu_id]);
                     // session()->flash('success', 'Specification created successfully!');
                     $data = ['spec'=> $save_spec, 'specificationsSelected' => [] ];
-                    $html = view('pages.plan.specification.specificationItem', $data)->render();
+                    $html = view('pages.submenu.configuration.specificationItem', $data)->render();
 
                     return response()->json([
                         'success' => 'Specification created successfully!',
@@ -77,7 +77,7 @@ class SpecificationController extends Controller
                     $sub_menu_id = $request->sub_menu_id;
                     $spec->update(['spec_name'=> $spec_name,'sub_menu_id'=>$sub_menu_id]);
                     $data = ['spec'=> $spec, 'specificationsSelected' => [] ];
-                    $html = view('pages.plan.specification.specificationItem', $data)->render();
+                    $html = view('pages.submenu.configuration.specificationItem', $data)->render();
 
                     // session()->flash('success', 'Specification Updated successfully!');
                     return response()->json([
@@ -119,7 +119,7 @@ class SpecificationController extends Controller
             if ($request->view == 'html') {
                 foreach($speciDataBysubmenu as $item) {
                     $data = ['spec'=> $item, 'specificationsSelected' => $specificationsSelected ];
-                    $html .= view('pages.plan.specification.specificationItemV2', $data)->render();
+                    $html .= view('pages.submenu.configuration.specificationItemV2', $data)->render();
                 }
             }
             return response()->json([
@@ -155,7 +155,7 @@ class SpecificationController extends Controller
                         $spec = Specification::create($specification);
                         $addedData[] = $spec;
                         $dataItem = ['spec'=> $spec, 'specificationsSelected' => [] ];
-                        $html .= view('pages.plan.specification.specificationItem', $dataItem)->render();
+                        $html .= view('pages.submenu.configuration.specificationItem', $dataItem)->render();
                     }
                 }
 

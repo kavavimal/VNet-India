@@ -49,12 +49,14 @@ class UserPlanController extends Controller
     public function userPlanExport()
     {
         return \Excel::download(new UsersPlanExport, 'Plans.csv', \Maatwebsite\Excel\Excel::CSV);
+        // return \Excel::download(new UsersPlanExport, 'invoices.pdf', \Maatwebsite\Excel\Excel::MPDF);
     }
 
-    public function userPlanExportPDF()
+    public function userPlanExportPDF($id)
     {
         $data1 = [
-            'header_image' => asset('storage/Logo_Settings/V_logo_new.png'),        
+            'header_image' => asset('storage/Logo_Settings/V_logo_new.png'),      
+            'id'  => $id
         ];        
         $pdf = PDF::loadView('pages.user-plan.exportsPlanPDF', $data1,[],[
             'margin_top' => 100,            
@@ -110,7 +112,7 @@ class UserPlanController extends Controller
             
             if(!empty($menu_specificatoin['featured_category'])){
                 $featuredCategory_id = explode(",",$menu_specificatoin['featured_category']);
-                $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->whereIn('id',$featuredCategory_id)->with('children')->orderBy('featured_cat_name','desc')->get();
+                $featuredCategory = FeaturedCategory::where('sys_state','!=','-1')->whereIn('id',$featuredCategory_id)->where('show_status','1')->with('children')->orderBy('featured_cat_name','desc')->get();
             }
 
             if(!empty($menu_specificatoin['billing_cycles'])){
@@ -255,7 +257,7 @@ class UserPlanController extends Controller
     public function remove($id)
     {
         try{
-            $model = new Plan();
+            $model = new UserPlan();
             helper::sysDelete($model,$id);
             return redirect()->back()
                 ->with([
