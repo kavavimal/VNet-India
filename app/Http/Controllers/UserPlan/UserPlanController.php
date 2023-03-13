@@ -98,11 +98,16 @@ class UserPlanController extends Controller
         $support = '';
         $server_locations = '';
         $plan_pricing = '';
+        $service_type_types = [];
         if(!empty($plan)){             
             $menu_specificatoin = SubMenSpecification::where('id',$plan->plan_product_id)->get()->first();
             if(!empty($menu_specificatoin['plan_pricingids'])){
                 $plan_pricing_id = explode(",",$menu_specificatoin['plan_pricingids']);
                 $plan_pricing = PlanPricing::where('sys_state','!=','-1')->whereIn('id', $plan_pricing_id)->get();            
+            }
+
+            if(!empty($menu_specificatoin['service_type_type'])){
+                $service_type_types = explode(",",$menu_specificatoin['service_type_type']);
             }
             
             if(!empty($menu_specificatoin['specification'])){
@@ -161,6 +166,7 @@ class UserPlanController extends Controller
             'plan_pricing',
             'planPricingSelected',
             'plan_sections_statuses',
+            'service_type_types',
         ));
     }
 
