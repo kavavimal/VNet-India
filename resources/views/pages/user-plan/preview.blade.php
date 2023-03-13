@@ -69,8 +69,7 @@
                         @endif
                     </tbody>
                 </table>
-                <div class="plan_list_wrap"></div>
-                <button class="expand_collapse_table btn btn-primary">Expand List</button>
+                <div class="plan_list_wrap"></div>            
             </div>
         </div>
     </div>
@@ -165,7 +164,6 @@
                     </tbody>
                 </table>
                 </div>
-                <button class="expand_collapse_table btn btn-primary">Expand List</button>
             </div>
         </div>  
     </div>
