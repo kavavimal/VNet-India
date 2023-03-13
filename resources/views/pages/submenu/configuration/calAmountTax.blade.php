@@ -11,7 +11,7 @@
                 </thead>
                 <tbody class="taxation_billing_price_table">
                     <tr class="first_year_info">
-                        <td>1 Year</td>
+                        <td>1</td>
                         <td class="default_amount"></td>
                         <td>-</td>
                         <td>-</td>
