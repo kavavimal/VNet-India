@@ -150,6 +150,7 @@ class PlanController extends Controller
 
     public function store(Request $request){        
         if($request->ajax()){
+            $user = auth()->user();
             if($request->id == "0"){
                 $validator = Validator::make($request->all(), [
                     'planName' => 'required',
@@ -164,7 +165,7 @@ class PlanController extends Controller
                     $planName = $request->planName;
                     $product_id = $request->product_id;
 
-                    $save_plan = Plan::create(['plan_name'=>$planName , 'plan_product_id'=>$product_id]);
+                    $save_plan = Plan::create(['plan_name'=>$planName , 'plan_product_id'=>$product_id, 'created_by' => $user['id']]);
                    
                     session()->flash('success', 'Plan created successfully!');
 
@@ -208,6 +209,7 @@ class PlanController extends Controller
                     $serverlocations = $request->serverlocations;
 
                     $plan->update([
+                        'created_by' => $user['id'],
                         'plan_name'=>$planName,
                         'plan_product_id'=>$product_id,
                         'billing_cycles'=>$billingCycle,

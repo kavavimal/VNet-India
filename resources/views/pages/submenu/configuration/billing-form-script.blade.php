@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 form-group">
                             <label for="billing_name">No. of Years</label>
-                            {!! Form::number('billing_name', null, array('placeholder' => 'Enter Name','class' => 'form-control' , 'id' => 'billing_name')) !!}
+                            {!! Form::number('billing_name', null, array('placeholder' => 'Add Years','class' => 'form-control' , 'id' => 'billing_name')) !!}
                             <div class="error" style="color:red;" id="billing_name_error"></div>
                         </div>                     
                         <div class="col-sm-12 col-md-6 form-group">
@@ -127,7 +127,7 @@
                                 data.billing_percentage + "</td><td>" +
                                 data.billing_upgrade_downgrade + "</td><td>" +                                
                                 "<button type='button' class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1' data-id='` + data.id + `'data-storage='` + data.storage + `'data-storage_price='` + data.storage_price + `'data-billing_cycle='` + data.billing_cycle + `'data-server='` + data.server + `'data-window_server='` +data.window_server + `'data-upgrade_downgrade='` +data.upgrade_downgrade + `'data-price='` + data.price + `'data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `'data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
-                            $('.billing_price_table').append(rows);
+                            $('.billing_list_wrap .billing_price_table').append(rows);
                     } else {
                         var rows2 =  $(`<tr id='billingPrice-` + data.id + `'><td>
                                     <input class='billing_cycle'
@@ -145,7 +145,7 @@
                                 data.billing_percentage + "</td><td>" +
                                 data.billing_upgrade_downgrade + "</td><td>" +                                
                                 "<button type='button' class='btn btn-outline-primary btn-sm edit-item-plan-pricing mr-1' data-id='` + data.id + `'data-storage='` + data.storage + `'data-storage_price='` + data.storage_price + `'data-billing_cycle='` + data.billing_cycle + `'data-server='` + data.server + `'data-window_server='` +data.window_server + `'data-upgrade_downgrade='` +data.upgrade_downgrade + `'data-price='` + data.price + `'data-toggle='modal' title='Edit'><i class='nav-icon i-pen-4'></i></button><button type='button' class='btn btn-outline-primary btn-sm delete-item-plan-pricing' data-id='` + data.id + `'data-toggle='modal' title='Delete'><i class='nav-icon i-remove'></i></button>" + "</td></tr>");
-                            $('.billing_price_table').find('#billingPrice-' + data.id).replaceWith(rows2);
+                            $('.billing_list_wrap .billing_price_table').find('#billingPrice-' + data.id).replaceWith(rows2);
                     }
                     $('#type').val('add');
                     $('#billing-id').val('');

@@ -31,7 +31,8 @@ class Plan extends Model
         'service_type_discount',
         'sys_state',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'created_by'
     ];
 
     public function submenu(){

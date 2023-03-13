@@ -4,7 +4,7 @@
         <div class="final_cal_billing_list_wrap">
             <table class="table table-hover ">
                 <thead>
-                    <th>Name</th>
+                    <th>No Of Years</th>
                     <th>Amount</th>
                     <th>Discount</th>
                     <th>Final Amount</th>
