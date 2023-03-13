@@ -308,22 +308,43 @@
     $('#base_country').select2({
         dropdownParent: $('#serverLocation_modal')
     });
-    function calculate_percentage() {
-        let amount = $('#amount').val();        
-        let percent = $('#percentage').val();        
-        let upgrade_downgrade = $('#upgrade_downgrade').val();        
-        alert(upgrade_downgrade);
-        if (amount && percent && upgrade_downgrade) {
-            let final_amount = amount * percent / 100;
-            if (upgrade_downgrade === 'upgrade') {                
-                let am = parseInt(amount) + parseInt(final_amount)
-                $('#final_amount').html('Allocate Country Amount: ' + am);
-            } else if (upgrade_downgrade === 'downgrade') {
-                let am = parseInt(amount) - parseInt(final_amount)
-                $('#final_amount').html('Allocate Country Amount: ' + am);
-            }else if(upgrade_downgrade === 'none'){
-                $('#final_amount').html('');
-            }
-        }
-    }    
+    function refreshTotalPrice () {
+        var price_plan = 0;
+        $('input[name="plan_pricing_check_box[]"]:checked').each(function() {
+            price_plan += parseInt($(this).parent().siblings('.total_price').text());
+        });
+        var server_plan = 0;
+        $('input[name="serverlocations[]"]:checked').each(function() {
+            let serverlocationprice = parseInt($(this).parent().siblings('.server_price').text());
+            server_plan += serverlocationprice > 0 ? serverlocationprice : 0
+        });        
+        var service_type_price = parseInt($("#service_type_price").val());
+        service_type_price = parseInt(service_type_price) > 0 ? service_type_price : 0; 
+        var total = price_plan + service_type_price + server_plan;
+        total = parseInt(total) > 0 ? total : 0; 
+        $("#servive_type_total").val(total);
+        $(".first_year_info .default_amount").text(total);
+        $("#billing_amount").val(total);
+
+        // Final amount after tax
+        var discount = parseInt($("#service_type_discount").val());
+        var final_total_remove = total * discount / 100;
+        var final_total = total - final_total_remove;
+
+        $('#after_tax_servive_type_total').val(final_total)
+    }
+    $(document).on('change','#service_type_price', function(){
+        refreshTotalPrice();
+    })
+    $(document).on('keyup','#service_type_price', function(){
+        refreshTotalPrice();
+    })
+    $(document).on('change', "input[name='serverlocations[]'],input[name='plan_pricing_check_box[]']", function() {        
+        refreshTotalPrice();
+    });
+
+    $(document).ready(function(){
+        initCollapsible();
+        refreshTotalPrice();
+    }); 
 </script>
