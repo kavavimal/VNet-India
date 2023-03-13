@@ -74,10 +74,10 @@
             </div>
             <div class="col-md-6 px-2">
                 @include('pages.plan.featuredcategoryList')
-               
-            </div>
-            @if($featuredCategorysSelected != '')
+            </div>                  
+            @if($featuredCategorysSelected != '' && $featuredCategory != '')            
                 @foreach ($featuredCategory as $featured_cat)
+                
                     @if (in_array($featured_cat->id, $featuredCategorysSelected))
                         @include('pages.plan.featuredSubCat.featuredCatBlock', [
                             'id' => $featured_cat->id,

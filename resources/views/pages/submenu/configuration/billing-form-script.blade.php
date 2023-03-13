@@ -81,7 +81,7 @@
         $('#type').val('add');
         $('.plan-billing-submit #billing-id').val('');
         $('.plan-billing-submit #billing_name').val('');
-        $('.plan-billing-submit #billing_amount').val(''),
+        $('.plan-billing-submit #billing_amount').val($('#servive_type_total').val()),
         $('.plan-billing-submit #billing_percentage').val(''),
         $('.plan-billing-submit #billing_upgrade_downgrade').val(''),
         $('#billing_modal').modal('show');
