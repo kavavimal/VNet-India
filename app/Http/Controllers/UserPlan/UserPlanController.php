@@ -26,6 +26,7 @@ use Illuminate\Support\Arr;
 use App\Models\SubMenu;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Excel;
 
 class UserPlanController extends Controller
 {
@@ -48,7 +49,7 @@ class UserPlanController extends Controller
 
     public function userPlanExport()
     {
-        return \Excel::download(new UsersPlanExport, 'Plans.csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new UsersPlanExport, 'Plans.csv', \Maatwebsite\Excel\Excel::CSV);
         // return \Excel::download(new UsersPlanExport, 'invoices.pdf', \Maatwebsite\Excel\Excel::MPDF);
     }
 
