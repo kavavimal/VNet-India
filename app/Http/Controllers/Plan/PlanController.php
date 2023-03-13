@@ -72,7 +72,8 @@ class PlanController extends Controller
         $featuredCategorysSelected = (!empty($plan->featured_category)) ? explode(',', $plan->featured_category) : '';
         $featuredSubCategorySelected = (!empty($plan->featured_sub_category)) ? explode(',', $plan->featured_sub_category) : '';
         $taxationSelected = (!empty($plan->taxation)) ? explode(',', $plan->taxation) : '';
-        $serverlocationSelected = '';
+        $serverlocationSelected = (!empty($plan->server_location)) ? explode(',', $plan->server_location) : '';
+        // $serverlocationSelected = [];
         $specifications = '';
         $bilingCycle = '';
         $featuredCategory = '';
@@ -209,7 +210,7 @@ class PlanController extends Controller
                     $serverlocations = $request->serverlocations;
 
                     $plan->update([
-                        'created_by' => $user['id'],
+                        // 'created_by' => $user['id'],
                         'plan_name'=>$planName,
                         'plan_product_id'=>$product_id,
                         'billing_cycles'=>$billingCycle,
@@ -234,6 +235,7 @@ class PlanController extends Controller
                         'success' => 'Plan updated successfully!',
                         'title' => 'Plan',
                         'type' => 'Update',
+                        'data' => $plan,
                     ]);
                 } else {
                     return response()->json(['error'=>$validator->getMessageBag()->toArray()]);
