@@ -4,7 +4,7 @@
             <div class="col-sm-12 px-1">
                 <h4 class="mb-3 d-inline-block">Featured Category</h4>
                 <div class="featuredCategory_list_wrap">
-                    @if(count($featuredCategory) > 0)
+                    @if($featuredCategory != ''  && count($featuredCategory) > 0)
                         @foreach ($featuredCategory as $featured_cat)
                             @include('pages.plan.featuredCat.catItemCheckbox', [
                                 'id' => $featured_cat->id, 

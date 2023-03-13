@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Illuminate\Contracts\View\View;
 
 
-class UsersPlanExport implements FromView, WithEvents
+class UsersPlanExport implements FromView
 {
    public function view(): View
     {
@@ -20,13 +20,11 @@ class UsersPlanExport implements FromView, WithEvents
                 'id' => 1,
                 'name' => 'John Doe',
                 'email' => 'johndoe@example.com',
-                'details' => '<table><tr><td>cell1</td><td>cell2</td><td>cell3</td></tr><tr><td>cell1</td><td>cell2</td><td>cell3</td></tr></table>',
             ],
             [
                 'id' => 2,
                 'name' => 'Naman Makwana',
-                'email' => 'naman@example.com',
-                'details' => '<table><tr><td>cell4</td><td>cell5</td><td>cell6</td></tr><tr><td>cell4</td><td>cell5</td><td>cell6</td></tr></table>',
+                'email' => 'naman@example.com',            
             ]           
         ];
 
